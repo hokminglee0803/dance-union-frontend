@@ -2,12 +2,44 @@ import contentfulClient from "../contentfulClient";
 
 const client = contentfulClient.initContentful();
 
-const getEntriesByContenType = async (contentType: string) => {
+const getEntriesByContentType = async (contentType: string) => {
     return await client.getEntries({
-        content_type: `${contentType}`
+        content_type: `${contentType}`,
     })
         .then((entry) => {
-            console.log(entry.items)
+            return entry?.items;
+        }).catch((err) => {
+            console.error(err);
+            return [];
+        })
+}
+
+const getBlogEntries = async (blogType: string, limit: number, skip: number) => {
+    return await client.getEntries({
+        'fields.blogType': blogType ?? 'SEO',
+        content_type: 'blog',
+        skip: skip,
+        limit: limit,
+        order: '-sys.createdAt'
+    })
+        .then((entry) => {
+            return entry?.items;
+        }).catch((err) => {
+            console.error(err);
+            return [];
+        })
+}
+
+const getEntriesById = async (id?: string) => {
+    let query = {};
+    if (id !== undefined) {
+        query = {
+            ...query,
+            'sys.id': id,
+        }
+    }
+    return await client.getEntries(query)
+        .then((entry) => {
             return entry?.items;
         }).catch((err) => {
             console.error(err);
@@ -16,5 +48,7 @@ const getEntriesByContenType = async (contentType: string) => {
 }
 
 export default {
-    getEntriesByContenType
+    getEntriesByContentType,
+    getBlogEntries,
+    getEntriesById
 }

@@ -7,7 +7,10 @@ import { I18nProvider } from 'next-localization';
 import { useRouter } from 'next/router';
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterMoment';
-
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import '../styles/style.css'
+import "react-responsive-carousel/lib/styles/carousel.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
 

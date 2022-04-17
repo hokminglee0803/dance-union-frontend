@@ -1,22 +1,24 @@
-import { Box, Divider, Drawer, Fab, IconButton, List, ListItem, ListItemText, useMediaQuery, useTheme } from '@mui/material';
-import { Clear as ClearIcon, RestartAlt as RestartAltIcon, Search as SearchIcon } from '@mui/icons-material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import MenuAppBar from '../components/Header';
-import useActivityCardCollection from '../hook/useActivityCardCollection';
-import MenuItem from '../components/MenuItem';
 import Footer from '../components/Footer';
-import ResponsiveCarousel from '../components/ResponsiveCarousel';
+import { Carousel } from 'react-responsive-carousel';
+import contentfulService from '../utils/service/contentfulService';
+import { transformBannerData } from '../utils/transformer';
+import { BannerType } from '../interface/Banner';
+import ActionAreaCard from '../components/ActionAreaCard';
+import ResponsiveAppBar from '../components/ResponsiveAppBar';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface IndexPageProps {
+  mainPageBanner: BannerType[];
+  highlight: BannerType[];
 }
 
-const IndexPage: React.FC<IndexPageProps> = () => {
+const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
 
   const router = useRouter();
 
@@ -29,59 +31,11 @@ const IndexPage: React.FC<IndexPageProps> = () => {
   const [init, setInit] = useState(true);
 
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const {
-    ActivityCardCollection,
-    ActivityCardCollectionProps,
-    SearchPopup,
-    SearchPopupProps
-  } = useActivityCardCollection(12);
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   useEffect(() => {
     if (init) {
-
-      setTimeout(function () {
-        ActivityCardCollectionProps.setActivities([
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/173_b745dcaaea.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5060_73578fcb82.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5075_e67732d8a4.JPG',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/27_a92ad6c196.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/173_b745dcaaea.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5060_73578fcb82.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5075_e67732d8a4.JPG',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/27_a92ad6c196.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/173_b745dcaaea.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5060_73578fcb82.jpg',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/5075_e67732d8a4.JPG',
-          },
-          {
-            imageUrl: 'https://easyvolunteer.hk/assets/uploads/services/27_a92ad6c196.jpg',
-          }
-        ]);
-      }, 1000);
-
       setInit(false);
     }
 
@@ -116,66 +70,42 @@ const IndexPage: React.FC<IndexPageProps> = () => {
         <meta property="og:image" content={t('og_image_url')} />
       </Head>
 
-      <Drawer
-        anchor={'top'}
-        open={SearchPopupProps.isDrawerOpen}
-        onClose={SearchPopupProps.closeDrawer}
-      >
-        {SearchPopup}
-        <div>
-          <Fab
-            sx={{
-              position: 'fixed',
-              bottom: 30,
-              right: 170,
-            }}
-          >
-            <SearchIcon fontSize={'large'} />
-          </Fab>
-          <Fab
-            sx={{
-              position: 'fixed',
-              bottom: 30,
-              right: 100,
-            }}
-          >
-            <RestartAltIcon fontSize={'large'} />
-          </Fab>
-          <Fab
-            onClick={SearchPopupProps.closeDrawer}
-            sx={{
-              position: 'fixed',
-              bottom: 30,
-              right: 30,
-            }}
-          >
-            <ClearIcon
-              fontSize={'large'} />
-          </Fab>
-        </div>
-      </Drawer>
+      <div style={{ marginTop: 50 }} />
+      <ResponsiveAppBar />
 
-      <MenuAppBar />
+      <Carousel autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
+        {
+          mainPageBanner.map((item, index) => {
+            return <div key={index}>
+              <img alt={t('image_alt')} src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
+              <div style={{
+                backgroundColor: 'black',
+                color: 'white',
+                fontSize: 20
+              }}>
+                {item.bannerTitle}
+              </div>
+            </div>
+          })
+        }
+      </Carousel>
 
-      <div style={{ margin: 0 }} />
-
-      <ResponsiveCarousel />
-
-      <div style={{ margin: 25 }} />
-
-      <h1
-        style={{
-          margin: "auto",
-          width: isDesktop ? '80%' : '90%',
-          color: 'orange',
-          borderBottom: '5px solid orange'
-        }}>
-        最新活動
-      </h1>
-
-      <div style={{ margin: 35 }} />
-
-      <ActivityCardCollection />
+      <div style={{ margin: 10 }}>
+        <Grid container spacing={3}>
+          {
+            highlight.map((item, index) => {
+              return (
+                <Grid key={index} item xs={12} sm={6} md={4}>
+                  <ActionAreaCard
+                    img={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                    title={item.bannerTitle}
+                  />
+                </Grid>
+              )
+            })
+          }
+        </Grid>
+      </div>
 
       <Footer />
 
@@ -192,9 +122,26 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   try {
 
+    const homePage = await contentfulService.getEntriesByContentType('homePage');
+
+    const mainPageBanner = [];
+    const highlight = [];
+
+    homePage.map(item => {
+      item.fields.mainPageBanner.map(banner => {
+        mainPageBanner.push(transformBannerData(banner))
+      })
+
+      item.fields.highlight.map(banner => {
+        highlight.push(transformBannerData(banner))
+      })
+    })
+
     return {
       props: {
         lngDict,
+        mainPageBanner,
+        highlight
       },
       revalidate: 1,
     };
