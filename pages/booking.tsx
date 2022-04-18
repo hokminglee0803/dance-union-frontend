@@ -305,7 +305,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 articleCollection: articleCollection,
                 webSettings: transformWebSettings(bookingPage[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Booking Page] getStaticProps failed.`);

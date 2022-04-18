@@ -179,7 +179,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
                 blogEntry: transformBlog(blogEntry[0]),
                 webSettings: transformWebSettings(blogEntry[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Blog Page] getStaticProps failed.`);

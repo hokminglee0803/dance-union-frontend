@@ -171,7 +171,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             props: {
                 lngDict,
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Contact Us] getStaticProps failed.`);

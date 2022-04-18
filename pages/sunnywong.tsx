@@ -310,7 +310,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 videoCollection: videoCollection,
                 webSettings: transformWebSettings(sunnyWongPage[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[IndexPage] getStaticProps failed.`);

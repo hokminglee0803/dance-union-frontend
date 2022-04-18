@@ -245,7 +245,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 partner: transformArticleWithImage(danceUnionPage[0].fields.partner),
                 webSettings: transformWebSettings(danceUnionPage[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[About Page] getStaticProps failed.`);

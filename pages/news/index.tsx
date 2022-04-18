@@ -339,7 +339,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 lngDict,
                 initBlogEntries: blogEntries.map(blog => transformBlog(blog))
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[News Page] getStaticProps failed.`);

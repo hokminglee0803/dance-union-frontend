@@ -422,7 +422,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 },
                 webSettings: transformWebSettings(coursePage[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Course Page] getStaticProps failed.`);

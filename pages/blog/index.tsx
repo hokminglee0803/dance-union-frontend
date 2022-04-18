@@ -104,6 +104,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
         setStopLazyLoad(false);
         const tempBlogEntries = await contentfulService.getBlogEntries(type, 3, 0);
         setBlogEntries(tempBlogEntries.map(blog => transformBlog(blog)))
+        setLoading(false)
     }
 
     const fetchMoreData = () => {
@@ -117,6 +118,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
     };
 
     const handleChange = (event, newValue) => {
+        setLoading(true)
         window.scrollTo(0, 0)
         setValue(newValue);
         let tempType = BlogTypeEnum.DIRECTION;
@@ -366,7 +368,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 lngDict,
                 initBlogEntries: blogEntries.map(blog => transformBlog(blog))
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Blog Page] getStaticProps failed.`);

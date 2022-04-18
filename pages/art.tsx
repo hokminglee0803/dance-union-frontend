@@ -276,7 +276,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 },
                 webSettings: transformWebSettings(promotionPage[0])
             },
-            revalidate: 60,
+            revalidate: 1,
         };
     } catch (e) {
         console.log(`[Promotion Page] getStaticProps failed.`);
