@@ -88,8 +88,8 @@ export default function Footer({ latestNews }: FooterProps) {
                         </Link>
                         <div className="mt-3 footer-top">
                             {
-                                latestNews?.map(item => {
-                                    return <div className="row mb-lg-3 mb-2">
+                                latestNews?.map((item, index) => {
+                                    return <div className="row mb-lg-3 mb-2" key={index}>
                                         <div className="col-lg-4 col-md-4 col-sm-4 col-3">
                                             <img alt="sunnyWong" src={item.desktopBanner} className="img-fluid" />
                                         </div>
