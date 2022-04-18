@@ -28,7 +28,7 @@ import Image from 'next/image'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
-interface BlogEntriesProps {
+interface NewsPageProps {
     initBlogEntries: BlogType[];
 }
 
@@ -65,7 +65,7 @@ function a11yProps(index) {
     };
 }
 
-const BlogMainPage: React.FC<BlogEntriesProps> = ({
+const NewsPage: React.FC<NewsPageProps> = ({
     initBlogEntries
 }) => {
 
@@ -87,12 +87,12 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
         setValue(index);
     };
 
-    const [value, setValue] = useState(1);
+    const [value, setValue] = useState(0);
 
     const [blogEntries, setBlogEntries] = useState(initBlogEntries);
 
     const [from, setFrom] = useState(3);
-    const [type, setType] = useState(BlogTypeEnum.DIRECTION);
+    const [type, setType] = useState(BlogTypeEnum.SEO);
     const [lazyLoadList, setLazyLoadList] = useState([]);
     const [stopLazyLoad, setStopLazyLoad] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -119,18 +119,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
     const handleChange = (event, newValue) => {
         window.scrollTo(0, 0)
         setValue(newValue);
-        let tempType = BlogTypeEnum.DIRECTION;
-        switch (newValue) {
-            case 0:
-                tempType = BlogTypeEnum.NEWS;
-                break;
-            case 1:
-                tempType = BlogTypeEnum.DIRECTION;
-                break;
-            case 2:
-                tempType = BlogTypeEnum.SHOW;
-                break;
-        }
+        let tempType = BlogTypeEnum.SEO;
         setType(tempType);
         fetchPageDetail(tempType);
     };
@@ -161,20 +150,20 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                         <div className="blog-date-grid mt-3">
                                             <ul>
                                                 <li>
-                                                    <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                    <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div className="blog-left-wthree mt-lg-4 mt-3" >
                                             <h4 className="pb-3">
-                                                <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                                                <Link href={`/news/${item.id}`}>{item.title}</Link>
                                             </h4>
                                             <p>
                                                 <div dangerouslySetInnerHTML={{ __html: item.description }} />
                                             </p>
                                         </div>
                                         <div className="view-buttn mt-md-4 mt-3">
-                                            <Link href={`/blog/${item.id}`}>Read More</Link>
+                                            <Link href={`/news/${item.id}`}>Read More</Link>
                                         </div>
                                     </div>
                                 </>
@@ -193,20 +182,20 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div className="blog-left-wthree mt-lg-4 mt-3">
                                                 <h4 className="pb-3">
-                                                    <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                                                    <Link href={`/news/${item.id}`}>{item.title}</Link>
                                                 </h4>
                                                 <p>
                                                     {item.description}
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/blog/${item.id}`}>Read More</Link>
+                                                <Link href={`/news/${item.id}`}>Read More</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -233,20 +222,20 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div className="blog-left-wthree mt-lg-4 mt-3">
                                                 <h4 className="pb-3">
-                                                    <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                                                    <Link href={`/news/${item.id}`}>{item.title}</Link>
                                                 </h4>
                                                 <p>
                                                     {item.description}
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/blog/${item.id}`}>Read More</Link>
+                                                <Link href={`/news/${item.id}`}>Read More</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -307,9 +296,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                         indicatorColor="primary"
                         textColor="inherit"
                     >
-                        <Tab icon={<NewReleasesIcon />} iconPosition="start" label="新聞" {...a11yProps(0)} />
-                        <Tab icon={<TrackChangesIcon />} iconPosition="start" label="動向" {...a11yProps(1)} />
-                        <Tab icon={<VideocamIcon />} iconPosition="start" label="演出" {...a11yProps(2)} />
+                        <Tab iconPosition="start" label="日誌" {...a11yProps(0)} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -321,20 +308,6 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={value} index={0} >
-                        {
-                            loading ?
-                                <CustomizedCircularProgress /> :
-                                blogDetail()
-                        }
-                    </TabPanel>
-                    <TabPanel value={value} index={1} >
-                        {
-                            loading ?
-                                <CustomizedCircularProgress /> :
-                                blogDetail()
-                        }
-                    </TabPanel>
-                    <TabPanel value={value} index={2} >
                         {
                             loading ?
                                 <CustomizedCircularProgress /> :
@@ -359,7 +332,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.DIRECTION, 3, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 3, 0);
 
         return {
             props: {
@@ -369,10 +342,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             revalidate: 60,
         };
     } catch (e) {
-        console.log(`[Blog Page] getStaticProps failed.`);
+        console.log(`[News Page] getStaticProps failed.`);
 
         throw e;
     }
 };
 
-export default BlogMainPage;
+export default NewsPage;

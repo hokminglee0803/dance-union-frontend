@@ -7,18 +7,22 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import { Carousel } from 'react-responsive-carousel';
 import contentfulService from '../utils/service/contentfulService';
-import { transformBannerData } from '../utils/transformer';
+import { transformBannerData, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ActionAreaCard from '../components/ActionAreaCard';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { VideoType } from '../interface/Video';
+import { PageSettingProps } from '../interface/PageSetting';
+import VideoPlayer from '../components/VideoPlayer';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
-interface SunnyWongProps {
-    mainPageBanner: BannerType[];
-    highlight: BannerType[];
+interface OpenClassType {
+    title: BannerType[];
+    videoCollection: VideoType[];
+    webSettings: PageSettingProps;
 }
 
-const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
+const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollection }) => {
 
     const router = useRouter();
 
@@ -44,9 +48,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
     return (
         <div>
             <Head>
-                <title>{t('seo_title')}</title>
-                <meta name="description" content={t('meta_description')} />
-                <meta name="keywords" content={t('meta_keywords')} />
+                <title>{webSettings?.seoTitle}</title>
+                <meta name="description" content={webSettings?.seoDescription} />
+                <meta name="keywords" content={webSettings?.seoKeywords} />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -54,7 +58,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/`}
+                    href={`${HOME_PATH}`}
                     hrefLang="en-hk"
                 />
                 <link
@@ -62,50 +66,31 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
-                <meta property="og:title" content={t('og_title')} />
-                <meta
-                    property="og:description"
-                    content={t('og_description')} />
-                <meta property="og:url" content={t('og_url')} />
-                <meta property="og:image" content={t('og_image_url')} />
+                <meta property="og:title" content={webSettings?.openGraphTitle} />
+                <meta property="og:description" content={webSettings?.openGraphDescription} />
+                <meta property="og:url" content={webSettings?.openGraphUrl} />
+                <meta property="og:image" content={webSettings?.openGraphImage} />
             </Head>
 
             <div style={{ marginTop: 50 }} />
             <ResponsiveAppBar />
 
-            <Carousel autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
+            <section className="py-lg-4 py-md-3 py-sm-3 py-3" id="promotion" style={{ background: 'white' }}>
+                <h4 className="text-center title mb-3">{title}</h4>
+                <br /><br />
                 {
-                    mainPageBanner.map((item, index) => {
-                        return <div key={index}>
-                            <img alt={t('image_alt')} src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
-                            <div style={{
-                                backgroundColor: 'black',
-                                color: 'white',
-                                fontSize: 20
-                            }}>
-                                {item.bannerTitle}
-                            </div>
-                        </div>
+                    videoCollection?.map(item => {
+                        return (
+                            <>
+                                <VideoPlayer url={item.url} />
+                                <h4 className="text-center title mb-3">{item.title}</h4>
+                                <br />
+                            </>
+                        )
+
                     })
                 }
-            </Carousel>
-
-            {/* <div style={{ margin: 10 }}>
-                <Grid container spacing={3}>
-                    {
-                        highlight.map(item => {
-                            return (
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <ActionAreaCard
-                                        img={isDesktop ? item.bannerDesktop : item.bannerMobile}
-                                        title={item.bannerTitle}
-                                    />
-                                </Grid>
-                            )
-                        })
-                    }
-                </Grid>
-            </div> */}
+            </section>
 
             <Footer />
 
@@ -122,34 +107,24 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const homePage = await contentfulService.getEntriesByContentType('homePage');
+        const openClassPage = await contentfulService.getEntriesByContentType('openClass');
 
-        const mainPageBanner = [];
-        const highlight = [];
-
-        homePage.map(item => {
-            item.fields.mainPageBanner.map(banner => {
-                mainPageBanner.push(transformBannerData(banner))
-            })
-
-            item.fields.highlight.map(banner => {
-                highlight.push(transformBannerData(banner))
-            })
-        })
+        const videoCollection = openClassPage[0].fields.videoCollection.map(item => transformVideoClip(item));
 
         return {
             props: {
                 lngDict,
-                mainPageBanner,
-                highlight
+                title: openClassPage[0].fields.title,
+                videoCollection: videoCollection,
+                webSettings: transformWebSettings(openClassPage[0])
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
-        console.log(`[IndexPage] getStaticProps failed.`);
+        console.log(`[Open Class Page] getStaticProps failed.`);
 
         throw e;
     }
 };
 
-export default SunnyWong;
+export default OpenClass;

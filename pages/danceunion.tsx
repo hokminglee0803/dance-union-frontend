@@ -13,6 +13,7 @@ import ActionAreaCard from '../components/ActionAreaCard';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { ArticleType } from '../interface/Article';
 import { PageSettingProps } from '../interface/PageSetting';
+import Image from 'next/image'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -244,7 +245,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 partner: transformArticleWithImage(danceUnionPage[0].fields.partner),
                 webSettings: transformWebSettings(danceUnionPage[0])
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
         console.log(`[About Page] getStaticProps failed.`);

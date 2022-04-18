@@ -7,12 +7,21 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import contentfulService from '../utils/service/contentfulService';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { ArticleProps } from '../components/Article';
+import { transformArticle, transformBannerData, transformWebSettings } from '../utils/transformer';
+import { Carousel } from 'react-responsive-carousel';
+import { PageSettingProps } from '../interface/PageSetting';
+import { ArticleWithBannerType } from '../interface/Article';
+import Image from 'next/image'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface BookingProps {
+    title: string;
+    articleCollection: ArticleWithBannerType[];
+    webSettings: PageSettingProps;
 }
 
-const Booking: React.FC<BookingProps> = ({ }) => {
+const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings }) => {
 
     const router = useRouter();
 
@@ -38,9 +47,9 @@ const Booking: React.FC<BookingProps> = ({ }) => {
     return (
         <div>
             <Head>
-                <title>{t('seo_title')}</title>
-                <meta name="description" content={t('meta_description')} />
-                <meta name="keywords" content={t('meta_keywords')} />
+                <title>{webSettings?.seoTitle}</title>
+                <meta name="description" content={webSettings?.seoDescription} />
+                <meta name="keywords" content={webSettings?.seoKeywords} />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -48,7 +57,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/`}
+                    href={`${HOME_PATH}`}
                     hrefLang="en-hk"
                 />
                 <link
@@ -56,18 +65,50 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
-                <meta property="og:title" content={t('og_title')} />
-                <meta
-                    property="og:description"
-                    content={t('og_description')} />
-                <meta property="og:url" content={t('og_url')} />
-                <meta property="og:image" content={t('og_image_url')} />
+                <meta property="og:title" content={webSettings?.openGraphTitle} />
+                <meta property="og:description" content={webSettings?.openGraphDescription} />
+                <meta property="og:url" content={webSettings?.openGraphUrl} />
+                <meta property="og:image" content={webSettings?.openGraphImage} />
             </Head>
 
             <div style={{ marginTop: 50 }} />
             <ResponsiveAppBar />
 
-            <section className="py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white' }}>
+            <section className="contact py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', textAlign: 'center', width: '85%', margin: 'auto' }}>
+                <h4 className="text-center title mb-3">
+                    {title}</h4>
+                {
+                    articleCollection?.map((item, index) => {
+                        return <div key={index}>
+                            <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                {
+                                    item?.banner.map((i, index) => {
+                                        return <div key={index}>
+                                            <img alt="sunnyWong" src={isDesktop ? i.bannerDesktop : i.bannerMobile} />
+                                            <div style={{
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                fontSize: 20
+                                            }}>{i.bannerTitle}</div>
+                                        </div>
+
+                                    })
+                                }
+                            </Carousel>
+                            <h3 className="text-center title mb-3">{item.title}</h3>
+                            <div className=" text-left pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+                                <p style={{ whiteSpace: 'pre-line' }}>
+                                    <div dangerouslySetInnerHTML={{ __html: item?.description }} />
+                                </p>
+                            </div>
+                        </div>
+                    })
+
+                }
+            </section>
+
+
+            {/* <section className="py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white' }}>
                 <h4 className="text-center title mb-3">舞蹈室租借</h4>
                 <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
                     <div>
@@ -102,7 +143,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                                     <h3 style={{ textAlign: 'center' }}>
                                         大排舞室
                                     </h3>
-                                    <div className="team-img">
+                                    <div className="team-image">
                                         <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1-PgQSWH5gIzI7xpSwh47Ycc-no3ulRZ_" className="img-fluid" />
                                     </div>
                                     <div className="team-hover">
@@ -129,7 +170,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                                     <h3 style={{ textAlign: 'center' }}>
                                         中排舞室
                                     </h3>
-                                    <div className="team-img">
+                                    <div className="team-image">
                                         <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1qNAnhcuUNhUFDtrGMixdSzJzhKPfd74_" className="img-fluid" />
                                     </div>
                                     <div className="team-hover">
@@ -156,7 +197,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                                     <h3 style={{ textAlign: 'center' }}>
                                         小排舞室
                                     </h3>
-                                    <div className="team-img">
+                                    <div className="team-image">
                                         <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1Dmsyz1fqsyUgysM6KzSW4DNasA-bVS_d" className="img-fluid" />
                                     </div>
                                     <div className="team-hover">
@@ -183,7 +224,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                                     <h3 style={{ textAlign: 'center' }}>
                                         接待處
                                     </h3>
-                                    <div className="team-img">
+                                    <div className="team-image">
                                         <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1KoWoS9di7cC25Hzg07bWMwUrnAV_L7ij" className="img-fluid" />
                                     </div>
                                     <div className="team-hover">
@@ -203,7 +244,7 @@ const Booking: React.FC<BookingProps> = ({ }) => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <Footer />
 
@@ -220,13 +261,51 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const homePage = await contentfulService.getEntriesByContentType('homePage');
+        const bookingPage = await contentfulService.getEntriesByContentType('bookingPage');
+
+        const generalIntroBannerList = await Promise.all(bookingPage[0].fields?.generalIntro?.fields?.banner.map(async item => {
+            const banner = await contentfulService.getEntriesById(item.sys.id);
+            return transformBannerData(banner[0]);
+        }))
+
+        const room1BannerList = await Promise.all(bookingPage[0].fields?.room1?.fields?.banner.map(async item => {
+            const banner = await contentfulService.getEntriesById(item.sys.id);
+            return transformBannerData(banner[0]);
+        }))
+
+
+        const room2BannerList = await Promise.all(bookingPage[0].fields?.Room2?.fields?.banner.map(async item => {
+            const banner = await contentfulService.getEntriesById(item.sys.id);
+            return transformBannerData(banner[0]);
+        }))
+
+
+        const room3BannerList = await Promise.all(bookingPage[0].fields?.room3?.fields?.banner.map(async item => {
+            const banner = await contentfulService.getEntriesById(item.sys.id);
+            return transformBannerData(banner[0]);
+        }))
+
+        const room4BannerList = await Promise.all(bookingPage[0]?.fields?.room4?.[0]?.fields?.banner.map(async item => {
+            const banner = await contentfulService.getEntriesById(item.sys.id);
+            return transformBannerData(banner[0]);
+        }))
+
+        const articleCollection = [
+            transformArticle(bookingPage[0].fields.generalIntro, generalIntroBannerList),
+            transformArticle(bookingPage[0].fields.room1, room1BannerList),
+            transformArticle(bookingPage[0].fields.Room2, room2BannerList),
+            transformArticle(bookingPage[0].fields.room3, room3BannerList),
+            transformArticle(bookingPage[0].fields.room4?.[0], room4BannerList)
+        ]
 
         return {
             props: {
                 lngDict,
+                title: bookingPage[0].fields.title,
+                articleCollection: articleCollection,
+                webSettings: transformWebSettings(bookingPage[0])
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
         console.log(`[Booking Page] getStaticProps failed.`);

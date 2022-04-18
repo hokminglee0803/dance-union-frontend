@@ -25,6 +25,7 @@ import VideoGallery from '../components/VideoGallery';
 import { VideoType } from '../interface/Video';
 import VideoPlayer from '../components/VideoPlayer';
 import { PageSettingProps } from '../interface/PageSetting';
+import Image from 'next/image'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -275,7 +276,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 },
                 webSettings: transformWebSettings(promotionPage[0])
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
         console.log(`[Promotion Page] getStaticProps failed.`);

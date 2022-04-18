@@ -23,6 +23,7 @@ import Tab from '@mui/material/Tab';
 import { Grid, Typography } from "@mui/material";
 import { VideoType } from '../interface/Video';
 import { PageSettingProps } from '../interface/PageSetting';
+import Image from 'next/image'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -309,7 +310,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 videoCollection: videoCollection,
                 webSettings: transformWebSettings(sunnyWongPage[0])
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
         console.log(`[IndexPage] getStaticProps failed.`);

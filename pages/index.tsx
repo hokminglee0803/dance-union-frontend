@@ -7,18 +7,23 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import { Carousel } from 'react-responsive-carousel';
 import contentfulService from '../utils/service/contentfulService';
-import { transformBannerData } from '../utils/transformer';
+import { transformBannerData, transformBlog, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ActionAreaCard from '../components/ActionAreaCard';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { PageSettingProps } from '../interface/PageSetting';
+import Image from 'next/image'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH;
 interface IndexPageProps {
   mainPageBanner: BannerType[];
   highlight: BannerType[];
+  webSettings: PageSettingProps;
+  latestNews: BlogType[];
 }
 
-const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
+const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSettings, latestNews }) => {
 
   const router = useRouter();
 
@@ -44,9 +49,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
   return (
     <div>
       <Head>
-        <title>{t('seo_title')}</title>
-        <meta name="description" content={t('meta_description')} />
-        <meta name="keywords" content={t('meta_keywords')} />
+        <title>{webSettings?.seoTitle}</title>
+        <meta name="description" content={webSettings?.seoDescription} />
+        <meta name="keywords" content={webSettings?.seoKeywords} />
         <link
           rel="alternate"
           href={`${HOME_PATH}`}
@@ -54,7 +59,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
         />
         <link
           rel="alternate"
-          href={`${HOME_PATH}/en/`}
+          href={`${HOME_PATH}`}
           hrefLang="en-hk"
         />
         <link
@@ -62,22 +67,20 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
           href={`${HOME_PATH}${localePath}`}
         />
         <meta name="buildVersion" content={'1.0.1'} />
-        <meta property="og:title" content={t('og_title')} />
-        <meta
-          property="og:description"
-          content={t('og_description')} />
-        <meta property="og:url" content={t('og_url')} />
-        <meta property="og:image" content={t('og_image_url')} />
+        <meta property="og:title" content={webSettings?.openGraphTitle} />
+        <meta property="og:description" content={webSettings?.openGraphDescription} />
+        <meta property="og:url" content={webSettings?.openGraphUrl} />
+        <meta property="og:image" content={webSettings?.openGraphImage} />
       </Head>
 
       <div style={{ marginTop: 50 }} />
       <ResponsiveAppBar />
 
-      <Carousel autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
+      <Carousel showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
         {
           mainPageBanner.map((item, index) => {
             return <div key={index}>
-              <img alt={t('image_alt')} src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
+              <img src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
               <div style={{
                 backgroundColor: 'black',
                 color: 'white',
@@ -107,7 +110,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight }) => {
         </Grid>
       </div>
 
-      <Footer />
+      <Footer latestNews={latestNews} />
 
     </div>
   )
@@ -137,13 +140,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       })
     })
 
+    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
     return {
       props: {
         lngDict,
         mainPageBanner,
-        highlight
+        highlight,
+        webSettings: transformWebSettings(homePage[0]),
+        latestNews: blogEntries.map(blog => transformBlog(blog))
       },
-      revalidate: 1,
+      revalidate: 60,
     };
   } catch (e) {
     console.log(`[IndexPage] getStaticProps failed.`);

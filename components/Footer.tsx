@@ -26,7 +26,11 @@ const iconStyle = {
     },
 };
 
-export default function Footer() {
+interface FooterProps {
+    latestNews?: BlogType[];
+}
+
+export default function Footer({ latestNews }: FooterProps) {
 
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
@@ -77,27 +81,27 @@ export default function Footer() {
                             </p>
                         </div>
                     </div>
-                    {/* <div className="col-lg-4 col-md-5 footer-bottom-txt">
-                        <Link link={`/news`}>
+                    <div className="col-lg-4 col-md-5 footer-bottom-txt">
+                        <Link href={`/news`}>
                             <h4>最新文章</h4>
                         </Link>
                         <div className="mt-3 footer-top">
                             {
-                                latestBlog?.map(item => {
+                                latestNews?.map(item => {
                                     return <div className="row mb-lg-3 mb-2">
                                         <div className="col-lg-4 col-md-4 col-sm-4 col-3">
-                                            <img alt="sunnyWong" src={item.image} alt="" className="img-fluid" />
+                                            <img alt="sunnyWong" src={item.desktopBanner} className="img-fluid" />
                                         </div>
                                         <div className="col-lg-8 col-md-8 col-sm-8 col-9 footer-us ">
                                             <p>
-                                                <a href={`/blogdetail/blog/${item.id}`}>
+                                                <a href={`/news/${item.id}`}>
                                                     {item.title}
                                                 </a>
                                             </p>
                                             <div className="blog-date-time mt-2">
                                                 <ul>
                                                     <li>
-                                                        <a href={`/blogdetail/blog/${item.id}`}>
+                                                        <a href={`/news/${item.id}`}>
                                                             {item.createdDate}
                                                         </a>
                                                     </li>
@@ -111,18 +115,18 @@ export default function Footer() {
 
                         </div>
                     </div>
-                </div> */}
+
                     <div
                         style={{
                             cursor: 'pointer'
                         }}
                         className="text-center mt-lg-5 mt-md-4 mt-3">
-                        <a onClick={() => { window.scroll(0, 0) }} className="move-top text-center mt-3">
+                        <div onClick={() => { window.scroll(0, 0) }} className="move-top text-center mt-3">
                             <span className="fa fa-arrow-up" aria-hidden="true"></span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

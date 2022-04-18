@@ -24,6 +24,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Link } from '@mui/material';
 import { useRouter } from 'next/router';
+import Image from 'next/image'
 
 const ResponsiveAppBar = () => {
     const [nav, setNav] = React.useState(false);
@@ -71,7 +72,7 @@ const ResponsiveAppBar = () => {
             <List>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ display: 'flex', justifyContent: 'center', backgroundColor: '#333333' }}>
                     <Link href='/'>
-                        <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1_ag37OtWny0NzRlfCx2SgFFKZIfleoD6" width={30} height={30} />
+                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={30} height={30} />
                     </Link>
                 </ListItem>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/sunnywong'))} style={{ backgroundColor: 'white' }}>
@@ -137,9 +138,16 @@ const ResponsiveAppBar = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        style={{
+                            cursor: 'pointer'
+                        }}
+                        onClick={() => {
+                            handleCloseNavMenu();
+                            router.push('/')
+                        }}
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1_ag37OtWny0NzRlfCx2SgFFKZIfleoD6" width={40} height={40} />
+                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={40} height={40} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -163,7 +171,7 @@ const ResponsiveAppBar = () => {
                     >
                         {list()}
                     </SwipeableDrawer>
-
+                    {/* 
                     <Typography
                         variant="h6"
                         noWrap
@@ -172,8 +180,8 @@ const ResponsiveAppBar = () => {
                             display: { xs: 'flex', md: 'none' },
                         }}
                     >
-                        <img alt="sunnyWong" src="https://lh3.googleusercontent.com/d/1_ag37OtWny0NzRlfCx2SgFFKZIfleoD6" width={40} height={40} />
-                    </Typography>
+                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={40} height={40} />
+                    </Typography> */}
 
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

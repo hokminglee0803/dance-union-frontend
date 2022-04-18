@@ -9,14 +9,14 @@ import contentfulService from '../utils/service/contentfulService';
 import { transformBannerData } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { postMember } from '../utils/mongo';
+import Image from 'next/image'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
-interface SunnyWongProps {
-    mainPageBanner: BannerType[];
-    highlight: BannerType[];
+interface ContactUsProps {
 }
 
-const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
+const ContactUs: React.FC<ContactUsProps> = ({ }) => {
 
     const router = useRouter();
 
@@ -32,6 +32,37 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
 
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
+    const [loading, setLoading] = useState(false);
+    const type = [
+        '兒童及青少年課程',
+        'Open Class',
+    ];
+
+    const [payload, setPayload] = useState({
+        "name": "",
+        "type": type[0],
+        "source": "Website",
+        "email": "",
+        "phone": "",
+        "alternatePhone": "",
+        "age": "",
+        "childAge": "",
+        "occupation": "",
+        "gender": "",
+        "contactTime": "",
+        "referral": [],
+        "remark": "",
+        status: '未檢閱 - 未檢閱'
+    })
+
+    const handleChange = (event) => {
+        setPayload({
+            ...payload,
+            [event.target.name]: event.target.value
+        })
+    }
+
+
     useEffect(() => {
         if (init) {
             setInit(false);
@@ -42,9 +73,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
     return (
         <div>
             <Head>
-                <title>{t('seo_title')}</title>
-                <meta name="description" content={t('meta_description')} />
-                <meta name="keywords" content={t('meta_keywords')} />
+                <title>聯絡我們 | Dance Union</title>
+                <meta name="description" content='Dance Union Contact Us' />
+                <meta name="keywords" content='Contact Us, 聯絡我們, Dance Union, Sunny Wong ' />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -79,19 +110,24 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
                     <div className="row">
                         <div className="col-lg-6 col-md-6 contact-form pb-lg-3 pb-2">
                             <form action="#" method="post">
-                                {/* 
+
                                 <div className=" form-group contact-forms">
-                                    <input name="name" type="text" className="form-control" placeholder="姓名" required="" onChange={handleChange} />
+                                    <input name="name" type="text" className="form-control" placeholder="姓名" required={true} onChange={handleChange} />
                                 </div>
+                                <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="email" type="email" className="form-control" placeholder="電郵" required="" onChange={handleChange} />
+                                    <input name="email" type="email" className="form-control" placeholder="電郵" required={true} onChange={handleChange} />
                                 </div>
+                                <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="phone" type="text" className="form-control" placeholder="聯絡電話" required="" onChange={handleChange} />
-                                </div> */}
+                                    <input name="phone" type="text" className="form-control" placeholder="聯絡電話" required={true} onChange={handleChange} />
+                                </div>
+                                <br />
+                                <br />
                                 <div className="form-group contact-forms">
-                                    {/* <textarea className="form-control" placeholder="查詢項目" required=""></textarea> */}
-                                    {/* <select name="type" className="form-control" placeholder="查詢項目" onChange={handleChange}>
+                                    <textarea className="form-control" placeholder="查詢項目" required={true}></textarea>
+                                    <br />
+                                    <select name="type" className="form-control" placeholder="查詢項目" onChange={handleChange}>
                                         {
                                             type.map((item, index) =>
                                                 <option key={index} value={item}>
@@ -99,13 +135,14 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ mainPageBanner, highlight }) => {
                                                 </option>
                                             )
                                         }
-                                    </select> */}
+                                    </select>
                                 </div>
+                                <br />
                                 <button onClick={() => {
-                                    // setLoading(true)
-                                    // postMember(payload).then(data => {
-                                    //     setLoading(false)
-                                    // })
+                                    setLoading(true)
+                                    postMember(payload).then(data => {
+                                        setLoading(false)
+                                    })
                                 }} type="button" className="btn sent-butnn btn-lg">發送</button>
                             </form>
                         </div>
@@ -130,35 +167,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     );
 
     try {
-
-        const homePage = await contentfulService.getEntriesByContentType('homePage');
-
-        const mainPageBanner = [];
-        const highlight = [];
-
-        homePage.map(item => {
-            item.fields.mainPageBanner.map(banner => {
-                mainPageBanner.push(transformBannerData(banner))
-            })
-
-            item.fields.highlight.map(banner => {
-                highlight.push(transformBannerData(banner))
-            })
-        })
-
         return {
             props: {
                 lngDict,
-                mainPageBanner,
-                highlight
             },
-            revalidate: 1,
+            revalidate: 60,
         };
     } catch (e) {
-        console.log(`[IndexPage] getStaticProps failed.`);
+        console.log(`[Contact Us] getStaticProps failed.`);
 
         throw e;
     }
 };
 
-export default SunnyWong;
+export default ContactUs;

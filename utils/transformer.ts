@@ -4,8 +4,8 @@ import moment from 'moment';
 export const transformBannerData = (banner: any) => {
     return {
         bannerTitle: banner?.fields?.bannerTitle ?? '',
-        bannerDesktop: banner.fields?.desktopBanner?.fields?.file?.url ?? '',
-        bannerMobile: banner.fields?.mobileBanner?.fields?.file?.url ?? '',
+        bannerDesktop: banner.fields?.desktopBanner?.fields?.file?.url ? `https:${banner.fields?.desktopBanner?.fields?.file?.url}` : '',
+        bannerMobile: banner.fields?.mobileBanner?.fields?.file?.url ? `https:${banner.fields?.mobileBanner?.fields?.file?.url}` : '',
         bannerVideo: banner.fields?.bannerVideo?.fields?.file?.url ?? '',
         actionLink: banner.fields?.actionLink ?? '',
     }
@@ -20,7 +20,7 @@ export const transformShowCollection = (item: any) => {
 
 export const transformMediaUrl = (item: any) => {
     return {
-        src: item?.fields?.file?.url ?? '',
+        src: item?.fields?.file?.url ? `https:${item?.fields?.file?.url}` : '',
         height: 1,
         width: 1,
     }
@@ -30,7 +30,7 @@ export const transformArticleWithImage = (item: any) => {
     return {
         title: item?.fields?.title,
         content: documentToHtmlString(item?.fields?.content),
-        image: item?.fields?.image?.fields?.file?.url ?? '',
+        image: item?.fields?.image?.fields?.file?.url ? `https:${item?.fields?.image?.fields?.file?.url}` : '',
     }
 }
 
@@ -40,17 +40,17 @@ export const transformBlog = (item: any) => {
         title: item?.fields?.title ?? '',
         content: documentToHtmlString(item?.fields?.content),
         description: documentToHtmlString(item?.fields?.description),
-        desktopBanner: item?.fields?.desktopBanner?.fields?.file?.url ?? '',
-        mobileBanner: item?.fields?.mobileBanner?.fields?.file?.url ?? '',
+        desktopBanner: item?.fields?.desktopBanner?.fields?.file?.url ? `https:${item?.fields?.desktopBanner?.fields?.file?.url}` : '',
+        mobileBanner: item?.fields?.mobileBanner?.fields?.file?.url ? `https:${item?.fields?.mobileBanner?.fields?.file?.url}` : '',
         createdDate: moment(item?.sys?.createdAt).format('DD/MM/YYYY')
     }
 }
 
-export const transformArticle = (item: any) => {
+export const transformArticle = (item: any, banner?: any[]) => {
     return {
         title: item?.fields?.title ?? '',
         description: documentToHtmlString(item?.fields?.description) ?? '',
-        banner: item?.fields?.banner?.map(item => transformBannerData(item)) ?? []
+        banner: banner ?? (item?.fields?.banner?.map(item => transformBannerData(item)) ?? [])
     }
 }
 
