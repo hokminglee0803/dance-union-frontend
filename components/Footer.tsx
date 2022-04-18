@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Container, Grid, Link, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Facebook as FacebookIcon, Twitter as TwiiterIcon } from '@mui/icons-material';
 import { Icon } from '@iconify/react';
+import { BlogType } from '../interface/Blog';
 
 const Copyright = () => {
     return (
