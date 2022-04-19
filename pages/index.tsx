@@ -14,6 +14,7 @@ import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { PageSettingProps } from '../interface/PageSetting';
 import Image from 'next/image'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
+import ReactPlayer from 'react-player/lazy'
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH;
 interface IndexPageProps {
@@ -79,8 +80,39 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
       <Carousel showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
         {
           mainPageBanner.map((item, index) => {
-            return <div key={index}>
-              <img src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
+            return <div key={index}
+              style={{
+                cursor: 'pointer'
+              }}
+              onClick={() => {
+                router.push(item.actionLink)
+              }}>
+              {
+                item.bannerDesktop !== '' && item.bannerMobile !== '' ?
+                  < Image
+                    alt={item.bannerSEOTitle}
+                    title={item.bannerSEOTitle}
+                    width={isDesktop ? '3648px' : '2736px'}
+                    height={isDesktop ? '1358px' : '2736px'}
+                    src={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                  /> :
+                  <div style={{
+                    position: 'relative',
+                    paddingTop: isDesktop ? '37.5%' : '100%',
+                  }}>
+                    <ReactPlayer
+                      light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                      controls={true}
+                      width={'100%'}
+                      height={'100%'}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                      }}
+                      url={`${item.bannerVideo}`} />
+                  </div>
+              }
               <div style={{
                 backgroundColor: 'black',
                 color: 'white',

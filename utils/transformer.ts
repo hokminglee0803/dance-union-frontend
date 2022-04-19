@@ -4,9 +4,11 @@ import moment from 'moment';
 export const transformBannerData = (banner: any) => {
     return {
         bannerTitle: banner?.fields?.bannerTitle ?? '',
-        bannerDesktop: banner.fields?.desktopBanner?.fields?.file?.url ? `https:${banner.fields?.desktopBanner?.fields?.file?.url}` : '',
-        bannerMobile: banner.fields?.mobileBanner?.fields?.file?.url ? `https:${banner.fields?.mobileBanner?.fields?.file?.url}` : '',
-        bannerVideo: banner.fields?.bannerVideo?.fields?.file?.url ?? '',
+        bannerDesktop: banner?.fields?.desktopBanner?.fields?.file?.url ? `https:${banner.fields?.desktopBanner?.fields?.file?.url}` : '',
+        bannerMobile: banner?.fields?.mobileBanner?.fields?.file?.url ? `https:${banner.fields?.mobileBanner?.fields?.file?.url}` : '',
+        bannerVideo: banner?.fields?.bannerVideo ?? '',
+        thumbumbDesktop: banner?.fields?.thumbumbDesktop?.fields?.file?.url ? `https:${banner.fields?.thumbumbDesktop?.fields?.file?.url}` : '',
+        thumbumbMobile: banner?.fields?.thumbumbMobile?.fields?.file?.url ? `https:${banner.fields?.thumbumbMobile?.fields?.file?.url}` : '',
         actionLink: banner.fields?.actionLink ?? '',
     }
 }
@@ -59,6 +61,8 @@ export const transformVideoClip = (clip: any) => {
         title: clip?.fields?.title ?? '',
         url: clip.fields?.url ?? '',
         description: documentToHtmlString(clip.fields?.description) ?? '',
+        thumbumbDesktop: clip?.fields?.thumbumbDesktop?.fields?.file?.url ? `https:${clip.fields?.thumbumbDesktop?.fields?.file?.url}` : '',
+        thumbumbMobile: clip?.fields?.thumbumbMobile?.fields?.file?.url ? `https:${clip.fields?.thumbumbMobile?.fields?.file?.url}` : '',
     }
 }
 

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import { Carousel } from 'react-responsive-carousel';
 import contentfulService from '../utils/service/contentfulService';
-import { transformArticle, transformBannerData, transformVideoClip, transformWebSettings } from '../utils/transformer';
+import { transformArticle, transformBannerData, transformBlog, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ActionAreaCard from '../components/ActionAreaCard';
 import Box from '@mui/material/Box';
@@ -26,6 +26,8 @@ import { VideoType } from '../interface/Video';
 import VideoPlayer from '../components/VideoPlayer';
 import { PageSettingProps } from '../interface/PageSetting';
 import Image from 'next/image'
+import ReactPlayer from 'react-player/lazy'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -40,6 +42,7 @@ interface PromotionProps {
         moreVideoList: VideoType[];
     };
     webSettings: PageSettingProps;
+    latestNews: BlogType[];
 }
 
 function TabPanel(props) {
@@ -75,7 +78,7 @@ function a11yProps(index) {
     };
 }
 
-const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettings }) => {
+const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettings, latestNews }) => {
 
     const router = useRouter();
 
@@ -177,13 +180,46 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                         <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item?.banner.map((i, index) => {
-                                                    return <div key={index}>
-                                                        <img alt="sunnyWong" src={isDesktop ? i.bannerDesktop : i.bannerMobile} />
+                                                    return <div key={index}
+                                                        style={{
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        onClick={() => {
+                                                            router.push(i.actionLink)
+                                                        }}>
+                                                        {
+                                                            i.bannerDesktop !== '' && i.bannerMobile !== '' ?
+                                                                <Image
+                                                                    alt={i.bannerSEOTitle}
+                                                                    title={i.bannerSEOTitle}
+                                                                    width={isDesktop ? '3648px' : '2736px'}
+                                                                    height={isDesktop ? '1358px' : '2736px'}
+                                                                    src={isDesktop ? i.bannerDesktop : i.bannerMobile}
+                                                                /> :
+                                                                <div style={{
+                                                                    position: 'relative',
+                                                                    paddingTop: isDesktop ? '37.5%' : '100%',
+                                                                }}>
+                                                                    <ReactPlayer
+                                                                        light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
+                                                                        controls={true}
+                                                                        width={'100%'}
+                                                                        height={'100%'}
+                                                                        style={{
+                                                                            position: 'absolute',
+                                                                            top: 0,
+                                                                            left: 0,
+                                                                        }}
+                                                                        url={`${i.bannerVideo}`} />
+                                                                </div>
+                                                        }
                                                         <div style={{
                                                             backgroundColor: 'black',
                                                             color: 'white',
                                                             fontSize: 20
-                                                        }}>{i.bannerTitle}</div>
+                                                        }}>
+                                                            {i.bannerTitle}
+                                                        </div>
                                                     </div>
 
                                                 })
@@ -210,7 +246,23 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                 videoInfo.videoCollection.map(item => {
                                     return (
                                         <>
-                                            <VideoPlayer url={item.url} />
+                                            <div style={{
+                                                position: 'relative',
+                                                paddingTop: isDesktop ? '37.5%' : '100%',
+                                            }}>
+                                                <ReactPlayer
+                                                    light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                                    controls={true}
+                                                    width={'100%'}
+                                                    height={'100%'}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 0,
+                                                        left: 0,
+                                                    }}
+                                                    url={`${item.url}`} />
+                                            </div>
+                                            <br />
                                             <h4 className="text-center title mb-3">{item.title}</h4>
                                             <br />
 
@@ -230,7 +282,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                 </SwipeableViews>
             </Box>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div >
     )
@@ -262,6 +314,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             return transformVideoClip(moreVideo[0]);
         }))
 
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
@@ -274,7 +328,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     videoCollection: videoCollection,
                     moreVideoList: moreVideoList
                 },
-                webSettings: transformWebSettings(promotionPage[0])
+                webSettings: transformWebSettings(promotionPage[0]),
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };

@@ -3,6 +3,7 @@ import { Box, Container, Grid, Link, TextField, Typography, useMediaQuery, useTh
 import { Facebook as FacebookIcon, Twitter as TwiiterIcon } from '@mui/icons-material';
 import { Icon } from '@iconify/react';
 import { BlogType } from '../interface/Blog';
+import Image from 'next/image'
 
 const Copyright = () => {
     return (
@@ -91,7 +92,10 @@ export default function Footer({ latestNews }: FooterProps) {
                                 latestNews?.map((item, index) => {
                                     return <div className="row mb-lg-3 mb-2" key={index}>
                                         <div className="col-lg-4 col-md-4 col-sm-4 col-3">
-                                            <img alt="sunnyWong" src={item.desktopBanner} className="img-fluid" />
+                                            <img alt={'sunny wong dance union'} src={item.desktopBanner} className="img-fluid" />
+                                            {/* {
+                                                item.desktopBanner !== '' ? <Image alt={'sunny wong dance union'} src={item.desktopBanner} width /> : ''
+                                            } */}
                                         </div>
                                         <div className="col-lg-8 col-md-8 col-sm-8 col-9 footer-us ">
                                             <p>

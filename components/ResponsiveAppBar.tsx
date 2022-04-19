@@ -72,8 +72,11 @@ const ResponsiveAppBar = () => {
             <List>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ display: 'flex', justifyContent: 'center', backgroundColor: '#333333' }}>
                     <Link href='/'>
-                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={30} height={30} />
+                        <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={30} height={30} />
                     </Link>
+                </ListItem>
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ backgroundColor: 'white', borderBottom: '1px black solid' }}>
+                    Home
                 </ListItem>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/sunnywong'))} style={{ backgroundColor: 'white' }}>
                     Sunny Wong
@@ -118,7 +121,7 @@ const ResponsiveAppBar = () => {
                     最新消息
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={toggleDrawer(false, () => router.push('/booking'))} style={{ backgroundColor: 'white' }}>
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/place'))} style={{ backgroundColor: 'white' }}>
                     場地租借
                 </ListItem>
                 <Divider />
@@ -147,21 +150,20 @@ const ResponsiveAppBar = () => {
                         }}
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={40} height={40} />
+                        <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={40} height={40} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{
+                                display: { xs: 'flex', md: 'none' },
+                            }}
                         >
-                            <MenuIcon />
-                        </IconButton>
-
+                            <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={40} height={40} />
+                        </Typography>
                     </Box>
                     <SwipeableDrawer
                         anchor={'top'}
@@ -171,20 +173,30 @@ const ResponsiveAppBar = () => {
                     >
                         {list()}
                     </SwipeableDrawer>
-                    {/* 
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
                         sx={{
                             display: { xs: 'flex', md: 'none' },
                         }}
+                        onClick={handleOpenNavMenu}
+                        color="inherit"
                     >
-                        <img alt="sunnyWong" src="https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png" width={40} height={40} />
-                    </Typography> */}
-
+                        <MenuIcon />
+                    </IconButton>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        <Button
+                            onClick={() => {
+                                handleCloseNavMenu();
+                                router.push('/');
+                            }}
+                            sx={{ color: 'white', display: 'block' }}
+                        >
+                            Home
+                        </Button>
                         <Button
                             onClick={() => {
                                 handleCloseNavMenu();
@@ -240,7 +252,7 @@ const ResponsiveAppBar = () => {
                         <Button
                             onClick={() => {
                                 handleCloseNavMenu();
-                                router.push('/booking')
+                                router.push('/place')
                             }}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >

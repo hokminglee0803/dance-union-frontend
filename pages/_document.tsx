@@ -28,7 +28,7 @@ export default class MyDocument extends Document {
                     <link
                         rel="shortcut icon"
                         type="image/x-icon"
-                        href="https://www.fwd.com.hk/favicon.ico"
+                        href="https://assets.ctfassets.net/k5r307sl52db/4iYdFvRoDdcBS1u8htN6aa/7ca9e7c2bb9aec0eb00a86082c585719/favicon.ico"
                     />
                 </Head>
                 <body>

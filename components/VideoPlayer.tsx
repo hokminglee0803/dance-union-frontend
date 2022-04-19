@@ -20,8 +20,6 @@ export default function VideoPlayer({ url }: VideoPlayerProps) {
                     left: 0
                 }}
                 controls={true}
-                width={'100%'}
-                height={'100%'}
                 url={`${url}`} />
         </div>
     );

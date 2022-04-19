@@ -145,7 +145,9 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                 return <>
                                     <div style={{ width: '80%', margin: 'auto' }}>
                                         <div className="color-img-three">
-                                            <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                            {
+                                                item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                            }
                                         </div>
                                         <div className="blog-date-grid mt-3">
                                             <ul>
@@ -177,7 +179,9 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                     return <div className="col-lg-6 col-md-6 blog-left-sub">
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
-                                                <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                                {
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid"  /> : ''
+                                                }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
@@ -217,7 +221,9 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                     return <div key={index} className="col-lg-6 col-md-6 blog-left-sub">
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
-                                                <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                                {
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid"  /> : ''
+                                                }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>

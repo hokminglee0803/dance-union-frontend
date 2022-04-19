@@ -30,6 +30,7 @@ const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
 interface BlogEntriesProps {
     initBlogEntries: BlogType[];
+    latestNews: BlogType[];
 }
 
 function TabPanel(props) {
@@ -66,7 +67,8 @@ function a11yProps(index) {
 }
 
 const BlogMainPage: React.FC<BlogEntriesProps> = ({
-    initBlogEntries
+    initBlogEntries,
+    latestNews
 }) => {
 
     const router = useRouter();
@@ -158,7 +160,9 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                 return <>
                                     <div style={{ width: '80%', margin: 'auto' }}>
                                         <div className="color-img-three">
-                                            <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                            {
+                                                item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                            }
                                         </div>
                                         <div className="blog-date-grid mt-3">
                                             <ul>
@@ -190,7 +194,9 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                     return <div className="col-lg-6 col-md-6 blog-left-sub">
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
-                                                <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                                {
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
@@ -204,7 +210,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                                     <Link href={`/blog/${item.id}`}>{item.title}</Link>
                                                 </h4>
                                                 <p>
-                                                    {item.description}
+                                                    <div dangerouslySetInnerHTML={{ __html: item.description }} />
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
@@ -230,7 +236,9 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                     return <div key={index} className="col-lg-6 col-md-6 blog-left-sub">
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
-                                                <img alt={t('image_alt')} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" />
+                                                {
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
@@ -244,7 +252,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                                     <Link href={`/blog/${item.id}`}>{item.title}</Link>
                                                 </h4>
                                                 <p>
-                                                    {item.description}
+                                                    <div dangerouslySetInnerHTML={{ __html: item.description }} />
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
@@ -265,9 +273,9 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
     return (
         <div>
             <Head>
-                <title>{t('seo_title')}</title>
-                <meta name="description" content={t('meta_description')} />
-                <meta name="keywords" content={t('meta_keywords')} />
+                <title>{'網誌 | Dance Union'}</title>
+                <meta name="description" content={'網誌 | Dance Union'} />
+                <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌'} />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -283,12 +291,12 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
-                <meta property="og:title" content={t('og_title')} />
+                <meta property="og:title" content={'網誌 | Dance Union'} />
                 <meta
                     property="og:description"
-                    content={t('og_description')} />
-                <meta property="og:url" content={t('og_url')} />
-                <meta property="og:image" content={t('og_image_url')} />
+                    content={'網誌 | Dance Union'} />
+                {/* <meta property="og:url" content={t('og_url')} /> */}
+                {/* <meta property="og:image" content={t('og_image_url')} /> */}
             </Head>
 
             <div style={{ marginTop: 50 }} />
@@ -346,7 +354,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                 </SwipeableViews>
             </Box>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -363,10 +371,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.DIRECTION, 3, 0);
 
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
-                initBlogEntries: blogEntries.map(blog => transformBlog(blog))
+                initBlogEntries: blogEntries.map(blog => transformBlog(blog)),
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Carousel } from 'react-responsive-carousel';
-import { transformBannerData, transformMediaUrl, transformShowCollection, transformVideoClip, transformWebSettings } from '../utils/transformer';
+import { transformBannerData, transformBlog, transformMediaUrl, transformShowCollection, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import VideoGallery from '../components/VideoGallery';
 import ImageGallery from '../components/ImageGallery';
@@ -24,6 +24,8 @@ import { Grid, Typography } from "@mui/material";
 import { VideoType } from '../interface/Video';
 import { PageSettingProps } from '../interface/PageSetting';
 import Image from 'next/image'
+import ReactPlayer from 'react-player/lazy'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -72,9 +74,10 @@ interface SunnyWongProps {
     albumCollection: string[];
     videoCollection: VideoType[];
     webSettings: PageSettingProps;
+    latestNews: BlogType[];
 }
 
-const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, albumCollection, videoCollection, webSettings }) => {
+const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, albumCollection, videoCollection, webSettings, latestNews }) => {
 
     const router = useRouter();
 
@@ -140,7 +143,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                     <div className="container py-lg-5 py-md-4 py-sm-4 py-3" >
                         <div className="row">
                             <div style={{ margin: 50, marginLeft: 'auto', marginRight: 'auto', maxWidth: 250, }}>
-                                <img src={intro.image} alt={t('image_alt')} className="img-fluid" />
+                                {
+                                    intro.image ? <Image alt={'sunny wong dance union'} src={intro.image} className="img-fluid" layout='fill' /> : ''
+                                }
                             </div>
                             <div className="col-lg-7 text-left about-two-grids">
                                 <h5 className="mb-lg-4 mb-3">Sunny Wong &nbsp;
@@ -161,8 +166,11 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             unmountOnExit
                         >
                             <div className="row">
-                                <div style={{ margin: 50, marginTop: 0, marginLeft: 'auto', marginRight: 'auto', maxWidth: 220 }}>
-                                    <img src={intro.extendImage} alt={t('image_alt')} className="img-fluid" />
+                                <div style={{ margin: 50, marginTop: 0, marginLeft: 'auto', marginRight: 'auto', maxWidth: 220 }}
+                                >
+                                    {
+                                        intro.extendImage ? <Image alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" layout='fill' /> : ''
+                                    }
                                 </div>
                                 <div className="col-lg-7 text-left about-two-grids">
                                     <div className="about-para-txt">
@@ -185,23 +193,46 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                     <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                         {
                             banner?.map((item, index) => {
-                                return <div key={index}>
-                                    <img alt={t('image_alt')} src={isDesktop ? item.bannerDesktop : item.bannerMobile} />
-                                    <p
-                                        style={{
-                                            fontSize: '1.5vw',
-                                            display: 'block',
-                                            width: '100%',
-                                            maxWidth: '100%',
-                                            padding: '0',
-                                            marginBottom: '.5rem',
-                                            lineHeight: 'inherit',
-                                            color: 'white',
-                                            whiteSpace: 'normal',
-                                            backgroundColor: 'black',
-                                        }}
-                                    >
-                                        {item.bannerTitle}</p>
+                                return <div key={index}
+                                    style={{
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => {
+                                        router.push(item.actionLink)
+                                    }}>
+                                    {
+                                        item.bannerDesktop !== '' && item.bannerMobile !== '' ?
+                                            <Image
+                                                alt={item.bannerSEOTitle}
+                                                title={item.bannerSEOTitle}
+                                                width={isDesktop ? '3648px' : '2736px'}
+                                                height={isDesktop ? '1358px' : '2736px'}
+                                                src={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                                            /> :
+                                            <div style={{
+                                                position: 'relative',
+                                                paddingTop: isDesktop ? '37.5%' : '100%',
+                                            }}>
+                                                <ReactPlayer
+                                                    light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                                    controls={true}
+                                                    width={'100%'}
+                                                    height={'100%'}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 0,
+                                                        left: 0,
+                                                    }}
+                                                    url={`${item.bannerVideo}`} />
+                                            </div>
+                                    }
+                                    <div style={{
+                                        backgroundColor: 'black',
+                                        color: 'white',
+                                        fontSize: 20
+                                    }}>
+                                        {item.bannerTitle}
+                                    </div>
                                 </div>
                             })
                         }
@@ -234,7 +265,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             </Tabs>
                             {
                                 showCollection.map((item, index) => {
-                                    return <TabPanel value={value} key={index}>
+                                    return <TabPanel value={value} key={index} index={index}>
                                         <Grid container spacing={2}>
                                             {item?.collectionList.map((item, index) => {
                                                 return <Grid key={index} item xs={4}>
@@ -270,7 +301,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 </section>
             </div>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -295,6 +326,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const videoCollection = sunnyWongPage[0].fields.sunnyWongVideoCollection.map(item => transformVideoClip(item));
 
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
@@ -308,7 +341,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 showCollection: showCollection,
                 albumCollection: albumCollection,
                 videoCollection: videoCollection,
-                webSettings: transformWebSettings(sunnyWongPage[0])
+                webSettings: transformWebSettings(sunnyWongPage[0]),
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };

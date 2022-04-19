@@ -6,17 +6,19 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import contentfulService from '../utils/service/contentfulService';
-import { transformBannerData } from '../utils/transformer';
+import { transformBannerData, transformBlog } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { postMember } from '../utils/mongo';
 import Image from 'next/image'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface ContactUsProps {
+    latestNews: BlogType[];
 }
 
-const ContactUs: React.FC<ContactUsProps> = ({ }) => {
+const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const router = useRouter();
 
@@ -153,7 +155,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ }) => {
                 </div>
             </section>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -166,10 +168,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         `../locales/${locale}.json`
     );
 
+    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
     try {
         return {
             props: {
                 lngDict,
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };

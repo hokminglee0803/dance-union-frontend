@@ -7,22 +7,24 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import { Carousel } from 'react-responsive-carousel';
 import contentfulService from '../utils/service/contentfulService';
-import { transformBannerData, transformVideoClip, transformWebSettings } from '../utils/transformer';
+import { transformBannerData, transformBlog, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ActionAreaCard from '../components/ActionAreaCard';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { VideoType } from '../interface/Video';
 import { PageSettingProps } from '../interface/PageSetting';
-import VideoPlayer from '../components/VideoPlayer';
+import ReactPlayer from 'react-player/lazy'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface OpenClassType {
     title: BannerType[];
     videoCollection: VideoType[];
     webSettings: PageSettingProps;
+    latestNews: BlogType[];
 }
 
-const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollection }) => {
+const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollection, latestNews }) => {
 
     const router = useRouter();
 
@@ -82,7 +84,23 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
                     videoCollection?.map(item => {
                         return (
                             <>
-                                <VideoPlayer url={item.url} />
+                                <div style={{
+                                    position: 'relative',
+                                    paddingTop: isDesktop ? '37.5%' : '100%',
+                                }}>
+                                    <ReactPlayer
+                                        light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                        controls={true}
+                                        width={'100%'}
+                                        height={'100%'}
+                                        style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                        }}
+                                        url={`${item.url}`} />
+                                </div>
+                                <br />
                                 <h4 className="text-center title mb-3">{item.title}</h4>
                                 <br />
                             </>
@@ -92,7 +110,7 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
                 }
             </section>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -111,12 +129,15 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const videoCollection = openClassPage[0].fields.videoCollection.map(item => transformVideoClip(item));
 
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
                 title: openClassPage[0].fields.title,
                 videoCollection: videoCollection,
-                webSettings: transformWebSettings(openClassPage[0])
+                webSettings: transformWebSettings(openClassPage[0]),
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };

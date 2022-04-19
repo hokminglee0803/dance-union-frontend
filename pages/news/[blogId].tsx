@@ -87,7 +87,9 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings }) => {
                         blogEntry.title
                     }</h3>
                 <div className="color-img-three">
-                    <img alt="sunnyWong" src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid" />
+                    {
+                        blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid"  /> : ''
+                    }
                 </div>
                 <div className="blog-date-grid mt-3">
                     <ul>

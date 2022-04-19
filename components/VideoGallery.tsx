@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import VideoPlayer from "./VideoPlayer";
 import { VideoType } from "../interface/Video";
-
+import ReactPlayer from 'react-player/lazy'
 interface VideoGalleryProps {
     videos: VideoType[];
 }
@@ -29,7 +29,21 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                         <ImageListItem style={{
                             margin: 10
                         }}>
-                            <VideoPlayer url={item.url} />
+                            <div style={{
+                                position: 'relative',
+                                paddingTop: '100%',
+                            }}>
+                                <ReactPlayer
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0
+                                    }}
+                                    width={'100%'}
+                                    height={'100%'}
+                                    controls={true}
+                                    url={`${item.url}`} />
+                            </div>
                             <Grid
                                 container
                                 spacing={0}
@@ -51,7 +65,21 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                         <ImageListItem style={{
                             margin: 10
                         }}>
-                            <VideoPlayer url={item.url} />
+                            <div style={{
+                                position: 'relative',
+                                paddingTop: '100%',
+                            }}>
+                                <ReactPlayer
+                                    style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0
+                                    }}
+                                    width={'100%'}
+                                    height={'100%'}
+                                    controls={true}
+                                    url={`${item.url}`} />
+                            </div>
                             <Grid
                                 container
                                 spacing={0}

@@ -7,13 +7,14 @@ import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import { Carousel } from 'react-responsive-carousel';
 import contentfulService from '../utils/service/contentfulService';
-import { transformArticleWithImage, transformBannerData, transformVideoClip, transformWebSettings } from '../utils/transformer';
+import { transformArticleWithImage, transformBannerData, transformBlog, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import ActionAreaCard from '../components/ActionAreaCard';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { ArticleType } from '../interface/Article';
 import { PageSettingProps } from '../interface/PageSetting';
 import Image from 'next/image'
+import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -26,6 +27,7 @@ interface AboutProps {
     socialResponsibility: ArticleType;
     partner: ArticleType;
     webSettings: PageSettingProps;
+    latestNews: BlogType[];
 }
 
 const About: React.FC<AboutProps> = ({
@@ -36,7 +38,8 @@ const About: React.FC<AboutProps> = ({
     booking,
     socialResponsibility,
     partner,
-    webSettings
+    webSettings,
+    latestNews
 }) => {
 
     const router = useRouter();
@@ -105,12 +108,12 @@ const About: React.FC<AboutProps> = ({
 
                         </div>
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={aboutDanceUnion.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={aboutDanceUnion.image} className="img-fluid"  />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={purpose.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={purpose.image} className="img-fluid"  />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">我們的
@@ -139,13 +142,13 @@ const About: React.FC<AboutProps> = ({
                             </div>
                         </div>
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={service.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={service.image} className="img-fluid"  />
                         </div>
                     </div>
                     <br /><br /><br />
                     <div className="row">
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={show.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={show.image} className="img-fluid"  />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">演出
@@ -176,13 +179,13 @@ const About: React.FC<AboutProps> = ({
                             </div>
                         </div>
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={booking?.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={booking.image} className="img-fluid"  />
                         </div>
                     </div>
                     <br /><br /><br />
                     <div className="row">
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={socialResponsibility?.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={socialResponsibility.image} className="img-fluid"  />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">社會
@@ -210,13 +213,13 @@ const About: React.FC<AboutProps> = ({
 
                         </div>
                         <div className="col-lg-5 about-imgs-txt">
-                            <img alt={t('image_alt')} src={partner?.image} className="img-fluid" />
+                            <img alt={'sunny wong dance union'} src={partner.image} className="img-fluid"  />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -233,6 +236,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const danceUnionPage = await contentfulService.getEntriesByContentType('danceUnionPage');
 
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
@@ -243,7 +248,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 booking: transformArticleWithImage(danceUnionPage[0].fields.booking),
                 socialResponsibility: transformArticleWithImage(danceUnionPage[0].fields.socialResponsibility),
                 partner: transformArticleWithImage(danceUnionPage[0].fields.partner),
-                webSettings: transformWebSettings(danceUnionPage[0])
+                webSettings: transformWebSettings(danceUnionPage[0]),
+                latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };
