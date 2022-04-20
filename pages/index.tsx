@@ -105,7 +105,6 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                       loop={true}
                       light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                       controls={true}
-                      loop={true}
                       width={'100%'}
                       height={'100%'}
                       style={{
