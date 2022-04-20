@@ -182,7 +182,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         webSettings: transformWebSettings(homePage[0]),
         latestNews: blogEntries.map(blog => transformBlog(blog))
       },
-      revalidate: 60,
+      revalidate: 1,
     };
   } catch (e) {
     console.log(`[IndexPage] getStaticProps failed.`);
