@@ -34,6 +34,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                                 paddingTop: '100%',
                             }}>
                                 <ReactPlayer
+                                    loop={true}
                                     style={{
                                         position: 'absolute',
                                         top: 0,
@@ -70,6 +71,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                                 paddingTop: '100%',
                             }}>
                                 <ReactPlayer
+                                    loop={true}
                                     style={{
                                         position: 'absolute',
                                         top: 0,

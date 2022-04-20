@@ -77,7 +77,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
       <div style={{ marginTop: 50 }} />
       <ResponsiveAppBar />
 
-      <Carousel showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
+      <Carousel
+        showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
         {
           mainPageBanner.map((item, index) => {
             return <div key={index}
@@ -101,8 +102,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                     paddingTop: isDesktop ? '37.5%' : '100%',
                   }}>
                     <ReactPlayer
+                      loop={true}
                       light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                       controls={true}
+                      loop={true}
                       width={'100%'}
                       height={'100%'}
                       style={{
@@ -110,7 +113,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                         top: 0,
                         left: 0,
                       }}
-                      url={`${item.bannerVideo}`} />
+                      url={
+                        `${item.bannerVideo}`
+                      }
+                    />
                   </div>
               }
               <div style={{

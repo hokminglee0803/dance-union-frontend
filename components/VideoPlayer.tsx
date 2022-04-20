@@ -14,6 +14,7 @@ export default function VideoPlayer({ url }: VideoPlayerProps) {
             paddingTop: '56.25%',
         }}>
             <ReactPlayer
+                loop={true}
                 style={{
                     position: 'absolute',
                     top: 0,

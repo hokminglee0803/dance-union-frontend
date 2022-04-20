@@ -107,6 +107,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                                         paddingTop: isDesktop ? '37.5%' : '100%',
                                                     }}>
                                                         <ReactPlayer
+                                                            loop={true}
                                                             light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                             controls={true}
                                                             width={'100%'}

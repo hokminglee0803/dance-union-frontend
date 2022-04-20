@@ -214,6 +214,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                                 paddingTop: isDesktop ? '37.5%' : '100%',
                                             }}>
                                                 <ReactPlayer
+                                                    loop={true}
                                                     light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                                                     controls={true}
                                                     width={'100%'}

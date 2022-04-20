@@ -201,6 +201,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                                     paddingTop: isDesktop ? '37.5%' : '100%',
                                                                 }}>
                                                                     <ReactPlayer
+                                                                        loop={true}
                                                                         light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                                         controls={true}
                                                                         width={'100%'}
@@ -250,6 +251,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                 paddingTop: isDesktop ? '37.5%' : '100%',
                                             }}>
                                                 <ReactPlayer
+                                                    loop={true}
                                                     light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                                                     controls={true}
                                                     width={'100%'}
