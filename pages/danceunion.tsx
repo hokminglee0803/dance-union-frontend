@@ -96,6 +96,13 @@ const About: React.FC<AboutProps> = ({
             <section style={{ background: '#ffffff' }} className="about py-lg-4 py-md-3 py-sm-3 py-3" >
                 <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
                     <div className="row" style={{ marginBottom: 20 }}>
+                        {
+                            !isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 50 }}>
+                                    <img alt={'sunny wong dance union'} src={aboutDanceUnion.image} className="img-fluid" />
+                                </div> : ""
+                        }
+                        <br />
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">關於
                                 <span className="mid-color">Dance Union</span>
@@ -107,12 +114,16 @@ const About: React.FC<AboutProps> = ({
                             </div>
 
                         </div>
-                        <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 50 }}>
-                            <img alt={'sunny wong dance union'} src={aboutDanceUnion.image} className="img-fluid" />
-                        </div>
+                        {
+                            isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 50 }}>
+                                    <img alt={'sunny wong dance union'} src={aboutDanceUnion.image} className="img-fluid" />
+                                </div> : ""
+                        }
                     </div>
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
-                        <div className="col-lg-5 about-imgs-txt">
+                        <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
                             <img alt={'sunny wong dance union'} src={purpose.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
@@ -127,8 +138,14 @@ const About: React.FC<AboutProps> = ({
 
                         </div>
                     </div>
-                    <br /><br /><br />
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
+                        {
+                            !isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
+                                    <img alt={'sunny wong dance union'} src={service.image} className="img-fluid" />
+                                </div> : ""
+                        }
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">我們的
                                 <span className="mid-color">服務</span>
@@ -141,13 +158,16 @@ const About: React.FC<AboutProps> = ({
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-5 about-imgs-txt">
-                            <img alt={'sunny wong dance union'} src={service.image} className="img-fluid" />
-                        </div>
+                        {
+                            isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt">
+                                    <img alt={'sunny wong dance union'} src={service.image} className="img-fluid" />
+                                </div> : ''
+                        }
                     </div>
-                    <br /><br /><br />
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
-                        <div className="col-lg-5 about-imgs-txt">
+                        <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
                             <img alt={'sunny wong dance union'} src={show.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
@@ -166,8 +186,13 @@ const About: React.FC<AboutProps> = ({
 
                         </div>
                     </div>
-                    <br /><br /><br />
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
+                        {
+                            !isDesktop ? <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
+                                <img alt={'sunny wong dance union'} src={booking.image} className="img-fluid" />
+                            </div> : ""
+                        }
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">場地
                                 <span className="mid-color">租借</span>
@@ -178,13 +203,15 @@ const About: React.FC<AboutProps> = ({
                                 </p>
                             </div>
                         </div>
-                        <div className="col-lg-5 about-imgs-txt">
-                            <img alt={'sunny wong dance union'} src={booking.image} className="img-fluid" />
-                        </div>
+                        {
+                            isDesktop ? <div className="col-lg-5 about-imgs-txt">
+                                <img alt={'sunny wong dance union'} src={booking.image} className="img-fluid" />
+                            </div> : ""
+                        }
                     </div>
-                    <br /><br /><br />
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
-                        <div className="col-lg-5 about-imgs-txt">
+                        <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
                             <img alt={'sunny wong dance union'} src={socialResponsibility.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
@@ -199,8 +226,14 @@ const About: React.FC<AboutProps> = ({
 
                         </div>
                     </div>
-                    <br /><br /><br />
+                    <br />
                     <div className="row" style={{ marginBottom: 20 }}>
+                        {
+                            !isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt" style={{ marginBottom: 20 }}>
+                                    <img alt={'sunny wong dance union'} src={partner.image} className="img-fluid" />
+                                </div> : ''
+                        }
                         <div className="col-lg-7 text-left about-two-grids">
                             <h5 className="mb-lg-4 mb-3">合作
                                 <span className="mid-color">夥伴</span>
@@ -212,9 +245,12 @@ const About: React.FC<AboutProps> = ({
                             </div>
 
                         </div>
-                        <div className="col-lg-5 about-imgs-txt">
-                            <img alt={'sunny wong dance union'} src={partner.image} className="img-fluid" />
-                        </div>
+                        {
+                            isDesktop ?
+                                <div className="col-lg-5 about-imgs-txt">
+                                    <img alt={'sunny wong dance union'} src={partner.image} className="img-fluid" />
+                                </div> : ''
+                        }
                     </div>
                 </div>
             </section>

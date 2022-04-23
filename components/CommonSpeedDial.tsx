@@ -10,14 +10,14 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import ChatIcon from '@mui/icons-material/Chat';
 
 const actions = [
-    {
-        icon: <WhatsAppIcon style={{ color: 'green' }} />, name: 'WhatsApp', onClick: () => {
+    // {
+    //     icon: <WhatsAppIcon style={{ color: 'green' }} />, name: 'WhatsApp', onClick: () => {
 
-        }
-    },
+    //     }
+    // },
     {
         icon: <SendIcon />, name: '報名查詢', onClick: () => {
-            window.location.href = `/contact/`
+            window.location.href = `/contactus/`
         }
     },
     {
@@ -27,10 +27,9 @@ const actions = [
     },
     {
         icon: <FacebookIcon style={{ color: 'blue' }} />, name: 'Facebook', onClick: () => {
-            window.location.href = 'https://www.facebook.com/sunnykidsdanceunion/'
+            window.open('https://www.facebook.com/sunnykidsdanceunion/', '_blank');
         }
     },
-
 
 ];
 
@@ -42,7 +41,7 @@ export default function CommonSpeedDial() {
                 position: 'fixed', bottom: 80, right: 35,
             }}
             // onOpen='mouseEnter'
-            icon={<ChatIcon fontSize="large" />}
+            icon={<ChatIcon fontSize="large">123</ChatIcon>}
 
         >
             {actions.map((action) => (
@@ -50,6 +49,7 @@ export default function CommonSpeedDial() {
                     onClick={action.onClick}
                     key={action.name}
                     icon={action.icon}
+                    tooltipOpen
                     tooltipTitle={action.name}
                 />
             ))}

@@ -80,8 +80,10 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
             <ResponsiveAppBar />
 
             <section className="contact py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', textAlign: 'center', width: '85%', margin: 'auto' }}>
+                <br />
                 <h4 className="text-center title mb-3">
-                    {title}</h4>
+                    {title}
+                </h4>
                 {
                     articleCollection?.map((item, index) => {
                         console.log(item);
@@ -95,10 +97,12 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                     item?.banner.map((i, index) => {
                                         return <div key={index}
                                             style={{
-                                                cursor: 'pointer'
+                                                cursor: i.actionLink !== '' ? 'pointer' : 'default'
                                             }}
                                             onClick={() => {
-                                                router.push(i.actionLink)
+                                                if (i.actionLink !== '') {
+                                                    router.push(i.actionLink)
+                                                }
                                             }}>
                                             {
                                                 i.bannerDesktop !== '' ?
@@ -121,7 +125,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                                                 setAutoPlay(true);
                                                             }}
                                                             loop={true}
-                                                            light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile ?? i.thumbumbDesktop)) : false}
+                                                            light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile !== '' ? i.thumbumbMobile : i.thumbumbDesktop)) : false}
                                                             controls={true}
                                                             width={'100%'}
                                                             height={'100%'}

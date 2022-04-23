@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Alert, useMediaQuery, useTheme } from '@mui/material';
 import { GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head'
@@ -34,10 +34,14 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
+    const [error, setError] = useState(false);
+
+    const [success, setSuccess] = useState(false);
+
     const [loading, setLoading] = useState(false);
     const type = [
         '兒童及青少年課程',
-        'Open Class',
+        'Vibe Open Class',
     ];
 
     const [payload, setPayload] = useState({
@@ -125,10 +129,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                     <input name="phone" type="text" className="form-control" placeholder="聯絡電話" required={true} onChange={handleChange} />
                                 </div>
                                 <br />
-                                <br />
                                 <div className="form-group contact-forms">
-                                    <textarea className="form-control" placeholder="查詢項目" required={true}></textarea>
-                                    <br />
                                     <select name="type" className="form-control" placeholder="查詢項目" onChange={handleChange}>
                                         {
                                             type.map((item, index) =>
@@ -140,11 +141,24 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                     </select>
                                 </div>
                                 <br />
+                                {
+                                    error ? <Alert severity="error">請寫下你的姓名, 電郵以及聯絡電話</Alert> : ""
+                                }
+                                {
+                                    success ? <Alert severity="success">你要查詢已經發出！</Alert> : ""
+                                }
+                                <br />
                                 <button onClick={() => {
                                     setLoading(true)
-                                    postMember(payload).then(data => {
-                                        setLoading(false)
-                                    })
+                                    if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
+                                        postMember(payload).then(data => {
+                                            setLoading(false);
+                                            setError(false);
+                                            setSuccess(true);
+                                        })
+                                    } else {
+                                        setError(true);
+                                    }
                                 }} type="button" className="btn sent-butnn btn-lg">發送</button>
                             </form>
                         </div>

@@ -1,5 +1,13 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
+
 import moment from 'moment';
+
+export const options = {
+    renderNode: {
+        [BLOCKS.PARAGRAPH]: (node, next) => next(node.content).replace('\n', '<br/>')
+    }
+}
 
 export const transformBannerData = (banner: any) => {
     return {
@@ -31,7 +39,7 @@ export const transformMediaUrl = (item: any) => {
 export const transformArticleWithImage = (item: any) => {
     return {
         title: item?.fields?.title,
-        content: documentToHtmlString(item?.fields?.content),
+        content: documentToHtmlString(item?.fields?.content, options),
         image: item?.fields?.image?.fields?.file?.url ? `https:${item?.fields?.image?.fields?.file?.url}` : '',
     }
 }
@@ -40,8 +48,8 @@ export const transformBlog = (item: any) => {
     return {
         id: item?.sys?.id ?? '',
         title: item?.fields?.title ?? '',
-        content: documentToHtmlString(item?.fields?.content),
-        description: documentToHtmlString(item?.fields?.description),
+        content: documentToHtmlString(item?.fields?.content, options),
+        description: documentToHtmlString(item?.fields?.description, options),
         desktopBanner: item?.fields?.desktopBanner?.fields?.file?.url ? `https:${item?.fields?.desktopBanner?.fields?.file?.url}` : '',
         mobileBanner: item?.fields?.mobileBanner?.fields?.file?.url ? `https:${item?.fields?.mobileBanner?.fields?.file?.url}` : '',
         createdDate: moment(item?.sys?.createdAt).format('DD/MM/YYYY')
@@ -51,7 +59,7 @@ export const transformBlog = (item: any) => {
 export const transformArticle = (item: any, banner?: any[]) => {
     return {
         title: item?.fields?.title ?? '',
-        description: documentToHtmlString(item?.fields?.description) ?? '',
+        description: documentToHtmlString(item?.fields?.description, options) ?? '',
         banner: banner ?? (item?.fields?.banner?.map(item => transformBannerData(item)) ?? [])
     }
 }
@@ -60,7 +68,7 @@ export const transformVideoClip = (clip: any) => {
     return {
         title: clip?.fields?.title ?? '',
         url: clip.fields?.url ?? '',
-        description: documentToHtmlString(clip.fields?.description) ?? '',
+        description: documentToHtmlString(clip.fields?.description, options) ?? '',
         thumbumbDesktop: clip?.fields?.thumbumbDesktop?.fields?.file?.url ? `https:${clip.fields?.thumbumbDesktop?.fields?.file?.url}` : '',
         thumbumbMobile: clip?.fields?.thumbumbMobile?.fields?.file?.url ? `https:${clip.fields?.thumbumbMobile?.fields?.file?.url}` : '',
     }
@@ -79,19 +87,24 @@ export const transformWebSettings = (item: any) => {
 }
 
 export const transformKnowMore = (item: any) => {
+
     return {
         title: item?.fields?.title ?? '',
         subTitle: item?.fields?.subTitle ?? '',
-        content: documentToHtmlString(item?.fields?.content) ?? '',
+        content: documentToHtmlString(item?.fields?.content, {
+            renderNode: {
+                [BLOCKS.PARAGRAPH]: (node, next) => next(node.content).replace('\n', '<br/><br/><br/>')
+            }
+        }) ?? '',
     }
 }
 
 export const transformCourseTable = (item: any) => {
     return {
         title: item?.fields?.title ?? '',
-        age: documentToHtmlString(item?.fields?.age) ?? '',
-        course: documentToHtmlString(item?.fields?.course) ?? '',
-        show: documentToHtmlString(item?.fields?.show) ?? '',
-        exam: documentToHtmlString(item?.fields?.exam) ?? '',
+        age: documentToHtmlString(item?.fields?.age, options) ?? '',
+        course: documentToHtmlString(item?.fields?.course, options) ?? '',
+        show: documentToHtmlString(item?.fields?.show, options) ?? '',
+        exam: documentToHtmlString(item?.fields?.exam, options) ?? '',
     }
 }

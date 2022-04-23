@@ -30,6 +30,7 @@ const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
 interface NewsPageProps {
     initBlogEntries: BlogType[];
+    latestNews: BlogType[];
 }
 
 function TabPanel(props) {
@@ -66,7 +67,8 @@ function a11yProps(index) {
 }
 
 const NewsPage: React.FC<NewsPageProps> = ({
-    initBlogEntries
+    initBlogEntries,
+    latestNews
 }) => {
 
     const router = useRouter();
@@ -110,7 +112,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
         contentfulService.getBlogEntries(type, 5, from).then(data => {
             setFrom(from + 5);
             setLazyLoadList(lazyLoadList.concat(data.map(blog => transformBlog(blog))));
-            if (data.length !== 0) {
+            if (data.length === 0) {
                 setStopLazyLoad(true);
             }
         })
@@ -180,7 +182,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid"  /> : ''
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
@@ -210,11 +212,9 @@ const NewsPage: React.FC<NewsPageProps> = ({
                             dataLength={lazyLoadList?.length ? lazyLoadList.length : 0}
                             next={fetchMoreData}
                             hasMore={true}
-                            loader={stopLazyLoad ? <h4 style={{ margin: 10 }}>
-                                未來會有更多更新..<br /></h4> : <h4 style={{ margin: 10 }}>
-                                未來會有更多更新..
-                                <br />
-                            </h4>}
+                            loader={!stopLazyLoad ? <div style={{ margin: 'auto', width: '10%', marginTop: 50 }}>
+                                <img src={'https://images.ctfassets.net/k5r307sl52db/6rKA3sePUzxuHhyN1xi5Ls/e56ce34f61ac25723a1afb0a06af553a/orange-loader.gif'} alt='loading' width={100} height={100} />
+                            </div> : ""}
                         >
                             <div className="row mt-lg-5 mt-md-4 mt-sm-4 mt-3">
                                 {lazyLoadList?.map((item: BlogType, index) => {
@@ -222,7 +222,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid"  /> : ''
+                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
@@ -323,7 +323,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 </SwipeableViews>
             </Box>
 
-            <Footer />
+            <Footer latestNews={latestNews} />
 
         </div>
     )
@@ -340,10 +340,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 3, 0);
 
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
-                initBlogEntries: blogEntries.map(blog => transformBlog(blog))
+                initBlogEntries: blogEntries.map(blog => transformBlog(blog)),
+                latestNews: seoBlogEntries.map(blog => transformBlog(blog)),
             },
             revalidate: 1,
         };

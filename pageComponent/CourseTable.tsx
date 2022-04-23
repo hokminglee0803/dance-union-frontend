@@ -94,7 +94,7 @@ export default function CourseTable({ pageData }) {
 
                     <StyledTableRow>
                         <StyledTableCell component="th" scope="row" align="center">
-                            考核
+                            師資
                         </StyledTableCell>
                         {
                             pageData.map(item => {

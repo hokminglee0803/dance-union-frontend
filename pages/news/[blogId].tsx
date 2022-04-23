@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import MenuAppBar from '../../components/Header';
 import ResponsiveAppBar from '../../components/ResponsiveAppBar';
-import { BlogType } from '../../interface/Blog';
+import { BlogType, BlogTypeEnum } from '../../interface/Blog';
 import contentfulService from '../../utils/service/contentfulService';
 import { transformBlog, transformWebSettings } from '../../utils/transformer';
 import Box from '@mui/material/Box';
@@ -23,9 +23,10 @@ const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface BlogEntryProps {
     blogEntry: BlogType;
     webSettings: PageSettingProps;
+    latestNews: BlogType[];
 }
 
-const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings }) => {
+const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) => {
 
     const router = useRouter()
 
@@ -80,7 +81,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings }) => {
         <div style={{ marginTop: 50 }} />
         <ResponsiveAppBar />
 
-        <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', width: '85%', margin: 'auto' }}>
+        <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', width: isDesktop ? '90%' : '100%', margin: 'auto' }}>
             <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
                 <h3 className="text-center title mb-3">
                     {
@@ -88,7 +89,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings }) => {
                     }</h3>
                 <div className="color-img-three">
                     {
-                        blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid"  /> : ''
+                        blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid" /> : ''
                     }
                 </div>
                 <div className="blog-date-grid mt-3">
@@ -139,7 +140,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings }) => {
             </div>
         </section>
 
-        <Footer />
+        <Footer latestNews={latestNews} />
 
     </div >
 
@@ -175,10 +176,13 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
         const blogEntry = await contentfulService.getEntriesById(params?.blogId?.toString());
 
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
         return {
             props: {
                 lngDict,
                 blogEntry: transformBlog(blogEntry[0]),
+                latestNews: seoBlogEntries.map(blog => transformBlog(blog)),
                 webSettings: transformWebSettings(blogEntry[0])
             },
             revalidate: 1,

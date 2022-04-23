@@ -78,8 +78,9 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
             <ResponsiveAppBar />
 
             <section className="py-lg-4 py-md-3 py-sm-3 py-3" id="promotion" style={{ background: 'white' }}>
+                <br/>
                 <h4 className="text-center title mb-3">{title}</h4>
-                <br /><br />
+                <br />
                 {
                     videoCollection?.map(item => {
                         return (

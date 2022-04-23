@@ -39,25 +39,15 @@ import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
-interface CourseProps {
+interface JoinProps {
     generalInfo: {
         title: string;
         articleCollection: ArticleWithBannerType[];
     },
-    videoInfo: {
-        title: string;
-        videoCollection: VideoType[];
-        moreVideoList: VideoType[];
-    };
-    imageInfo: {
-        title: string;
-        imageCollection: ImageType[];
-    };
     knowMore: {
         title: string;
         subTitle: string;
         banner: BannerType[];
-        table: CourseType[];
         content: string;
     };
     webSettings: PageSettingProps;
@@ -97,7 +87,7 @@ function a11yProps(index) {
     };
 }
 
-const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, knowMore, webSettings, latestNews }) => {
+const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestNews }) => {
 
     const router = useRouter();
 
@@ -183,10 +173,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                 indicatorColor="primary"
                                 textColor="inherit"
                             >
-                                <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'課程精選'} {...a11yProps(0)} />
-                                <Tab icon={<VideocamIcon />} iconPosition="start" label={'相關影片'} {...a11yProps(1)} />
-                                <Tab icon={<PhotoAlbumIcon />} iconPosition="start" label={'精選相集'} {...a11yProps(2)} />
-                                <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(3)} />
+                                <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'加盟聯營'} {...a11yProps(0)} />
+                                <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(1)} />
                             </Tabs>
                         </AppBar>
                     )
@@ -287,126 +275,6 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
 
                     </TabPanel>
                     <TabPanel value={value} index={1} >
-                        <section className="py-lg-4 py-md-3 py-sm-3 py-3" id="promotion" style={{ background: 'white' }}>
-                            <h4 className="text-center title mb-3">{videoInfo.title}</h4>
-                            <br /><br />
-                            {
-                                videoInfo.videoCollection.map(item => {
-                                    return (
-                                        <>
-                                            <div style={{
-                                                position: 'relative',
-                                                paddingTop: isDesktop ? '37.5%' : '100%',
-                                            }}>
-                                                <ReactPlayer
-                                                    loop={true}
-                                                    light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
-                                                    controls={true}
-                                                    width={'100%'}
-                                                    height={'100%'}
-                                                    style={{
-                                                        position: 'absolute',
-                                                        top: 0,
-                                                        left: 0,
-                                                    }}
-                                                    url={`${item.url}`} />
-                                            </div>
-                                            <br />
-                                            <h4 className="text-center title mb-3">{item.title}</h4>
-                                            <br />
-                                        </>
-                                    )
-
-                                })
-                            }
-
-                            <h3 className="text-center title mb-3">更多影片</h3>
-                            <div className="row gallery-info">
-                                <VideoGallery videos={videoInfo.moreVideoList} />
-                            </div>
-                        </section>
-                    </TabPanel>
-                    <TabPanel value={value} index={2} >
-                        <section className="py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white' }} id="blog">
-                            <h4 className="text-center title mb-3">{imageInfo.title}</h4>
-
-                            {
-                                imageInfo.imageCollection?.map(item => {
-                                    return (<>
-                                        <Carousel
-                                            onChange={() => {
-                                                setAutoPlay(true);
-                                            }}
-                                            showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
-                                            {
-                                                item.banner.map((i, index) => {
-                                                    return <div key={index}
-                                                        style={{
-                                                            cursor: i.actionLink !== '' ? 'pointer' : 'default'
-                                                        }}
-                                                        onClick={() => {
-                                                            if (i.actionLink !== '') {
-                                                                router.push(i.actionLink)
-                                                            }
-                                                        }}>
-                                                        {
-                                                            i.bannerDesktop !== '' ?
-                                                                <Image
-                                                                    alt={i.bannerSEOTitle}
-                                                                    title={i.bannerSEOTitle}
-                                                                    width={isDesktop ? '3648px' : '2736px'}
-                                                                    height={isDesktop ? '1358px' : '2736px'}
-                                                                    src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
-                                                                /> :
-                                                                <div style={{
-                                                                    position: 'relative',
-                                                                    paddingTop: isDesktop ? '37.5%' : '100%',
-                                                                }}>
-                                                                    <ReactPlayer
-                                                                        onPlay={() => {
-                                                                            setAutoPlay(false);
-                                                                        }}
-                                                                        onPause={() => {
-                                                                            setAutoPlay(true);
-                                                                        }}
-                                                                        loop={true}
-                                                                        light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile !== '' ? i.thumbumbMobile : i.thumbumbDesktop)) : false}
-                                                                        controls={true}
-                                                                        width={'100%'}
-                                                                        height={'100%'}
-                                                                        style={{
-                                                                            position: 'absolute',
-                                                                            top: 0,
-                                                                            left: 0,
-                                                                        }}
-                                                                        url={`${i.bannerVideo}`} />
-                                                                </div>
-                                                        }
-                                                        <div style={{
-                                                            backgroundColor: 'black',
-                                                            color: 'white',
-                                                            fontSize: 20
-                                                        }}>
-                                                            {i.bannerTitle}
-                                                        </div>
-                                                    </div>
-                                                })
-                                            }
-                                        </Carousel>
-                                        <h4 className="text-center title mb-3">{item.title}</h4>
-                                        <br />
-                                        <div className=" text-center pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-                                            <p>
-                                                <div dangerouslySetInnerHTML={{ __html: item.description }} />
-                                            </p>
-                                        </div>
-
-                                    </>)
-                                })
-                            }
-                        </section>
-                    </TabPanel>
-                    <TabPanel value={value} index={3} >
                         <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white' }} id="blog">
                             <h4 className="text-center title mb-3">
                                 {
@@ -466,7 +334,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                             <div style={{
                                                 backgroundColor: 'black',
                                                 color: 'white',
-                                                fontSize: 20
+                                                fontSize: 40
                                             }}>
                                                 {item.bannerTitle}
                                             </div>
@@ -474,13 +342,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                     })
                                 }
                             </Carousel>
-                            <h3 className="text-center title mb-3">
-                                {knowMore?.subTitle}
-                            </h3>
-                            <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
-                                <CourseTable pageData={knowMore?.table} />
-                            </div>
-                            <div style={{ width: isDesktop ? '85%' : '95%', margin: 'auto' }}>
+                            <div style={{ width: isDesktop ? '85%' : '97%', margin: 'auto' }}>
                                 <div dangerouslySetInnerHTML={{ __html: knowMore.content }} />
                             </div>
                         </section>
@@ -500,9 +362,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                     setValue(newValue);
                                 }}
                             >
-                                <BottomNavigationAction label="課程精選" icon={<EmojiPeopleIcon />} />
-                                <BottomNavigationAction label="相關影片" icon={<VideocamIcon />} />
-                                <BottomNavigationAction label="精選相集" icon={<PhotoAlbumIcon />} />
+                                <BottomNavigationAction label="加盟聯營" icon={<EmojiPeopleIcon />} />
                                 <BottomNavigationAction label="了解更多" icon={<InfoIcon />} />
                             </BottomNavigation>
                         </Paper>
@@ -526,34 +386,14 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const coursePage = await contentfulService.getEntriesByContentType('coursePage');
+        const joinPage = await contentfulService.getEntriesByContentType('joinPage');
 
-        const articleCollection = await Promise.all(coursePage[0].fields?.generalInfoSession?.fields?.articleCollection?.map(async item => {
+        const articleCollection = await Promise.all(joinPage[0].fields?.generalInfo?.fields?.articleCollection?.map(async item => {
             const article = await contentfulService.getEntriesById(item.sys.id);
             return transformArticle(article[0]);
         }))
 
-        const videoCollection = await Promise.all(coursePage[0].fields?.videoSession?.fields?.videoCollection?.map(async item => {
-            const video = await contentfulService.getEntriesById(item.sys.id);
-            return transformVideoClip(video[0]);
-        }))
-
-        const moreVideoList = await Promise.all(coursePage[0].fields?.videoSession?.fields?.moreVideo?.map(async item => {
-            const moreVideo = await contentfulService.getEntriesById(item.sys.id);
-            return transformVideoClip(moreVideo[0]);
-        }))
-
-        const imageCollection = await Promise.all(coursePage[0].fields?.imageSession?.fields?.imageCollection?.map(async item => {
-            const image = await contentfulService.getEntriesById(item.sys.id);
-            return transformArticle(image[0])
-        }))
-
-        const courseTableList = await Promise.all(coursePage[0].fields?.knowMoreSession?.fields?.courseTable.map(async item => {
-            const courseTable = await contentfulService.getEntriesById(item.sys.id);
-            return transformCourseTable(courseTable[0]);
-        }))
-
-        const bannerList = await Promise.all(coursePage[0].fields?.knowMoreSession?.fields?.banner.map(async item => {
+        const bannerList = await Promise.all(joinPage[0].fields?.knowMore?.fields?.banner.map(async item => {
             const banner = await contentfulService.getEntriesById(item.sys.id);
             return transformBannerData(banner[0]);
         }))
@@ -564,33 +404,23 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             props: {
                 lngDict,
                 generalInfo: {
-                    title: coursePage[0].fields.generalInfoSession.fields.title,
+                    title: joinPage[0].fields.generalInfo.fields.title,
                     articleCollection: articleCollection
                 },
-                videoInfo: {
-                    title: coursePage[0].fields.videoSession.fields.title,
-                    videoCollection: videoCollection,
-                    moreVideoList: moreVideoList
-                },
-                imageInfo: {
-                    title: coursePage[0].fields.imageSession.fields.title,
-                    imageCollection: imageCollection,
-                },
                 knowMore: {
-                    ...transformKnowMore(coursePage[0].fields.knowMoreSession),
-                    banner: bannerList,
-                    table: courseTableList
+                    ...transformKnowMore(joinPage[0].fields.knowMore),
+                    banner: bannerList
                 },
-                webSettings: transformWebSettings(coursePage[0]),
+                webSettings: transformWebSettings(joinPage[0]),
                 latestNews: blogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };
     } catch (e) {
-        console.log(`[Course Page] getStaticProps failed.`);
+        console.log(`[Join Page] getStaticProps failed.`);
 
         throw e;
     }
 };
 
-export default Course;
+export default Join;

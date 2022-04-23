@@ -188,10 +188,12 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                                 item?.banner.map((i, index) => {
                                                     return <div key={index}
                                                         style={{
-                                                            cursor: 'pointer'
+                                                            cursor: i.actionLink !== '' ? 'pointer' : 'default'
                                                         }}
                                                         onClick={() => {
-                                                            router.push(i.actionLink)
+                                                            if (i.actionLink !== '') {
+                                                                router.push(i.actionLink)
+                                                            }
                                                         }}>
                                                         {
                                                             i.bannerDesktop !== '' ?

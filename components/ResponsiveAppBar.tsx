@@ -104,7 +104,7 @@ const ResponsiveAppBar = () => {
                             兒童及青少年課程
                         </ListItem>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/openclass'))} >
-                            Open Class
+                            Vibe Open Class
                         </ListItem>
                     </List>
                 </Collapse>
@@ -134,7 +134,7 @@ const ResponsiveAppBar = () => {
 
     return (
         <AppBar
-            position="fixed" style={{ backgroundColor: '#333333', height: 55 }}>
+            position="fixed" style={{ backgroundColor: '#444444', height: 65 }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
@@ -148,9 +148,9 @@ const ResponsiveAppBar = () => {
                             handleCloseNavMenu();
                             router.push('/')
                         }}
-                        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                        sx={{ display: { xs: 'none', md: 'flex' } }}
                     >
-                        <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={40} height={40} />
+                        <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/1DQVJnEJoJVJvs40xGBOeg/c60f47d9679cabc010a08b1659de39e0/logo_black_1_.png'} width={100} height={40} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -158,11 +158,17 @@ const ResponsiveAppBar = () => {
                             variant="h6"
                             noWrap
                             component="div"
+                            style={{
+                                cursor: 'pointer'
+                            }}
+                            onClick={() => {
+                                router.push('/')
+                            }}
                             sx={{
                                 display: { xs: 'flex', md: 'none' },
                             }}
                         >
-                            <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={40} height={40} />
+                            <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/1DQVJnEJoJVJvs40xGBOeg/c60f47d9679cabc010a08b1659de39e0/logo_black_1_.png'} width={120} height={40} />
                         </Typography>
                     </Box>
                     <SwipeableDrawer
@@ -193,7 +199,13 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/');
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block',
+                                '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             Home
                         </Button>
@@ -202,7 +214,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/sunnywong')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             Sunny Wong
                         </Button>
@@ -211,14 +228,23 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/danceunion')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+                                },
+                            }}
                         >
                             Dance Union
                         </Button>
                         <Button
                             onClick={handleOpenUserMenu}
                             endIcon={<ExpandMoreIcon fontSize={'small'} />}
-                            style={{ color: 'white' }}
+                            sx={{
+                                my: 2, color: 'white', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             課程
                         </Button>
@@ -227,7 +253,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/show')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             演出邀請
                         </Button>
@@ -236,7 +267,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/art')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             文化藝術推廣
                         </Button>
@@ -245,7 +281,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/blog')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'yellow', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             最新消息
                         </Button>
@@ -254,7 +295,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/place')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             場地租借
                         </Button>
@@ -263,7 +309,12 @@ const ResponsiveAppBar = () => {
                                 handleCloseNavMenu();
                                 router.push('/contactus')
                             }}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
                         >
                             聯絡我們
                         </Button>
@@ -303,7 +354,7 @@ const ResponsiveAppBar = () => {
                                 }}
                             >
                                 <Typography textAlign="center" >
-                                    Open Class
+                                    Vibe Open Class
                                 </Typography>
                             </MenuItem>
                         </Menu>

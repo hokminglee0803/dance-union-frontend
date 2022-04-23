@@ -31,7 +31,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
         width: isMobile ? '100%' : '70%',
         height: '60%',
         bgcolor: 'background.paper',
-        border: '2px solid #000',
+        border: '2px solid #ffffff',
         boxShadow: 24,
         p: 4,
     };

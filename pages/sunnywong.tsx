@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { Carousel } from 'react-responsive-carousel';
-import { transformBannerData, transformBlog, transformMediaUrl, transformShowCollection, transformVideoClip, transformWebSettings } from '../utils/transformer';
+import { options, transformBannerData, transformBlog, transformMediaUrl, transformShowCollection, transformVideoClip, transformWebSettings } from '../utils/transformer';
 import { BannerType } from '../interface/Banner';
 import VideoGallery from '../components/VideoGallery';
 import ImageGallery from '../components/ImageGallery';
@@ -169,7 +169,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             unmountOnExit
                         >
                             <div className="row">
-                                <div style={{ width: '80%', margin: 'auto', marginBottom: 30, maxWidth: 220 }}
+                                <div style={{ width: '85%', margin: 'auto', marginBottom: 30, maxWidth: 220 }}
                                 >
                                     {
                                         intro.extendImage ? <img alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" /> : ''
@@ -347,9 +347,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             props: {
                 lngDict,
                 intro: {
-                    intro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntro),
+                    intro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntro, options),
                     image: sunnyWongPage[0]?.fields?.sunnyWongImage?.fields?.file?.url ? `https:${sunnyWongPage[0]?.fields?.sunnyWongImage?.fields?.file?.url}` : '',
-                    extendIntro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntroExtend),
+                    extendIntro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntroExtend, options),
                     extendImage: sunnyWongPage[0]?.fields?.sunnyWongExtendImage?.fields?.file?.url ? `https:${sunnyWongPage[0]?.fields?.sunnyWongExtendImage?.fields?.file?.url}` : '',
                 },
                 banner: banner,

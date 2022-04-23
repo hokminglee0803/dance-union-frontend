@@ -241,7 +241,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                         </Carousel>
                                         <h3 className="text-center title mb-3">{item.title}</h3>
                                         <div className=" text-left pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
-                                            <p style={{ whiteSpace: 'pre-line' }}>
+                                            <p style={{ whiteSpace: 'pre-line', width: isDesktop ? '85%' : '95%', margin: 'auto' }}>
                                                 <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                                             </p>
                                         </div>
