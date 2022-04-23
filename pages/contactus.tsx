@@ -82,6 +82,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 <title>聯絡我們 | Dance Union</title>
                 <meta name="description" content='Dance Union Contact Us' />
                 <meta name="keywords" content='Contact Us, 聯絡我們, Dance Union, Sunny Wong ' />
+                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}

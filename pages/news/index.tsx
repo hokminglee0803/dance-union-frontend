@@ -261,6 +261,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 <title>{'網誌 | Dance Union'}</title>
                 <meta name="description" content={'網誌 | Dance Union'} />
                 <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌'} />
+                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}

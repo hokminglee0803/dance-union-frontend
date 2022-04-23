@@ -141,6 +141,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 <meta name="description" content={webSettings?.seoDescription} />
                 <meta name="keywords" content={webSettings?.seoKeywords} />
                 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
+                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}

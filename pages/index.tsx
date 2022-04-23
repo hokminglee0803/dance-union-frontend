@@ -55,6 +55,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         <title>{webSettings?.seoTitle}</title>
         <meta name="description" content={webSettings?.seoDescription} />
         <meta name="keywords" content={webSettings?.seoKeywords} />
+        <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
         <link
           rel="alternate"

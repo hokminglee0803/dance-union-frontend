@@ -274,6 +274,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                 <title>{'最新消息 | Dance Union'}</title>
                 <meta name="description" content={'最新消息 | Dance Union'} />
                 <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌, 最新消息'} />
+                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
