@@ -108,6 +108,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
 
     }, [init])
 
+    const [autoPlay, setAutoPlay] = useState(true);
+
+
     return (
         <div>
             <Head>
@@ -142,9 +145,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 <section style={{ background: '#ffffff' }} className="py-lg-4 py-md-3 py-sm-3 py-3">
                     <div className="container py-lg-5 py-md-4 py-sm-4 py-3" >
                         <div className="row">
-                            <div style={{ margin: 50, marginLeft: 'auto', marginRight: 'auto', maxWidth: 250, }}>
+                            <div style={{ width: '80%', margin: 'auto', marginBottom: 30, maxWidth: 250, }}>
                                 {
-                                    intro.image ? <Image alt={'sunny wong dance union'} src={intro.image} className="img-fluid" layout='fill' /> : ''
+                                    intro.image ? <img alt={'sunny wong dance union'} src={intro.image} className="img-fluid" /> : ''
                                 }
                             </div>
                             <div className="col-lg-7 text-left about-two-grids">
@@ -166,10 +169,10 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             unmountOnExit
                         >
                             <div className="row">
-                                <div style={{ margin: 50, marginTop: 0, marginLeft: 'auto', marginRight: 'auto', maxWidth: 220 }}
+                                <div style={{ width: '80%', margin: 'auto', marginBottom: 30, maxWidth: 220 }}
                                 >
                                     {
-                                        intro.extendImage ? <Image alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" layout='fill' /> : ''
+                                        intro.extendImage ? <img alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" /> : ''
                                     }
                                 </div>
                                 <div className="col-lg-7 text-left about-two-grids">
@@ -190,7 +193,11 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 </section>
                 <section style={{ background: '#ffffff' }} className="about py-lg-4 py-md-3 py-sm-3 py-3">
 
-                    <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                    <Carousel
+                        onChange={() => {
+                            setAutoPlay(true);
+                        }}
+                        showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                         {
                             banner?.map((item, index) => {
                                 return <div key={index}
@@ -214,6 +221,12 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                                 paddingTop: isDesktop ? '37.5%' : '100%',
                                             }}>
                                                 <ReactPlayer
+                                                    onPlay={() => {
+                                                        setAutoPlay(false);
+                                                    }}
+                                                    onPause={() => {
+                                                        setAutoPlay(true);
+                                                    }}
                                                     loop={true}
                                                     light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                                                     controls={true}
@@ -334,9 +347,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 lngDict,
                 intro: {
                     intro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntro),
-                    image: sunnyWongPage[0]?.fields?.sunnyWongImage?.fields?.file?.url ?? '',
+                    image: sunnyWongPage[0]?.fields?.sunnyWongImage?.fields?.file?.url ? `https:${sunnyWongPage[0]?.fields?.sunnyWongImage?.fields?.file?.url}` : '',
                     extendIntro: documentToHtmlString(sunnyWongPage[0].fields.sunnyWongIntroExtend),
-                    extendImage: sunnyWongPage[0]?.fields?.sunnyWongExtendImage?.fields?.file?.url ?? ''
+                    extendImage: sunnyWongPage[0]?.fields?.sunnyWongExtendImage?.fields?.file?.url ? `https:${sunnyWongPage[0]?.fields?.sunnyWongExtendImage?.fields?.file?.url}` : '',
                 },
                 banner: banner,
                 showCollection: showCollection,

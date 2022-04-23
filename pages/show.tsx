@@ -112,6 +112,8 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
 
     }, [init])
 
+    const [autoPlay, setAutoPlay] = useState(true);
+
     return (
         <div>
             <Head>
@@ -177,7 +179,11 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                             {
                                 generalInfo.articleCollection.map((item, index) => {
                                     return <div key={index}>
-                                        <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                        <Carousel
+                                            onChange={() => {
+                                                setAutoPlay(true);
+                                            }}
+                                            showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item?.banner.map((i, index) => {
                                                     return <div key={index}
@@ -201,6 +207,12 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                                     paddingTop: isDesktop ? '37.5%' : '100%',
                                                                 }}>
                                                                     <ReactPlayer
+                                                                        onPlay={() => {
+                                                                            setAutoPlay(false);
+                                                                        }}
+                                                                        onPause={() => {
+                                                                            setAutoPlay(true);
+                                                                        }}
                                                                         loop={true}
                                                                         light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                                         controls={true}

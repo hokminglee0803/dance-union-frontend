@@ -105,6 +105,8 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
 
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
+    const [autoPlay, setAutoPlay] = useState(true);
+
     useEffect(() => {
         if (init) {
             setInit(false);
@@ -177,7 +179,11 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                             {
                                 generalInfo.articleCollection.map((item, index) => {
                                     return <div key={index}>
-                                        <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                        <Carousel
+                                            onChange={() => {
+                                                setAutoPlay(true);
+                                            }}
+                                            showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item?.banner.map((i, index) => {
                                                     return <div key={index}
@@ -201,6 +207,12 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                                                     paddingTop: isDesktop ? '37.5%' : '100%',
                                                                 }}>
                                                                     <ReactPlayer
+                                                                        onPlay={() => {
+                                                                            setAutoPlay(false);
+                                                                        }}
+                                                                        onPause={() => {
+                                                                            setAutoPlay(true);
+                                                                        }}
                                                                         loop={true}
                                                                         light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                                         controls={true}

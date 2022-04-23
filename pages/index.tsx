@@ -40,6 +40,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
 
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
+  const [autoPlay, setAutoPlay] = useState(true);
+
   useEffect(() => {
     if (init) {
       setInit(false);
@@ -78,7 +80,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
       <ResponsiveAppBar />
 
       <Carousel
-        showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={true}>
+        onChange={() => {
+          setAutoPlay(true);
+        }}
+        showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay}>
         {
           mainPageBanner.map((item, index) => {
             return <div key={index}
@@ -103,6 +108,12 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                   }}>
                     <ReactPlayer
                       loop={true}
+                      onPlay={() => {
+                        setAutoPlay(false);
+                      }}
+                      onPause={() => {
+                        setAutoPlay(true);
+                      }}
                       light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                       controls={true}
                       width={'100%'}
@@ -149,7 +160,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
 
       <Footer latestNews={latestNews} />
 
-    </div>
+    </div >
   )
 
 }

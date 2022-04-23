@@ -132,6 +132,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
 
     }, [init])
 
+    const [autoPlay, setAutoPlay] = useState(true);
+
     return (
         <div>
             <Head>
@@ -208,7 +210,11 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                 generalInfo.articleCollection.map(item => {
                                     return (
                                         <>
-                                            <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                            <Carousel
+                                                onChange={() => {
+                                                    setAutoPlay(true);
+                                                }}
+                                                showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                                 {
                                                     item?.banner?.map((i, index) => {
                                                         return <div key={index}
@@ -232,6 +238,12 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                         paddingTop: isDesktop ? '37.5%' : '100%',
                                                                     }}>
                                                                         <ReactPlayer
+                                                                            onPlay={() => {
+                                                                                setAutoPlay(false);
+                                                                            }}
+                                                                            onPause={() => {
+                                                                                setAutoPlay(true);
+                                                                            }}
                                                                             loop={true}
                                                                             light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                                             controls={true}
@@ -319,7 +331,11 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                             {
                                 imageInfo.imageCollection?.map(item => {
                                     return (<>
-                                        <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                        <Carousel
+                                            onChange={() => {
+                                                setAutoPlay(true);
+                                            }}
+                                            showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item.banner.map((i, index) => {
                                                     return <div key={index}
@@ -343,6 +359,12 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                     paddingTop: isDesktop ? '37.5%' : '100%',
                                                                 }}>
                                                                     <ReactPlayer
+                                                                        onPlay={() => {
+                                                                            setAutoPlay(false);
+                                                                        }}
+                                                                        onPause={() => {
+                                                                            setAutoPlay(true);
+                                                                        }}
                                                                         loop={true}
                                                                         light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
                                                                         controls={true}
@@ -388,7 +410,11 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                 }
                             </h4>
 
-                            <Carousel showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                            <Carousel
+                                onChange={() => {
+                                    setAutoPlay(true);
+                                }}
+                                showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                 {
                                     knowMore?.banner.map((item, index) => {
                                         return <div key={index}
@@ -413,6 +439,12 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                     }}>
                                                         <ReactPlayer
                                                             loop={true}
+                                                            onPlay={() => {
+                                                                setAutoPlay(false);
+                                                            }}
+                                                            onPause={() => {
+                                                                setAutoPlay(true);
+                                                            }}
                                                             light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
                                                             controls={true}
                                                             width={'100%'}
