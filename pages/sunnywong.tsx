@@ -192,7 +192,6 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                     </div>
                 </section>
                 <section style={{ background: '#ffffff' }} className="about py-lg-4 py-md-3 py-sm-3 py-3">
-
                     <Carousel
                         onChange={() => {
                             setAutoPlay(true);
@@ -202,19 +201,21 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             banner?.map((item, index) => {
                                 return <div key={index}
                                     style={{
-                                        cursor: 'pointer'
+                                        cursor: item.actionLink !== '' ? 'pointer' : 'default'
                                     }}
                                     onClick={() => {
-                                        router.push(item.actionLink)
+                                        if (item.actionLink !== '') {
+                                            router.push(item.actionLink)
+                                        }
                                     }}>
                                     {
-                                        item.bannerDesktop !== '' && item.bannerMobile !== '' ?
+                                        item.bannerDesktop !== '' ?
                                             <Image
                                                 alt={item.bannerSEOTitle}
                                                 title={item.bannerSEOTitle}
                                                 width={isDesktop ? '3648px' : '2736px'}
                                                 height={isDesktop ? '1358px' : '2736px'}
-                                                src={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                                                src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                                             /> :
                                             <div style={{
                                                 position: 'relative',
@@ -228,7 +229,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                                         setAutoPlay(true);
                                                     }}
                                                     loop={true}
-                                                    light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                                    light={item.thumbumbDesktop !== '' ? (isDesktop ? item.thumbumbDesktop : (item.thumbumbMobile !== '' ? item.thumbumbMobile : item.thumbumbDesktop)) : false}
                                                     controls={true}
                                                     width={'100%'}
                                                     height={'100%'}

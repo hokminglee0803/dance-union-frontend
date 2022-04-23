@@ -4,7 +4,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { Grid } from '@mui/material';
+import { Grid, Modal, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import VideoPlayer from "./VideoPlayer";
@@ -20,9 +20,45 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const [showMore, setShowMore] = React.useState(false);
     const [isOpen, setOpen] = useState(false)
+    const [url, setUrl] = useState('');
+    const playerRefs = React.useRef([])
+
+    const style = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: isMobile ? '100%' : '70%',
+        height: '60%',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     return (
         <>
+            <Modal
+                open={isOpen}
+                onClose={() => {
+                    setOpen(false);
+                    playerRefs.current.map(playerRef=> playerRef.showPreview())
+                }}
+            >
+                <Box sx={style}>
+                    <ReactPlayer
+                        loop={true}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0
+                        }}
+                        width={'100%'}
+                        height={'100%'}
+                        controls={true}
+                        url={`${url}`} />
+                </Box>
+            </Modal>
             <ImageList sx={{ width: "100%", height: "auto" }} cols={isMobile ? 1 : 3} >
                 {showMore && videos.map((item) => (
                     <>
@@ -61,7 +97,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
 
                     </>
                 ))}
-                {!showMore && videos?.slice(0, 6).map((item) => (
+                {!showMore && videos?.slice(0, 6).map((item, index) => (
                     <>
                         <ImageListItem style={{
                             margin: 10
@@ -71,6 +107,12 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                                 paddingTop: '100%',
                             }}>
                                 <ReactPlayer
+                                    ref={el => playerRefs.current[index] = el}
+                                    onClickPreview={() => {
+                                        setOpen(true);
+                                        setUrl(item.url)
+                                    }}
+                                    light={true}
                                     loop={true}
                                     style={{
                                         position: 'absolute',

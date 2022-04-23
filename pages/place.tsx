@@ -84,6 +84,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                     {title}</h4>
                 {
                     articleCollection?.map((item, index) => {
+                        console.log(item);
                         return <div key={index}>
                             <Carousel
                                 onChange={() => {
@@ -100,13 +101,13 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                                 router.push(i.actionLink)
                                             }}>
                                             {
-                                                i.bannerDesktop !== '' && i.bannerMobile !== '' ?
+                                                i.bannerDesktop !== '' ?
                                                     <Image
                                                         alt={i.bannerSEOTitle}
                                                         title={i.bannerSEOTitle}
                                                         width={isDesktop ? '3648px' : '2736px'}
                                                         height={isDesktop ? '1358px' : '2736px'}
-                                                        src={isDesktop ? i.bannerDesktop : i.bannerMobile}
+                                                        src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                     /> :
                                                     <div style={{
                                                         position: 'relative',
@@ -120,7 +121,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                                                 setAutoPlay(true);
                                                             }}
                                                             loop={true}
-                                                            light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
+                                                            light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile ?? i.thumbumbDesktop)) : false}
                                                             controls={true}
                                                             width={'100%'}
                                                             height={'100%'}

@@ -88,19 +88,21 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
           mainPageBanner.map((item, index) => {
             return <div key={index}
               style={{
-                cursor: 'pointer'
+                cursor: item.actionLink !== '' ? 'pointer' : 'default'
               }}
               onClick={() => {
-                router.push(item.actionLink)
+                if (item.actionLink !== '') {
+                  router.push(item.actionLink)
+                }
               }}>
               {
-                item.bannerDesktop !== '' && item.bannerMobile !== '' ?
+                item.bannerDesktop !== '' ?
                   < Image
                     alt={item.bannerSEOTitle}
                     title={item.bannerSEOTitle}
                     width={isDesktop ? '3648px' : '2736px'}
                     height={isDesktop ? '1358px' : '2736px'}
-                    src={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                    src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                   /> :
                   <div style={{
                     position: 'relative',
@@ -114,7 +116,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                       onPause={() => {
                         setAutoPlay(true);
                       }}
-                      light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                      light={item.thumbumbDesktop !== '' ? (isDesktop ? item.thumbumbDesktop : (item.thumbumbMobile !== '' ? item.thumbumbMobile : item.thumbumbDesktop)) : false}
                       controls={true}
                       width={'100%'}
                       height={'100%'}
@@ -148,8 +150,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
               return (
                 <Grid key={index} item xs={12} sm={6} md={4}>
                   <ActionAreaCard
-                    img={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                    img={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerDesktop : item.bannerMobile)}
                     title={item.bannerTitle}
+                    href={item.actionLink}
                   />
                 </Grid>
               )

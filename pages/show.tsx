@@ -188,19 +188,21 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                 item?.banner.map((i, index) => {
                                                     return <div key={index}
                                                         style={{
-                                                            cursor: 'pointer'
+                                                            cursor: i.actionLink !== '' ? 'pointer' : 'default'
                                                         }}
                                                         onClick={() => {
-                                                            router.push(i.actionLink)
+                                                            if (i.actionLink !== '') {
+                                                                router.push(i.actionLink)
+                                                            }
                                                         }}>
                                                         {
-                                                            i.bannerDesktop !== '' && i.bannerMobile !== '' ?
+                                                            i.bannerDesktop !== '' ?
                                                                 <Image
                                                                     alt={i.bannerSEOTitle}
                                                                     title={i.bannerSEOTitle}
                                                                     width={isDesktop ? '3648px' : '2736px'}
                                                                     height={isDesktop ? '1358px' : '2736px'}
-                                                                    src={isDesktop ? i.bannerDesktop : i.bannerMobile}
+                                                                    src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                 /> :
                                                                 <div style={{
                                                                     position: 'relative',
@@ -214,7 +216,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                                             setAutoPlay(true);
                                                                         }}
                                                                         loop={true}
-                                                                        light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
+                                                                        light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile !== '' ? i.thumbumbMobile : i.thumbumbDesktop)) : false}
                                                                         controls={true}
                                                                         width={'100%'}
                                                                         height={'100%'}
@@ -264,7 +266,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                             }}>
                                                 <ReactPlayer
                                                     loop={true}
-                                                    light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                                    light={item.thumbumbDesktop !== '' ? (isDesktop ? item.thumbumbDesktop : (item.thumbumbMobile !== '' ? item.thumbumbMobile : item.thumbumbDesktop)) : false}
                                                     controls={true}
                                                     width={'100%'}
                                                     height={'100%'}

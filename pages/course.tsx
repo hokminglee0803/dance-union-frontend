@@ -219,19 +219,21 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                     item?.banner?.map((i, index) => {
                                                         return <div key={index}
                                                             style={{
-                                                                cursor: 'pointer'
+                                                                cursor: i.actionLink !== '' ? 'pointer' : 'default'
                                                             }}
                                                             onClick={() => {
-                                                                router.push(i.actionLink)
+                                                                if (i.actionLink !== '') {
+                                                                    router.push(i.actionLink)
+                                                                }
                                                             }}>
                                                             {
-                                                                i.bannerDesktop !== '' && i.bannerMobile !== '' ?
+                                                                i.bannerDesktop !== '' ?
                                                                     <Image
                                                                         alt={i.bannerSEOTitle}
                                                                         title={i.bannerSEOTitle}
                                                                         width={isDesktop ? '3648px' : '2736px'}
                                                                         height={isDesktop ? '1358px' : '2736px'}
-                                                                        src={isDesktop ? i.bannerDesktop : i.bannerMobile}
+                                                                        src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                     /> :
                                                                     <div style={{
                                                                         position: 'relative',
@@ -245,7 +247,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                                 setAutoPlay(true);
                                                                             }}
                                                                             loop={true}
-                                                                            light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
+                                                                            light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile !== '' ? i.thumbumbMobile : i.thumbumbDesktop)) : false}
                                                                             controls={true}
                                                                             width={'100%'}
                                                                             height={'100%'}
@@ -352,7 +354,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                     title={i.bannerSEOTitle}
                                                                     width={isDesktop ? '3648px' : '2736px'}
                                                                     height={isDesktop ? '1358px' : '2736px'}
-                                                                    src={isDesktop ? i.bannerDesktop : i.bannerMobile}
+                                                                    src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                 /> :
                                                                 <div style={{
                                                                     position: 'relative',
@@ -366,7 +368,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                             setAutoPlay(true);
                                                                         }}
                                                                         loop={true}
-                                                                        light={i.thumbumbDesktop !== '' && i.thumbumbMobile !== '' ? (isDesktop ? i.thumbumbDesktop : i.thumbumbMobile) : false}
+                                                                        light={i.thumbumbDesktop !== '' ? (isDesktop ? i.thumbumbDesktop : (i.thumbumbMobile ?? i.thumbumbDesktop)) : false}
                                                                         controls={true}
                                                                         width={'100%'}
                                                                         height={'100%'}
@@ -419,19 +421,21 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                     knowMore?.banner.map((item, index) => {
                                         return <div key={index}
                                             style={{
-                                                cursor: 'pointer'
+                                                cursor: item.actionLink !== '' ? 'pointer' : 'default'
                                             }}
                                             onClick={() => {
-                                                router.push(item.actionLink)
+                                                if (item.actionLink !== '') {
+                                                    router.push(item.actionLink)
+                                                }
                                             }}>
                                             {
-                                                item.bannerDesktop !== '' && item.bannerMobile !== '' ?
+                                                item.bannerDesktop !== '' ?
                                                     <Image
                                                         alt={item.bannerSEOTitle}
                                                         title={item.bannerSEOTitle}
                                                         width={isDesktop ? '3648px' : '2736px'}
                                                         height={isDesktop ? '1358px' : '2736px'}
-                                                        src={isDesktop ? item.bannerDesktop : item.bannerMobile}
+                                                        src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                                                     /> :
                                                     <div style={{
                                                         position: 'relative',
@@ -445,7 +449,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                             onPause={() => {
                                                                 setAutoPlay(true);
                                                             }}
-                                                            light={item.thumbumbDesktop !== '' && item.thumbumbMobile !== '' ? (isDesktop ? item.thumbumbDesktop : item.thumbumbMobile) : false}
+                                                            light={item.thumbumbDesktop !== '' ? (isDesktop ? item.thumbumbDesktop : (item.thumbumbMobile !== '' ? item.thumbumbMobile : item.thumbumbDesktop)) : false}
                                                             controls={true}
                                                             width={'100%'}
                                                             height={'100%'}

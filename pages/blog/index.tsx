@@ -377,7 +377,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             props: {
                 lngDict,
                 initBlogEntries: blogEntries.map(blog => transformBlog(blog)),
-                latestNews: blogEntries.map(blog => transformBlog(blog))
+                latestNews: seoBlogEntries.map(blog => transformBlog(blog))
             },
             revalidate: 1,
         };
