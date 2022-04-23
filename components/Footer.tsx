@@ -92,10 +92,14 @@ export default function Footer({ latestNews }: FooterProps) {
                                 latestNews?.map((item, index) => {
                                     return <div className="row mb-lg-3 mb-2" key={index}>
                                         <div className="col-lg-4 col-md-4 col-sm-4 col-3">
-                                            <img alt={'sunny wong dance union'} src={item.desktopBanner} className="img-fluid" />
-                                            {/* {
-                                                item.desktopBanner !== '' ? <Image alt={'sunny wong dance union'} src={item.desktopBanner} width /> : ''
-                                            } */}
+                                            {/* <img alt={'sunny wong dance union'} src={item.desktopBanner} className="img-fluid" /> */}
+                                            {
+                                                item.desktopBanner !== '' ?
+                                                    <div style={{ height: '100%', width: '100%', position: 'relative' }}>
+                                                        <Image alt={'sunny wong dance union'} src={item.desktopBanner} layout={'fill'} />
+                                                    </div>
+                                                    : ''
+                                            }
                                         </div>
                                         <div className="col-lg-8 col-md-8 col-sm-8 col-9 footer-us ">
                                             <p>

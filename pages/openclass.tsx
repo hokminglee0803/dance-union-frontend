@@ -53,6 +53,7 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
                 <title>{webSettings?.seoTitle}</title>
                 <meta name="description" content={webSettings?.seoDescription} />
                 <meta name="keywords" content={webSettings?.seoKeywords} />
+                <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -68,9 +69,12 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
+                <meta property="og:locale" content="zh_hk" />
+                <meta property="og:type" content="website" />
                 <meta property="og:title" content={webSettings?.openGraphTitle} />
                 <meta property="og:description" content={webSettings?.openGraphDescription} />
                 <meta property="og:url" content={webSettings?.openGraphUrl} />
+                <meta property="og:site_name" content="Dance Union"></meta>
                 <meta property="og:image" content={webSettings?.openGraphImage} />
             </Head>
 
@@ -78,7 +82,7 @@ const OpenClass: React.FC<OpenClassType> = ({ webSettings, title, videoCollectio
             <ResponsiveAppBar />
 
             <section className="py-lg-4 py-md-3 py-sm-3 py-3" id="promotion" style={{ background: 'white' }}>
-                <br/>
+                <br />
                 <h4 className="text-center title mb-3">{title}</h4>
                 <br />
                 {

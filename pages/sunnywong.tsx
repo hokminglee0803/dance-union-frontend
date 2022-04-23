@@ -117,6 +117,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 <title>{webSettings?.seoTitle}</title>
                 <meta name="description" content={webSettings?.seoDescription} />
                 <meta name="keywords" content={webSettings?.seoKeywords} />
+                <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -132,9 +133,12 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
+                <meta property="og:locale" content="zh_hk" />
+                <meta property="og:type" content="website" />
                 <meta property="og:title" content={webSettings?.openGraphTitle} />
                 <meta property="og:description" content={webSettings?.openGraphDescription} />
                 <meta property="og:url" content={webSettings?.openGraphUrl} />
+                <meta property="og:site_name" content="Dance Union"></meta>
                 <meta property="og:image" content={webSettings?.openGraphImage} />
             </Head>
 
@@ -147,7 +151,11 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                         <div className="row">
                             <div style={{ width: '80%', margin: 'auto', marginBottom: 30, maxWidth: 250, }}>
                                 {
-                                    intro.image ? <img alt={'sunny wong dance union'} src={intro.image} className="img-fluid" /> : ''
+                                    intro.image !== '' ?
+                                        <div style={{ width: '100%', height: '300px', position: 'relative' }}>
+                                            <Image alt={'sunny wong dance union'} src={intro.image} className="img-fluid" layout='fill' />
+                                        </div>
+                                        : ''
                                 }
                             </div>
                             <div className="col-lg-7 text-left about-two-grids">
@@ -172,7 +180,10 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                 <div style={{ width: '85%', margin: 'auto', marginBottom: 30, maxWidth: 220 }}
                                 >
                                     {
-                                        intro.extendImage ? <img alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" /> : ''
+                                        intro.extendImage ?
+                                            <div style={{ width: '100%', height: '300px', position: 'relative' }}>
+                                                <Image alt={'sunny wong dance union'} src={intro.extendImage} className="img-fluid" layout='fill' />
+                                            </div> : ''
                                     }
                                 </div>
                                 <div className="col-lg-7 text-left about-two-grids">

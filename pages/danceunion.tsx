@@ -69,6 +69,7 @@ const About: React.FC<AboutProps> = ({
                 <title>{webSettings?.seoTitle}</title>
                 <meta name="description" content={webSettings?.seoDescription} />
                 <meta name="keywords" content={webSettings?.seoKeywords} />
+                <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -84,9 +85,12 @@ const About: React.FC<AboutProps> = ({
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
+                <meta property="og:locale" content="zh_hk" />
+                <meta property="og:type" content="website" />
                 <meta property="og:title" content={webSettings?.openGraphTitle} />
                 <meta property="og:description" content={webSettings?.openGraphDescription} />
                 <meta property="og:url" content={webSettings?.openGraphUrl} />
+                <meta property="og:site_name" content="Dance Union"></meta>
                 <meta property="og:image" content={webSettings?.openGraphImage} />
             </Head>
 

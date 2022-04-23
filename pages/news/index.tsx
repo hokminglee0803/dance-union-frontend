@@ -258,9 +258,9 @@ const NewsPage: React.FC<NewsPageProps> = ({
     return (
         <div>
             <Head>
-                <title>{t('seo_title')}</title>
-                <meta name="description" content={t('meta_description')} />
-                <meta name="keywords" content={t('meta_keywords')} />
+                <title>{'網誌 | Dance Union'}</title>
+                <meta name="description" content={'網誌 | Dance Union'} />
+                <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌'} />
                 <link
                     rel="alternate"
                     href={`${HOME_PATH}`}
@@ -276,12 +276,10 @@ const NewsPage: React.FC<NewsPageProps> = ({
                     href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
-                <meta property="og:title" content={t('og_title')} />
+                <meta property="og:title" content={'網誌 | Dance Union'} />
                 <meta
                     property="og:description"
-                    content={t('og_description')} />
-                <meta property="og:url" content={t('og_url')} />
-                <meta property="og:image" content={t('og_image_url')} />
+                    content={'網誌 | Dance Union'} />
             </Head>
 
             <div style={{ marginTop: 50 }} />
