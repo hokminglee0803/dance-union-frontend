@@ -59,10 +59,10 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
-      };
-    
+    };
+
 
     useEffect(() => {
         if (init) {
@@ -200,8 +200,8 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                                                     <Image
                                                         alt={i.bannerSEOTitle}
                                                         title={i.bannerSEOTitle}
-                                                        width={isDesktop ? '3648px' : '2736px'}
-                                                        height={isDesktop ? '1358px' : '2736px'}
+                                                        width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                        height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                         src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                     /> :
                                                     <div style={{

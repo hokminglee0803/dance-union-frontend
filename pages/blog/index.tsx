@@ -167,7 +167,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                         <div className="blog-date-grid mt-3">
                                             <ul>
                                                 <li>
-                                                    <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                    <Link href={`/blog/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -201,7 +201,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/blog/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -241,7 +241,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/blog/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/blog/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -124,7 +124,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
     };
 
@@ -291,8 +291,8 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                                                 <Image
                                                                     alt={i.bannerSEOTitle}
                                                                     title={i.bannerSEOTitle}
-                                                                    width={isDesktop ? '3648px' : '2736px'}
-                                                                    height={isDesktop ? '1358px' : '2736px'}
+                                                                    width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                                    height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                                     src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                 /> :
                                                                 <div style={{
@@ -331,8 +331,8 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                                 })
                                             }
                                         </Carousel>
-                                        <h3 className="text-center title mb-3">{item.title}</h3>
-                                        <div className=" text-left pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+                                        <h4 className="text-center title mb-3">{item.title}</h4>
+                                        <div className=" text-left pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3" style={{ width: isDesktop ? '85%' : '95%', margin: 'auto' }}>
                                             <p style={{ whiteSpace: 'pre-line' }}>
                                                 <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                                             </p>

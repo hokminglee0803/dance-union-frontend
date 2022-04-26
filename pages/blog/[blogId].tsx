@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head';
@@ -86,35 +86,58 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
         <div style={{ marginTop: 50 }} />
         <ResponsiveAppBar />
 
-        <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', width: isDesktop ? '90%' : '100%', margin: 'auto' }}>
+        <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', width: isDesktop ? '95%' : '100%', margin: 'auto', marginTop: 100 }}>
             <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
-                <h3 className="text-center title mb-3">
+                <h4 className="text-center title mb-3">
                     {
                         blogEntry.title
-                    }</h3>
-                <div className="color-img-three">
-                    {
-                        blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid" /> : ''
                     }
-                </div>
+                </h4>
+                <Grid
+                    style={{
+                        height: '100%'
+                    }}
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <Grid item xs={3}>
+                        <div className="color-img-three">
+                            {
+                                blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid" /> : ''
+                            }
+                        </div>
+                    </Grid>
+                </Grid>
+
                 <div className="blog-date-grid mt-3">
                     <ul>
-                        <li>
-                            <Link href="/">{
+                        <li style={{
+                            color: '#ff5e00',
+                            fontWeight: 900,
+                            fontSize: 13,
+                        }}>
+                            上載日期：
+                            {
                                 blogEntry.createdDate
-                            }</Link>
+                            }
                         </li>
                     </ul>
                 </div>
                 <div className="blog-left-wthree mt-lg-4 mt-3">
-                    <h4 className="pb-3">
-                        <Link href="/">
+                    <h6 className="pb-3">
+                        <b>
                             {
-                                blogEntry.title
+                                blogEntry.description
                             }
-                        </Link>
-                    </h4>
-                    <p>
+                        </b>
+                    </h6>
+                    <p >
+                        <b>
+                            文章內容：
+                        </b>
                         <div dangerouslySetInnerHTML={{
                             __html: blogEntry.content
                         }}>
@@ -122,30 +145,35 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
                         </div>
                     </p>
                 </div>
-                <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
-                    <div className="blog-date-grid mt-3">
-                        <Box>
-                            <Typography>
-                                分享文章：
-                            </Typography>
-                        </Box>
-                    </div>
-                    <ShareSocial
-                        style={{
-                            borderRadius: 3,
-                            border: 0,
-                            color: 'white',
-                            width: '100%'
-                        }}
-                        url={`${url}`}
-                        socialTypes={['facebook', 'twitter', 'line', 'linkedin']}
-                    />
 
-                </div>
             </div>
         </section>
 
+        <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
+            <div className="blog-date-grid mt-3">
+                <Box>
+                    <Typography>
+                        <b>
+                            分享文章：
+                        </b>
+                    </Typography>
+                </Box>
+            </div>
+            <ShareSocial
+                style={{
+                    borderRadius: 3,
+                    border: 0,
+                    color: 'white',
+                    width: '100%'
+                }}
+                url={`${url}`}
+                socialTypes={['facebook', 'twitter', 'line', 'linkedin']}
+            />
+
+        </div>
+
         <Footer latestNews={latestNews} />
+
 
     </div >
 

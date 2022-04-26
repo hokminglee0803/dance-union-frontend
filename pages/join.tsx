@@ -134,10 +134,10 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
-      };
-    
+    };
+
 
     useEffect(() => {
         if (init) {
@@ -184,30 +184,25 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
             <ResponsiveAppBar />
 
             <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
-                {
-                    !isDesktop ? (
-                        null
-                    ) : (
-                        <AppBar
-                            position="fixed" style={{ marginTop: 55, height: 60, background: 'white', flexGrow: 1 }}>
-                            <Tabs
-                                value={value}
-                                style={{
-                                    color: 'black'
-                                }}
-                                onChange={handleChange}
-                                variant="scrollable"
-                                scrollButtons
-                                allowScrollButtonsMobile
-                                indicatorColor="primary"
-                                textColor="inherit"
-                            >
-                                <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'加盟聯營'} {...a11yProps(0)} />
-                                <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(1)} />
-                            </Tabs>
-                        </AppBar>
-                    )
-                }
+                <AppBar
+                    position="fixed" style={{ marginTop: 55, height: 60, background: 'white', flexGrow: 1 }}>
+                    <Tabs
+                        value={value}
+                        style={{
+                            color: 'black'
+                        }}
+                        onChange={handleChange}
+                        // variant="scrollable"
+                        scrollButtons
+                        allowScrollButtonsMobile
+                        indicatorColor="primary"
+                        textColor="inherit"
+                        centered
+                    >
+                        <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'加盟聯營'} {...a11yProps(0)} />
+                        <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(1)} />
+                    </Tabs>
+                </AppBar>
 
                 <SwipeableViews
                     style={{
@@ -310,8 +305,8 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                                                                     <Image
                                                                         alt={i.bannerSEOTitle}
                                                                         title={i.bannerSEOTitle}
-                                                                        width={isDesktop ? '3648px' : '2736px'}
-                                                                        height={isDesktop ? '1358px' : '2736px'}
+                                                                        width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                                        height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                                         src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                     /> :
                                                                     <div style={{
@@ -351,7 +346,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                                                 }
 
                                             </Carousel>
-                                            <h3 className="text-center title mb-3">{item.title}</h3>
+                                            <h4 style={{ width: isDesktop ? '85%' : '95%', margin: 'auto' }} className="text-center title mb-3">{item.title}</h4>
                                             <div className=" text-center pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
                                                 <p>
                                                     <div dangerouslySetInnerHTML={{ __html: item.description }} />
@@ -456,8 +451,8 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                                                     <Image
                                                         alt={item.bannerSEOTitle}
                                                         title={item.bannerSEOTitle}
-                                                        width={isDesktop ? '3648px' : '2736px'}
-                                                        height={isDesktop ? '1358px' : '2736px'}
+                                                        width={isDesktop ? '3648px' : item.bannerMobile === '' ? '3648px' : '2736px'}
+                                                        height={isDesktop ? '1358px' : item.bannerMobile === '' ? '1358px' : '2736px'}
                                                         src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                                                     /> :
                                                     <div style={{
@@ -501,7 +496,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                         </section>
                     </TabPanel>
                 </SwipeableViews>
-                {
+                {/* {
                     !isDesktop ? (
                         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 999 }} elevation={3}>
                             <BottomNavigation
@@ -521,7 +516,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                         </Paper>
                     ) : ""
 
-                }
+                } */}
             </Box>
 
             <Footer latestNews={latestNews} />

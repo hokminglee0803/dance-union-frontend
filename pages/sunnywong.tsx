@@ -120,9 +120,9 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
-      };
+    };
 
     useEffect(() => {
         if (init) {
@@ -310,8 +310,8 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                             <Image
                                                 alt={item.bannerSEOTitle}
                                                 title={item.bannerSEOTitle}
-                                                width={isDesktop ? '3648px' : '2736px'}
-                                                height={isDesktop ? '1358px' : '2736px'}
+                                                width={isDesktop ? '3648px' : item.bannerMobile === '' ? '3648px' : '2736px'}
+                                                height={isDesktop ? '1358px' : item.bannerMobile === '' ? '1358px' : '2736px'}
                                                 src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                                             /> :
                                             <div style={{

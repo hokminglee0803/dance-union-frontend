@@ -124,9 +124,9 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
-      };
+    };
 
     useEffect(() => {
         if (init) {
@@ -181,11 +181,12 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                             color: 'black'
                         }}
                         onChange={handleChange}
-                        variant="scrollable"
+                        // variant="scrollable"
                         scrollButtons
                         allowScrollButtonsMobile
                         indicatorColor="primary"
                         textColor="inherit"
+                        centered
                     >
                         <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label="舞蹈文化藝術推廣" {...a11yProps(0)} />
                         <Tab icon={<VideocamIcon />} iconPosition="start" label="相關影片" {...a11yProps(1)} />
@@ -290,8 +291,8 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                                 <Image
                                                                     alt={i.bannerSEOTitle}
                                                                     title={i.bannerSEOTitle}
-                                                                    width={isDesktop ? '3648px' : '2736px'}
-                                                                    height={isDesktop ? '1358px' : '2736px'}
+                                                                    width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                                    height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                                     src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                 /> :
                                                                 <div style={{
@@ -329,7 +330,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                                                 })
                                             }
                                         </Carousel>
-                                        <h3 className="text-center title mb-3">{item.title}</h3>
+                                        <h4 className="text-center title mb-3">{item.title}</h4>
                                         <div className=" text-left pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
                                             <p style={{ whiteSpace: 'pre-line', width: isDesktop ? '85%' : '95%', margin: 'auto' }}>
                                                 <div dangerouslySetInnerHTML={{ __html: item?.description }} />

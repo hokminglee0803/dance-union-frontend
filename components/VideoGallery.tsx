@@ -42,7 +42,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                 open={isOpen}
                 onClose={() => {
                     setOpen(false);
-                    playerRefs.current.map(playerRef=> playerRef.showPreview())
+                    playerRefs.current.map(playerRef => playerRef.showPreview())
                 }}
             >
                 <Box sx={style}>
@@ -60,7 +60,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                 </Box>
             </Modal>
             <ImageList sx={{ width: "100%", height: "auto" }} cols={isMobile ? 1 : 3} >
-                {showMore && videos.map((item) => (
+                {showMore && videos.map((item,index) => (
                     <>
                         <ImageListItem style={{
                             margin: 10
@@ -70,6 +70,12 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                                 paddingTop: '100%',
                             }}>
                                 <ReactPlayer
+                                    ref={el => playerRefs.current[index] = el}
+                                    onClickPreview={() => {
+                                        setOpen(true);
+                                        setUrl(item.url)
+                                    }}
+                                    light={true}
                                     loop={true}
                                     style={{
                                         position: 'absolute',

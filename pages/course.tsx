@@ -144,10 +144,10 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
         height: 12,
         display: 'inline-block',
         margin: '0 8px',
-        marginBottom: 40,
+        marginBottom: isDesktop ? 40 : 60,
         borderRadius: '20px'
-      };
-    
+    };
+
 
     useEffect(() => {
         if (init) {
@@ -322,8 +322,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                     <Image
                                                                         alt={i.bannerSEOTitle}
                                                                         title={i.bannerSEOTitle}
-                                                                        width={isDesktop ? '3648px' : '2736px'}
-                                                                        height={isDesktop ? '1358px' : '2736px'}
+                                                                        width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                                        height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                                         src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                     /> :
                                                                     <div style={{
@@ -363,8 +363,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                 }
 
                                             </Carousel>
-                                            <h3 className="text-center title mb-3">{item.title}</h3>
-                                            <div className=" text-center pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3">
+                                            <h4 className="text-center title mb-3">{item.title}</h4>
+                                            <div className=" text-center pt-lg-2 pt-1 mb-lg-5 mb-md-4 mb-sm-4 mb-3" style={{ width: isDesktop ? '85%' : '95%', margin: 'auto' }}>
                                                 <p>
                                                     <div dangerouslySetInnerHTML={{ __html: item.description }} />
                                                 </p>
@@ -507,8 +507,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                                 <Image
                                                                     alt={i.bannerSEOTitle}
                                                                     title={i.bannerSEOTitle}
-                                                                    width={isDesktop ? '3648px' : '2736px'}
-                                                                    height={isDesktop ? '1358px' : '2736px'}
+                                                                    width={isDesktop ? '3648px' : i.bannerMobile === '' ? '3648px' : '2736px'}
+                                                                    height={isDesktop ? '1358px' : i.bannerMobile === '' ? '1358px' : '2736px'}
                                                                     src={isDesktop ? i.bannerDesktop : (i.bannerMobile === '' ? i.bannerDesktop : i.bannerMobile)}
                                                                 /> :
                                                                 <div style={{
@@ -650,8 +650,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                     <Image
                                                         alt={item.bannerSEOTitle}
                                                         title={item.bannerSEOTitle}
-                                                        width={isDesktop ? '3648px' : '2736px'}
-                                                        height={isDesktop ? '1358px' : '2736px'}
+                                                        width={isDesktop ? '3648px' : item.bannerMobile === '' ? '3648px' : '2736px'}
+                                                        height={isDesktop ? '1358px' : item.bannerMobile === '' ? '1358px' : '2736px'}
                                                         src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                                                     /> :
                                                     <div style={{

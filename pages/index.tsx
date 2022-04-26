@@ -189,8 +189,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
                   < Image
                     alt={item.bannerSEOTitle}
                     title={item.bannerSEOTitle}
-                    width={isDesktop ? '3648px' : '2736px'}
-                    height={isDesktop ? '1358px' : '2736px'}
+                    width={isDesktop ? '3648px' : item.bannerMobile === '' ? '3648px' : '2736px'}
+                    height={isDesktop ? '1358px' : item.bannerMobile === '' ? '1358px' : '2736px'}
                     src={isDesktop ? item.bannerDesktop : (item.bannerMobile !== '' ? item.bannerMobile : item.bannerDesktop)}
                   /> :
                   <div style={{
