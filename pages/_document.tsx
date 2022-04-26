@@ -36,15 +36,13 @@ export default class MyDocument extends Document {
                         type="image/x-icon"
                         href="https://images.ctfassets.net/k5r307sl52db/1DQVJnEJoJVJvs40xGBOeg/c60f47d9679cabc010a08b1659de39e0/logo_black_1_.png"
                     />
-                    <script>
-                        {`
-                            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    <script dangerouslySetInnerHTML={{
+                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                            })(window,document,'script','dataLayer','GTM-MVQMLH5');
-                        `}
-                    </script>
+                            })(window,document,'script','dataLayer','GTM-MVQMLH5');`
+                    }}></script>
                     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5GEVWMHMT"></script>
                     <script>
                         {
@@ -52,6 +50,7 @@ export default class MyDocument extends Document {
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}
                                 gtag('js', new Date());
+
                                 gtag('config', 'G-P5GEVWMHMT');
                             `
                         }
