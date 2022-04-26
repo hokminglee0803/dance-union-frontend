@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head'
@@ -15,6 +15,9 @@ import { ArticleWithBannerType } from '../interface/Article';
 import Image from 'next/image'
 import ReactPlayer from 'react-player/lazy'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 interface BookingProps {
@@ -39,6 +42,27 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
     const theme = useTheme();
 
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+
+    const arrowStyles: React.CSSProperties = {
+        position: 'absolute',
+        zIndex: 2,
+        top: 0,
+        cursor: 'pointer',
+        height: '100%',
+        width: isDesktop ? '100px' : '60px',
+        margin: 0,
+    };
+
+    const indicatorStyles: React.CSSProperties = {
+        background: '#fff',
+        width: 12,
+        height: 12,
+        display: 'inline-block',
+        margin: '0 8px',
+        marginBottom: 40,
+        borderRadius: '20px'
+      };
+    
 
     useEffect(() => {
         if (init) {
@@ -94,10 +118,72 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                         console.log(item);
                         return <div key={index}>
                             <Carousel
+                                renderArrowPrev={(onClickHandler, hasPrev, label) =>
+                                    hasPrev && (
+                                        <div id={'nextArrowLeft'} onClick={onClickHandler} style={{ ...arrowStyles, left: 0 }} >
+                                            <Grid
+                                                style={{
+                                                    height: '100%'
+                                                }}
+                                                container
+                                                spacing={0}
+                                                direction="column"
+                                                alignItems="center"
+                                                justifyContent="center"
+                                            >
+                                                <Grid item xs={3}>
+                                                    <ArrowBackIosIcon fontSize='large' style={{
+                                                        zIndex: 999,
+                                                        opacity: 1,
+                                                        color: 'white',
+                                                        fontSize: 50,
+                                                        fontWeight: 50,
+                                                    }} />
+                                                </Grid>
+                                            </Grid>
+                                        </div>
+                                    )
+                                }
+                                renderArrowNext={(onClickHandler, hasNext, label) =>
+                                    hasNext && (
+                                        <div id={'nextArrow'} onClick={onClickHandler} style={{ ...arrowStyles, right: 0 }} >
+                                            <Grid
+                                                style={{
+                                                    height: '100%'
+                                                }}
+                                                container
+                                                spacing={0}
+                                                direction="column"
+                                                alignItems="center"
+                                                justifyContent="center"
+                                            >
+                                                <Grid item xs={3}>
+                                                    <ArrowForwardIosIcon fontSize='large' style={{
+                                                        zIndex: 999,
+                                                        opacity: 1,
+                                                        color: 'white',
+                                                        fontSize: 50,
+                                                        fontWeight: 50,
+                                                    }} />
+                                                </Grid>
+                                            </Grid>
+                                        </div>
+                                    )
+                                }
                                 onChange={() => {
                                     setAutoPlay(true);
                                 }}
-                                showIndicators={false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                renderIndicator={(onClickHandler, isSelected, index, label) => {
+                                    if (isSelected) {
+                                        return (
+                                            <div style={{ ...indicatorStyles, background: '#fff', listStyleType: 'circle' }}></div>
+                                        );
+                                    }
+                                    return (
+                                        <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
+                                    );
+                                }}
+                                showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                 {
                                     item?.banner.map((i, index) => {
                                         return <div key={index}

@@ -15,6 +15,8 @@ import { PageSettingProps } from '../interface/PageSetting';
 import Image from 'next/image'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
 import ReactPlayer from 'react-player/lazy'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH;
 interface IndexPageProps {
@@ -42,12 +44,32 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
 
   const [autoPlay, setAutoPlay] = useState(true);
 
+  const arrowStyles: React.CSSProperties = {
+    position: 'absolute',
+    zIndex: 2,
+    top: 0,
+    cursor: 'pointer',
+    height: '100%',
+    width: isDesktop ? '100px' : '60px',
+    margin: 0,
+  };
+
   useEffect(() => {
     if (init) {
       setInit(false);
     }
 
   }, [init])
+
+  const indicatorStyles: React.CSSProperties = {
+    background: '#fff',
+    width: 12,
+    height: 12,
+    display: 'inline-block',
+    margin: '0 8px',
+    marginBottom: 40,
+    borderRadius: '20px'
+  };
 
   return (
     <div>
@@ -88,7 +110,69 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         onChange={() => {
           setAutoPlay(true);
         }}
-        showIndicators={false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay}>
+        renderArrowPrev={(onClickHandler, hasPrev, label) =>
+          hasPrev && (
+            <div id={'nextArrowLeft'} onClick={onClickHandler} style={{ ...arrowStyles, left: 0 }} >
+              <Grid
+                style={{
+                  height: '100%'
+                }}
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid item xs={3}>
+                  <ArrowBackIosIcon fontSize='large' style={{
+                    zIndex: 999,
+                    opacity: 1,
+                    color: 'white',
+                    fontSize: 50,
+                    fontWeight: 50,
+                  }} />
+                </Grid>
+              </Grid>
+            </div>
+          )
+        }
+        renderArrowNext={(onClickHandler, hasNext, label) =>
+          hasNext && (
+            <div id={'nextArrow'} onClick={onClickHandler} style={{ ...arrowStyles, right: 0 }} >
+              <Grid
+                style={{
+                  height: '100%'
+                }}
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Grid item xs={3}>
+                  <ArrowForwardIosIcon fontSize='large' style={{
+                    zIndex: 999,
+                    opacity: 1,
+                    color: 'white',
+                    fontSize: 50,
+                    fontWeight: 50,
+                  }} />
+                </Grid>
+              </Grid>
+            </div>
+          )
+        }
+        renderIndicator={(onClickHandler, isSelected, index, label) => {
+          if (isSelected) {
+            return (
+              <div style={{ ...indicatorStyles, background: '#fff', listStyleType: 'circle' }}></div>
+            );
+          }
+          return (
+            <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
+          );
+        }}
+        showIndicators={true} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay} >
         {
           mainPageBanner.map((item, index) => {
             return <div key={index}
@@ -146,7 +230,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
             </div>
           })
         }
-      </Carousel>
+      </Carousel >
 
       <div style={{ margin: 10 }}>
         <Grid container spacing={3}>
