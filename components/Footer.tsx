@@ -96,7 +96,7 @@ export default function Footer({ latestNews }: FooterProps) {
                                             {
                                                 item.desktopBanner !== '' ?
                                                     <div style={{ height: '100%', width: '100%', position: 'relative' }}>
-                                                        <Image alt={'sunny wong dance union'} src={item.desktopBanner} layout={'fill'} />
+                                                        <Image alt={'sunny wong dance union'} src={item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner} layout={'fill'} />
                                                     </div>
                                                     : ''
                                             }
@@ -126,12 +126,9 @@ export default function Footer({ latestNews }: FooterProps) {
                     </div>
 
                     <div
-                        style={{
-                            cursor: 'pointer'
-                        }}
-                        className="text-center mt-lg-5 mt-md-4 mt-3">
-                        <div onClick={() => { window.scroll(0, 0) }} className="move-top text-center mt-3">
-                            <span className="fa fa-arrow-up" aria-hidden="true"></span>
+                        className="text-left mt-lg-5 mt-md-4 mt-3">
+                        <div className="move-top text-left mt-3 footer-bottom-txt" style={{ color: '#AAAAAA', fontSize: 10 }}>
+                            Copyright @2022 Dance Union. All Rights Reserved
                         </div>
                     </div>
                 </div>
