@@ -182,11 +182,12 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                             color: 'black'
                         }}
                         onChange={handleChange}
-                        variant="scrollable"
+                        // variant="scrollable"
                         scrollButtons
                         allowScrollButtonsMobile
                         indicatorColor="primary"
                         textColor="inherit"
+                        centered
                     >
                         <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label="舞蹈文化藝術推廣" {...a11yProps(0)} />
                         <Tab icon={<VideocamIcon />} iconPosition="start" label="相關影片" {...a11yProps(1)} />

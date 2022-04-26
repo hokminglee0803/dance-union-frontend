@@ -161,7 +161,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                     <div style={{ width: '80%', margin: 'auto' }}>
                                         <div className="color-img-three">
                                             {
-                                                item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                             }
                                         </div>
                                         <div className="blog-date-grid mt-3">
@@ -180,7 +180,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                             </p>
                                         </div>
                                         <div className="view-buttn mt-md-4 mt-3">
-                                            <Link href={`/blog/${item.id}`}>Read More</Link>
+                                            <Link href={`/blog/${item.id}`}>閱讀更多</Link>
                                         </div>
                                     </div>
                                 </>
@@ -195,7 +195,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                    item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
@@ -214,7 +214,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/blog/${item.id}`}>Read More</Link>
+                                                <Link href={`/blog/${item.id}`}>閱讀更多</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                    item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
@@ -254,7 +254,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/blog/${item.id}`}>Read More</Link>
+                                                <Link href={`/blog/${item.id}`}>閱讀更多</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -310,11 +310,12 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                             color: 'black'
                         }}
                         onChange={handleChange}
-                        variant="scrollable"
+                        // variant="scrollable"
                         scrollButtons
                         allowScrollButtonsMobile
                         indicatorColor="primary"
                         textColor="inherit"
+                        centered
                     >
                         <Tab icon={<NewReleasesIcon />} iconPosition="start" label="新聞" {...a11yProps(0)} />
                         <Tab icon={<TrackChangesIcon />} iconPosition="start" label="動向" {...a11yProps(1)} />

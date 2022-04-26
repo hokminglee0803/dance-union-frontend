@@ -138,7 +138,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
         return (
             <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" id="blog">
                 <h4 className="text-center title mb-3">
-                    {type}
+                    {'日誌'}
                 </h4>
                 <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
                     {
@@ -148,13 +148,13 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                     <div style={{ width: '80%', margin: 'auto' }}>
                                         <div className="color-img-three">
                                             {
-                                                item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                             }
                                         </div>
                                         <div className="blog-date-grid mt-3">
                                             <ul>
                                                 <li>
-                                                    <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
+                                                    <Link href={`/news/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -167,7 +167,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                             </p>
                                         </div>
                                         <div className="view-buttn mt-md-4 mt-3">
-                                            <Link href={`/news/${item.id}`}>Read More</Link>
+                                            <Link href={`/news/${item.id}`}>閱讀更多</Link>
                                         </div>
                                     </div>
                                 </>
@@ -182,13 +182,13 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                    item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/news/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -201,7 +201,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/news/${item.id}`}>Read More</Link>
+                                                <Link href={`/news/${item.id}`}>閱讀更多</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -222,13 +222,13 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                         <div className="back-ground-color">
                                             <div className="color-img-three">
                                                 {
-                                                    item.desktopBanner !== '' && item.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : item.mobileBanner} className="img-fluid" /> : ''
+                                                    item.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? item.desktopBanner : (item.mobileBanner !== '' ? item.mobileBanner : item.desktopBanner)} className="img-fluid" /> : ''
                                                 }
                                             </div>
                                             <div className="blog-date-grid mt-3">
                                                 <ul>
                                                     <li>
-                                                        <Link href={`/news/${item.id}`}>{item.createdDate}</Link>
+                                                        <Link href={`/news/${item.id}`}>{`上載日期：${item.createdDate}`}</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -241,7 +241,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                                                 </p>
                                             </div>
                                             <div className="view-buttn mt-md-4 mt-3">
-                                                <Link href={`/news/${item.id}`}>Read More</Link>
+                                                <Link href={`/news/${item.id}`}>閱讀更多</Link>
                                             </div>
                                         </div>
                                     </div>

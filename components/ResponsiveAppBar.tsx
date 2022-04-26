@@ -71,9 +71,7 @@ const ResponsiveAppBar = () => {
         >
             <List>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ display: 'flex', justifyContent: 'center', backgroundColor: '#333333' }}>
-                    <Link href='/'>
-                        <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/7kOMaN5hSsCRv0WM3Rm1V4/0402c1b26019544ee674f70f100f3bb4/logo_web.png'} width={30} height={30} />
-                    </Link>
+                    <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/1DQVJnEJoJVJvs40xGBOeg/c60f47d9679cabc010a08b1659de39e0/logo_black_1_.png'} width={120} height={40} />
                 </ListItem>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ backgroundColor: 'white', borderBottom: '1px black solid' }}>
                     Home
@@ -117,7 +115,7 @@ const ResponsiveAppBar = () => {
                     文化藝術推廣
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={toggleDrawer(false, () => router.push('/blog'))} style={{ backgroundColor: 'white' }}>
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/blog'))} style={{ backgroundColor: 'white', color: 'orange' }}>
                     最新消息
                 </ListItem>
                 <Divider />

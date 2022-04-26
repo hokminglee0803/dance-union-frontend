@@ -106,7 +106,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
                     <Grid item xs={3}>
                         <div className="color-img-three">
                             {
-                                blogEntry.desktopBanner !== '' && blogEntry.mobileBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : blogEntry.mobileBanner} className="img-fluid" /> : ''
+                                blogEntry.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : (blogEntry.mobileBanner !== '' ? blogEntry.mobileBanner : blogEntry.desktopBanner)} className="img-fluid" /> : ''
                             }
                         </div>
                     </Grid>
