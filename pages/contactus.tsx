@@ -111,8 +111,8 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
             {
                 isDesktop ?
-                    <img src={'https://lh3.googleusercontent.com/d/1F3FJAZKRz5_hlNQI-kYf5Kslg6DKDKgO'} width={'100%'} alt={'sunny wong dance union'} />
-                    : ""
+                    <img src={'https://images.ctfassets.net/k5r307sl52db/3DT7NTS9H8IDJ1IrnS5sQe/443370cb423130e8bef00d07f426f7c5/CON_P1.jpeg'} width={'100%'} alt={'sunny wong dance union'} />
+                    : <img src={'https://images.ctfassets.net/k5r307sl52db/5HaL4DBEAtT3AX3j0MqSU7/fd4b30e340e4cd5a3ca65f1b6468a712/CON_P1_m.jpeg'} width={'100%'} alt={'sunny wong dance union'} />
             }
 
 

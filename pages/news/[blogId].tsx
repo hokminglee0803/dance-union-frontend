@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head';
@@ -88,15 +88,29 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
         <section className="blog py-lg-4 py-md-3 py-sm-3 py-3" style={{ background: 'white', width: isDesktop ? '90%' : '100%', margin: 'auto', marginTop: 100 }}>
             <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
-                <h3 className="text-center title mb-3">
+                <h4 className="text-center title mb-3">
                     {
                         blogEntry.title
-                    }</h3>
-                <div className="color-img-three">
-                    {
-                        blogEntry.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : (blogEntry.mobileBanner !== '' ? blogEntry.mobileBanner : blogEntry.desktopBanner)} className="img-fluid" /> : ''
                     }
-                </div>
+                </h4>
+                <Grid
+                    style={{
+                        height: '100%'
+                    }}
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <Grid item xs={3}>
+                        <div className="color-img-three">
+                            {
+                                blogEntry.desktopBanner !== '' ? <img alt={'sunny wong dance union'} src={isDesktop ? blogEntry.desktopBanner : (blogEntry.mobileBanner !== '' ? blogEntry.mobileBanner : blogEntry.desktopBanner)} className="img-fluid" /> : ''
+                            }
+                        </div>
+                    </Grid>
+                </Grid>
                 <div className="blog-date-grid mt-3">
                     <ul>
                         <li style={{
