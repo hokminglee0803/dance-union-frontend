@@ -66,8 +66,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
     width: 12,
     height: 12,
     display: 'inline-block',
-    margin: '0 8px',
-    marginBottom: 40,
+    margin: '2px',
+    marginBottom: isDesktop ? 30 : 40,
     borderRadius: '20px'
   };
 
@@ -172,6 +172,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
             <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
           );
         }}
+        transitionTime={750}
         showIndicators={true} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay} >
         {
           mainPageBanner.map((item, index) => {

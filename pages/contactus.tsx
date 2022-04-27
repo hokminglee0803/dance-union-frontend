@@ -109,7 +109,13 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
             <div style={{ marginTop: 50 }} />
             <ResponsiveAppBar />
 
-            <img src={'https://lh3.googleusercontent.com/d/1F3FJAZKRz5_hlNQI-kYf5Kslg6DKDKgO'} width={'100%'}  alt={'sunny wong dance union'}/>
+            {
+                isDesktop ?
+                    <img src={'https://lh3.googleusercontent.com/d/1F3FJAZKRz5_hlNQI-kYf5Kslg6DKDKgO'} width={'100%'} alt={'sunny wong dance union'} />
+                    : ""
+            }
+
+
             <section className="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact" style={{ background: 'white' }}>
                 <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
                     <h4 className="text-center title mb-3">聯絡我們</h4>

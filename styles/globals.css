@@ -23,20 +23,30 @@ a {
   font-weight: 700;
 }
 
+#nextArrow {
+  opacity: 0.8
+}
+
+#nextArrowLeft {
+  opacity: 0.8
+}
+
 #nextArrow:hover {
   /* background-color: rgba(0, 0, 0, 0.5); */
-  background: linear-gradient(to right, transparent 30%, rgba(0, 0, 0, 0.4) 60%);
-  -webkit-transition: background-color 100ms linear;
-  -ms-transition: background-color 100ms linear;
-  transition: background-color 100ms linear;
+  background: linear-gradient(to right, transparent 20%, rgba(0, 0, 0, 0.4) 60%);
+  -webkit-transition: background-color 2000ms linear;
+  -ms-transition: background-color 2000ms linear;
+  transition: background-color 2000ms linear;
+  opacity: 1;
 }
 
 #nextArrowLeft:hover {
   /* background-color: rgba(0, 0, 0, 0.5); */
-  background: linear-gradient(to left, transparent 30%, rgba(0, 0, 0, 0.4) 60%);
-  -webkit-transition: background-color 100ms linear;
-  -ms-transition: background-color 100ms linear;
-  transition: background-color 100ms linear;
+  background: linear-gradient(to left, transparent 20%, rgba(0, 0, 0, 0.4) 60%);
+  -webkit-transition: background-color 2000ms linear;
+  -ms-transition: background-color 2000ms linear;
+  transition: background-color 2000ms linear;
+  opacity: 1;
 }
 
 .carousel .control-next.control-arrow:before {

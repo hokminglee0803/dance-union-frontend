@@ -143,8 +143,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
         width: 12,
         height: 12,
         display: 'inline-block',
-        margin: '0 8px',
-        marginBottom: isDesktop ? 40 : 60,
+        margin: '2px',
+        marginBottom: isDesktop ? 30 : 40,
         borderRadius: '20px'
     };
 
