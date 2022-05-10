@@ -27,12 +27,11 @@ interface OpenClassType {
         articleCollection: ArticleWithBannerType[];
     },
     title: BannerType[];
-    videoCollection: VideoType[];
     webSettings: PageSettingProps;
     latestNews: BlogType[];
 }
 
-const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, videoCollection, latestNews }) => {
+const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, latestNews }) => {
 
     const router = useRouter();
 
@@ -308,8 +307,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             return transformArticle(article[0]);
         }))
 
-        const videoCollection = openClassPage[0].fields.videoCollection.map(item => transformVideoClip(item));
-
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
 
         return {
@@ -320,7 +317,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     title: openClassPage[0].fields.generalInfoSession.fields.title,
                     articleCollection: articleCollection
                 },
-                videoCollection: videoCollection,
                 webSettings: transformWebSettings(openClassPage[0]),
                 latestNews: blogEntries.map(blog => transformBlog(blog))
             },
