@@ -293,7 +293,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                                 <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
                             );
                         }}
-                        showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                        showIndicators={banner?.length > 1 ? true : false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                         {
                             banner?.map((item, index) => {
                                 return <div key={index}

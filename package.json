@@ -29,6 +29,7 @@
     "clsx": "^1.1.1",
     "contentful": "^9.1.18",
     "core-js": "^3.22.0",
+    "feed": "^4.2.2",
     "moment": "^2.29.1",
     "next": "12.1.0",
     "next-localization": "^0.11.0",

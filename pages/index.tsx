@@ -173,7 +173,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
           );
         }}
         transitionTime={750}
-        showIndicators={true} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay} >
+        showIndicators={mainPageBanner?.length > 1 ? true : false} autoFocus={true} infiniteLoop={true} emulateTouch={true} showThumbs={false} autoPlay={autoPlay} >
         {
           mainPageBanner.map((item, index) => {
             return <div key={index}

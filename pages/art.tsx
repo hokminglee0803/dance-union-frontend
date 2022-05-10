@@ -275,7 +275,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                                                     <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
                                                 );
                                             }}
-                                            showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                            showIndicators={item?.banner?.length > 1 ? true : false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item?.banner.map((i, index) => {
                                                     return <div key={index}

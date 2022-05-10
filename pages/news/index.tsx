@@ -25,6 +25,7 @@ import Link from 'next/link'
 import InfiniteScroll from "react-infinite-scroll-component";
 import CustomizedCircularProgress from '../../components/CustomizedCircularProgress';
 import Image from 'next/image'
+import { generateRSS } from '../../utils/rss';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -340,6 +341,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 3, 0);
 
         const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+
+        await generateRSS();
 
         return {
             props: {

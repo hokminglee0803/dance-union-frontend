@@ -305,7 +305,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                         <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
                                                     );
                                                 }}
-                                                showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                                showIndicators={item?.banner?.length > 1 ? true : false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                                 {
                                                     item?.banner?.map((i, index) => {
                                                         return <div key={index}
@@ -490,7 +490,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                                     <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
                                                 );
                                             }}
-                                            showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                            showIndicators={item?.banner?.length > 1 ? true : false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                             {
                                                 item.banner.map((i, index) => {
                                                     return <div key={index}
@@ -633,7 +633,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                         <div style={{ ...indicatorStyles, background: 'transparent', border: '2px solid white' }}></div>
                                     );
                                 }}
-                                showIndicators={true} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
+                                showIndicators={knowMore?.banner?.length > 1 ? true : false} autoFocus={true} autoPlay={true} infiniteLoop={true} emulateTouch={true}>
                                 {
                                     knowMore?.banner.map((item, index) => {
                                         return <div key={index}
