@@ -1,4 +1,4 @@
-import { Alert, useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Modal, Typography, useMediaQuery, useTheme, Box } from '@mui/material';
 import { GetStaticProps } from 'next';
 import { useI18n } from 'next-localization';
 import Head from 'next/head'
@@ -109,6 +109,29 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
             <div style={{ marginTop: 50 }} />
             <ResponsiveAppBar />
 
+            <Modal
+                open={loading}
+                onClose={() => {
+                    setLoading(false);
+                }}
+            >
+                <Box style={{
+                    position: 'absolute' as 'absolute',
+                    top: '50%',
+                    left: '60%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                }}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        提交中.....
+                    </Typography>
+                </Box>
+
+            </Modal>
+
             {
                 isDesktop ?
                     <img src={'https://images.ctfassets.net/k5r307sl52db/3DT7NTS9H8IDJ1IrnS5sQe/443370cb423130e8bef00d07f426f7c5/CON_P1.jpeg'} width={'100%'} alt={'sunny wong dance union'} />
@@ -155,18 +178,22 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                     success ? <Alert severity="success">你要查詢已經發出！</Alert> : ""
                                 }
                                 <br />
-                                <button onClick={() => {
-                                    setLoading(true)
-                                    if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
-                                        postMember(payload).then(data => {
-                                            setLoading(false);
-                                            setError(false);
-                                            setSuccess(true);
-                                        })
-                                    } else {
-                                        setError(true);
-                                    }
-                                }} type="button" className="btn sent-butnn btn-lg">發送</button>
+                                <button
+                                    style={{
+                                        display: success ? 'none' : 'block'
+                                    }}
+                                    onClick={() => {
+                                        if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
+                                            setLoading(true)
+                                            postMember(payload).then(data => {
+                                                setLoading(false);
+                                                setError(false);
+                                                setSuccess(true);
+                                            })
+                                        } else {
+                                            setError(true);
+                                        }
+                                    }} type="button" className="btn sent-butnn btn-lg">發送</button>
                             </form>
                         </div>
                         <div className="address_mail_footer_grids col-lg-6 col-md-6">
