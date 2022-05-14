@@ -122,7 +122,6 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                     transform: 'translate(-50%, -50%)',
                     width: 400,
                     bgcolor: 'background.paper',
-                    boxShadow: 24,
                     p: 4,
                 }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
