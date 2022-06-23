@@ -65,7 +65,7 @@ export default function Footer({ latestNews }: FooterProps) {
                                 <a href="tel:+852 2893 3807">+852 2893 3807</a>
                             </p>
                             <p className="pt-2">
-                                <Icon icon="bi:phone" width={25} height={25} />&nbsp; &nbsp;
+                                <Icon icon="akar-icons:whatsapp-fill" width={25} height={25} />&nbsp; &nbsp;
                                 <span>Whatsapp: </span>
                                 <a href="https://api.whatsapp.com/send?phone=85265581506">+852 6558 1506</a>
                             </p>
