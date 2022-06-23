@@ -9,6 +9,20 @@ export const options = {
     }
 }
 
+export const transformFooter = (data: any) => {
+    return {
+        address: data?.fields?.address ?? '',
+        description: data.fields?.description ?? '',
+        email: data.fields?.email ?? '',
+        fax: data?.fields?.fax ?? '',
+        googleMapAddress: data.fields?.googleMapAddress ?? '',
+        mondayToFriday: data.fields?.mondayToFriday ?? '',
+        saturdayAndSunday: data.fields?.saturdayAndSunday ?? '',
+        whatsapp: data.fields?.whatsapp ?? '',
+        phone: data.fields?.phone ?? '',
+    }
+}
+
 export const transformBannerData = (banner: any) => {
     return {
         bannerTitle: banner?.fields?.bannerTitle ?? '',
