@@ -1,9 +1,89 @@
 {
-    "seo_title": "",
-    "meta_description": "",
-    "meta_keywords": "",
-    "og_title": "",
-    "og_description": "",
-    "og_url": "",
-    "og_image_url": ""
+    "footer": {
+        "title": "聯絡我們",
+        "address": "地址:",
+        "phone": "電話:",
+        "whatsapp": "Whatsapp:",
+        "email": "電郵:",
+        "fax": "傳真:",
+        "monToFri": "星期一至五:",
+        "holiday": "星期六及日:"
+    },
+    "common": {
+        "latestBlog": "最新文章",
+        "email": "電郵",
+        "query": "報名查詢",
+        "album": "相片",
+        "video": "影片",
+        "more": "更多",
+        "less": "更少",
+        "moreVideo": "更多影片",
+        "submit": "提交中...",
+        "name": "姓名",
+        "phone": "聯絡電話",
+        "兒童及青少年課程": "兒童及青少年課程",
+        "Vibe Open Class": "Vibe Open Class",
+        "warning": "請寫下你的姓名, 電郵以及聯絡電話",
+        "submitSuccess": "你的查詢已經發出！",
+        "submitButton": "發送"
+    },
+    "menu": {
+        "contactUs": "聯絡我們",
+        "course": "課程",
+        "home": "主頁",
+        "childrenProgram": "兒童及青少年課程",
+        "show": "演出邀請",
+        "promotion": "文化藝術推廣",
+        "news": "最新消息",
+        "renting": "場地租借"
+    },
+    "course": {
+        "general": {
+            "title": "課程精選"
+        },
+        "video": {
+            "title": "相關影片"
+        },
+        "album": {
+            "title": "精選相集"
+        },
+        "more": {
+            "title": "了解更多",
+            "age": "年齡",
+            "course": "課堂",
+            "performance": "演出相關",
+            "teacher": "師資"
+        }
+    },
+    "join": {
+        "general": {
+            "title": "加盟聯營"
+        },
+        "more": {
+            "title": "了解更多"
+        }
+    },
+    "sunnyWong": {
+        "majarProductionDisplay": "主要作品一覽"
+    },
+    "danceUnion": {
+        "aboutDanceUnion_1": "關於",
+        "aboutDanceUnion_2": "Dance Union",
+        "purpose_1": "我們的",
+        "purpose_2": "理念",
+        "service_1": "我們的",
+        "service_2": "服務",
+        "show_1": "演出",
+        "show_2": "邀請",
+        "booking_1": "場地",
+        "booking_2": "租借",
+        "socialResponsibility_1": "社會",
+        "socialResponsibility_2": "責任",
+        "partner_1": "合作",
+        "partner_2": "夥伴"
+    },
+    "art": {
+        "general": "舞蹈文化藝術推廣",
+        "video": "相關影片"
+    }
 }

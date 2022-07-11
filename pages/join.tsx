@@ -199,8 +199,8 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                         textColor="inherit"
                         centered
                     >
-                        <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'加盟聯營'} {...a11yProps(0)} />
-                        <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(1)} />
+                        <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={t('join.general.title')} {...a11yProps(0)} />
+                        <Tab icon={<InfoIcon />} iconPosition="start" label={t('join.more.title')} {...a11yProps(1)} />
                     </Tabs>
                 </AppBar>
 
@@ -534,19 +534,19 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const joinPage = await contentfulService.getEntriesByContentType('joinPage');
+        const joinPage = await contentfulService.getEntriesByContentType('joinPage', locale);
 
         const articleCollection = await Promise.all(joinPage[0].fields?.generalInfo?.fields?.articleCollection?.map(async item => {
-            const article = await contentfulService.getEntriesById(item.sys.id);
+            const article = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformArticle(article[0]);
         }))
 
         const bannerList = await Promise.all(joinPage[0].fields?.knowMore?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

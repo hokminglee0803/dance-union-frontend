@@ -6,7 +6,7 @@ const nextConfig = {
     domains: ['images.ctfassets.net'],
   },
   i18n: {
-    locales: ['zh'],
+    locales: ['zh', 'en'],
     defaultLocale: 'zh',
     localeDetection: false
   },

@@ -22,15 +22,22 @@ import MailIcon from '@mui/icons-material/Mail';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { Link } from '@mui/material';
+import { Link, Slide } from '@mui/material';
 import { useRouter } from 'next/router';
 import Image from 'next/image'
+import LanguageIcon from '@mui/icons-material/LanguageRounded';
+import { useI18n } from 'next-localization';
 
 const ResponsiveAppBar = () => {
+
+    const [langShow, setLangShow] = React.useState(false);
+
     const [nav, setNav] = React.useState(false);
     const [user, setUser] = React.useState(false);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const router = useRouter();
+
+    const { t } = useI18n();
 
     const handleOpenNavMenu = (event) => {
         setNav(true);
@@ -74,7 +81,7 @@ const ResponsiveAppBar = () => {
                     <Image alt={'sunny wong dance union'} src={'https://images.ctfassets.net/k5r307sl52db/1DQVJnEJoJVJvs40xGBOeg/c60f47d9679cabc010a08b1659de39e0/logo_black_1_.png'} width={120} height={40} />
                 </ListItem>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/'))} style={{ backgroundColor: 'white', borderBottom: '1px black solid' }}>
-                    Home
+                    {t('menu.home')}
                 </ListItem>
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/sunnywong'))} style={{ backgroundColor: 'white' }}>
                     Sunny Wong
@@ -85,7 +92,7 @@ const ResponsiveAppBar = () => {
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={() => setUser(!user)} style={{ backgroundColor: 'white' }}>
-                    <ListItemText primary="課程" />
+                    <ListItemText primary={t('menu.course')} />
                     {user ? (
                         <ExpandLessIcon />
                     ) : (
@@ -99,7 +106,7 @@ const ResponsiveAppBar = () => {
                 >
                     <List component="div" disablePadding>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/course'))} >
-                            兒童及青少年課程
+                            {t('menu.course')}
                         </ListItem>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/openclass'))} >
                             Vibe Open Class
@@ -108,23 +115,23 @@ const ResponsiveAppBar = () => {
                 </Collapse>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/show'))} style={{ backgroundColor: 'white' }}>
-                    演出邀請
+                    {t('menu.show')}
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/art'))} style={{ backgroundColor: 'white' }}>
-                    文化藝術推廣
+                    {t('menu.promotion')}
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/blog'))} style={{ backgroundColor: 'white', color: 'orange' }}>
-                    最新消息
+                    {t('menu.news')}
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/place'))} style={{ backgroundColor: 'white' }}>
-                    場地租借
+                    {t('menu.renting')}
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/contactus'))} style={{ backgroundColor: 'white' }}>
-                    聯絡我們
+                    {t('menu.contactUs')}
                 </ListItem>
             </List>
         </Box >
@@ -205,7 +212,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            Home
+                            {t('menu.home')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -244,7 +251,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            課程
+                            {t('menu.course')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -258,7 +265,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            演出邀請
+                            {t('menu.show')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -272,7 +279,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            文化藝術推廣
+                            {t('menu.promotion')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -286,7 +293,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            最新消息
+                            {t('menu.news')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -300,7 +307,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            場地租借
+                            {t('menu.renting')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -314,9 +321,31 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            聯絡我們
+                            {t('menu.contactUs')}
                         </Button>
                     </Box>
+                    <Box>
+                        <IconButton onClick={() => {
+                            router.push(router.asPath, undefined, { locale: 'zh' })
+                        }}>
+                            <Typography>
+                                <b style={{ color: 'white' }}>
+                                    中
+                                </b>
+                            </Typography>
+                        </IconButton>
+                        <IconButton onClick={() => {
+                            router.push(router.asPath, undefined, { locale: 'en' })
+
+                        }}>
+                            <Typography>
+                                <b style={{ color: 'white' }}>
+                                    EN
+                                </b>
+                            </Typography>
+                        </IconButton>
+                    </Box>
+
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Menu
@@ -342,7 +371,7 @@ const ResponsiveAppBar = () => {
                                 }}
                             >
                                 <Typography textAlign="center" >
-                                    兒童及青少年課程
+                                    Children	Dance	and	Talent	Training	Program
                                 </Typography>
                             </MenuItem>
                             <MenuItem

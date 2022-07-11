@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useI18n } from 'next-localization';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -29,6 +30,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CourseTable({ pageData }) {
+
+    const { t } = useI18n();
+
     return (
         <TableContainer component={Paper} >
             <Table aria-label="customized table">
@@ -49,7 +53,7 @@ export default function CourseTable({ pageData }) {
                 <TableBody>
                     <StyledTableRow>
                         <StyledTableCell component="th" scope="row" align="center">
-                            年齡
+                            {t('course.more.age')}
                         </StyledTableCell>
                         {
                             pageData.map(item => {
@@ -64,7 +68,7 @@ export default function CourseTable({ pageData }) {
 
                     <StyledTableRow>
                         <StyledTableCell component="th" scope="row" align="center">
-                            課堂
+                            {t('course.more.course')}
                         </StyledTableCell>
                         {
                             pageData.map(item => {
@@ -79,7 +83,7 @@ export default function CourseTable({ pageData }) {
 
                     <StyledTableRow>
                         <StyledTableCell component="th" scope="row">
-                            演出相關
+                            {t('course.more.performance')}
                         </StyledTableCell>
                         {
                             pageData.map(item => {
@@ -94,7 +98,7 @@ export default function CourseTable({ pageData }) {
 
                     <StyledTableRow>
                         <StyledTableCell component="th" scope="row" align="center">
-                            師資
+                            {t('course.more.teacher')}
                         </StyledTableCell>
                         {
                             pageData.map(item => {

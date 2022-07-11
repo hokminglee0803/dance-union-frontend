@@ -109,8 +109,8 @@ const About: React.FC<AboutProps> = ({
                         }
                         <br />
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">關於
-                                <span className="mid-color">Dance Union</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.aboutDanceUnion_1')}
+                                <span className="mid-color">{t('danceUnion.aboutDanceUnion_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <p style={{ whiteSpace: 'pre-line' }}>
@@ -132,8 +132,8 @@ const About: React.FC<AboutProps> = ({
                             <img alt={'sunny wong dance union'} src={purpose.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">我們的
-                                <span className="mid-color">理念</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.purpose_1')}
+                                <span className="mid-color">{t('danceUnion.purpose_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <p style={{ whiteSpace: 'pre-line' }}>
@@ -152,8 +152,8 @@ const About: React.FC<AboutProps> = ({
                                 </div> : ""
                         }
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">我們的
-                                <span className="mid-color">服務</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.service_1')}
+                                <span className="mid-color">{t('danceUnion.service_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <div className="about-para-txt">
@@ -176,8 +176,8 @@ const About: React.FC<AboutProps> = ({
                             <img alt={'sunny wong dance union'} src={show.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">演出
-                                <span className="mid-color">邀請</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.show_1')}
+                                <span className="mid-color">{t('danceUnion.show_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <div className="about-para-txt">
@@ -199,8 +199,8 @@ const About: React.FC<AboutProps> = ({
                             </div> : ""
                         }
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">場地
-                                <span className="mid-color">租借</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.booking_1')}
+                                <span className="mid-color">{t('danceUnion.booking_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <p style={{ whiteSpace: 'pre-line' }}>
@@ -220,8 +220,8 @@ const About: React.FC<AboutProps> = ({
                             <img alt={'sunny wong dance union'} src={socialResponsibility.image} className="img-fluid" />
                         </div>
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">社會
-                                <span className="mid-color">責任</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.socialResponsibility_1')}
+                                <span className="mid-color">{t('danceUnion.socialResponsibility_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <p style={{ whiteSpace: 'pre-line' }}>
@@ -240,8 +240,8 @@ const About: React.FC<AboutProps> = ({
                                 </div> : ''
                         }
                         <div className="col-lg-7 text-left about-two-grids">
-                            <h5 className="mb-lg-4 mb-3">合作
-                                <span className="mid-color">夥伴</span>
+                            <h5 className="mb-lg-4 mb-3">{t('danceUnion.partner_1')}
+                                <span className="mid-color">{t('danceUnion.partner_2')}</span>
                             </h5>
                             <div className="about-para-txt">
                                 <p style={{ whiteSpace: 'pre-line' }}>
@@ -275,9 +275,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const danceUnionPage = await contentfulService.getEntriesByContentType('danceUnionPage');
+        const danceUnionPage = await contentfulService.getEntriesByContentType('danceUnionPage', locale);
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

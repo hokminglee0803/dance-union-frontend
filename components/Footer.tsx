@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import contentfulService from '../utils/service/contentfulService';
 import { transformFooter } from '../utils/transformer';
+import { useRouter } from 'next/router';
+import { useI18n } from 'next-localization';
 
 const Copyright = () => {
     return (
@@ -37,24 +39,35 @@ interface FooterProps {
 
 export default function Footer({ latestNews }: FooterProps) {
 
+    const router = useRouter();
+
+    const { t } = useI18n();
+
+    const { locale } = router;
+
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
     const [init, setInit] = useState(true);
     const [footer, setFooter] = useState(null);
 
+    const fetchFooter = async () => {
+        const footerData = await contentfulService.getEntriesById(locale, '4Fyw9g6B6OfXYEbNzOJlds');
+        if (footerData) {
+            setFooter(transformFooter(footerData[0]));
+        }
+    }
+
     useEffect(() => {
         if (init) {
-            const fetchFooter = async () => {
-                const footerData = await contentfulService.getEntriesById('4Fyw9g6B6OfXYEbNzOJlds');
-                if (footerData) {
-                    setFooter(transformFooter(footerData[0]));
-                }
-            }
             fetchFooter();
             setInit(false);
         }
     })
+
+    useEffect(() => {
+        fetchFooter();
+    }, [locale])
 
     return (
         <section className="footer-w3layouts-bottem py-lg-3 py-md-2 py-sm-3 py-2">
@@ -69,47 +82,47 @@ export default function Footer({ latestNews }: FooterProps) {
                         </p>
                     </div>
                     <div className="col-lg-4 col-md-4 footer-bottom-txt">
-                        <h4>聯絡我們</h4>
+                        <h4>{t('footer.title')}</h4>
                         <div className="mt-3 footer-top">
                             <p>
                                 <Icon icon="clarity:map-marker-solid" width={25} height={25} />&nbsp; &nbsp;
-                                <span>地址: </span>
+                                <span>{t('footer.address')}</span>
                                 <a target="_blank" rel="noopener noreferrer" href={footer?.googleMapAddress}>
                                     {footer?.address}
                                 </a>
                             </p>
                             <p className="pt-2">
                                 <Icon icon="bi:phone" width={25} height={25} />&nbsp; &nbsp;
-                                <span>電話: </span>
+                                <span>{t('footer.address')}</span>
                                 <a href={`tel:+852 ${footer?.phone}`}>+852 {footer?.phone.replace(/(\d{4})(\d{4})/, '$1 $2')}</a>
                             </p>
                             <p className="pt-2">
                                 <Icon icon="akar-icons:whatsapp-fill" width={25} height={25} />&nbsp; &nbsp;
-                                <span>Whatsapp: </span>
+                                <span>{t('footer.whatsapp')}</span>
                                 <a href={`https://api.whatsapp.com/send?phone=852${footer?.whatsapp}`}>+852 {footer?.whatsapp.replace(/(\d{4})(\d{4})/, '$1 $2')}</a>
                             </p>
                             <p className="pt-2">
                                 <Icon icon="carbon:email" width={25} height={25} />&nbsp; &nbsp;
-                                <span>電郵: </span>
+                                <span>{t('footer.email')}</span>
                                 <a href={`mailto:{footer.email}`}>{footer?.email}</a>
                             </p>
                             <p className="pt-2">
                                 <Icon icon="la:fax" width={25} height={25} />&nbsp; &nbsp;
-                                <span>傳真: </span>+852 {footer?.fax.replace(/(\d{4})(\d{4})/, '$1 $2')}
+                                <span>{t('footer.fax')}</span>+852 {footer?.fax.replace(/(\d{4})(\d{4})/, '$1 $2')}
                             </p>
                             <p className="pt-2">
                                 <Icon icon="healthicons:i-schedule-school-date-time" width={25} height={25} />&nbsp; &nbsp;
-                                <span >星期一至五: </span>{footer?.mondayToFriday}
+                                <span >{t('footer.monToFri')}</span>{footer?.mondayToFriday}
                             </p>
                             <p className="pt-2">
                                 <Icon icon="healthicons:i-schedule-school-date-time" width={25} height={25} />&nbsp; &nbsp;
-                                <span>星期六及日: </span>{footer?.saturdayAndSunday}
+                                <span>{t('footer.holiday')}</span>{footer?.saturdayAndSunday}
                             </p>
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-5 footer-bottom-txt">
                         <Link href={`/news`}>
-                            <h4>最新文章</h4>
+                            <h4>{t('common.latestBlog')}</h4>
                         </Link>
                         <div className="mt-3 footer-top">
                             {

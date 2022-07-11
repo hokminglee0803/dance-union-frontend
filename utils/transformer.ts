@@ -9,6 +9,17 @@ export const options = {
     }
 }
 
+export const translateLocale = (locale: string) => {
+    switch (locale) {
+        case 'zh':
+            return 'zh-Hant-HK';
+        case 'en':
+            return 'en-US';
+        default:
+            return 'zh-Hant-HK';
+    }
+}
+
 export const transformFooter = (data: any) => {
     return {
         address: data?.fields?.address ?? '',

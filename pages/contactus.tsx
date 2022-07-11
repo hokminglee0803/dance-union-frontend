@@ -79,7 +79,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
     return (
         <div>
             <Head>
-                <title>聯絡我們 | Dance Union</title>
+                <title>{t('menu.contactUs')} | Dance Union</title>
                 <meta name="description" content='Dance Union Contact Us' />
                 <meta name="keywords" content='Contact Us, 聯絡我們, Dance Union, Sunny Wong ' />
                 <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
@@ -123,7 +123,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                     width: 400
                 }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        提交中.....
+                        {t('common.submit')}
                     </Typography>
                 </Box>
 
@@ -138,22 +138,22 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
             <section className="contact py-lg-4 py-md-3 py-sm-3 py-3" id="contact" style={{ background: 'white' }}>
                 <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
-                    <h4 className="text-center title mb-3">聯絡我們</h4>
+                    <h4 className="text-center title mb-3">{t('menu.contactUs')}</h4>
                     <br /><br />
                     <div className="row">
                         <div className="col-lg-6 col-md-6 contact-form pb-lg-3 pb-2">
                             <form action="#" method="post">
 
                                 <div className=" form-group contact-forms">
-                                    <input name="name" type="text" className="form-control" placeholder="姓名" required={true} onChange={handleChange} />
+                                    <input name="name" type="text" className="form-control" placeholder={t('common.name')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="email" type="email" className="form-control" placeholder="電郵" required={true} onChange={handleChange} />
+                                    <input name="email" type="email" className="form-control" placeholder={t('common.email')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="phone" type="text" className="form-control" placeholder="聯絡電話" required={true} onChange={handleChange} />
+                                    <input name="phone" type="text" className="form-control" placeholder={t('common.name')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className="form-group contact-forms">
@@ -161,7 +161,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                         {
                                             type.map((item, index) =>
                                                 <option key={index} value={item}>
-                                                    {item}
+                                                    {t(`common.${item}`)}
                                                 </option>
                                             )
                                         }
@@ -169,10 +169,10 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                 </div>
                                 <br />
                                 {
-                                    error ? <Alert severity="error">請寫下你的姓名, 電郵以及聯絡電話</Alert> : ""
+                                    error ? <Alert severity="error">{t('common.warning')}</Alert> : ""
                                 }
                                 {
-                                    success ? <Alert severity="success">你要查詢已經發出！</Alert> : ""
+                                    success ? <Alert severity="success">{t('common.submitSuccess')}</Alert> : ""
                                 }
                                 <br />
                                 <button
@@ -190,7 +190,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                         } else {
                                             setError(true);
                                         }
-                                    }} type="button" className="btn sent-butnn btn-lg">發送</button>
+                                    }} type="button" className="btn sent-butnn btn-lg">{t('common.submit')}</button>
                             </form>
                         </div>
                         <div className="address_mail_footer_grids col-lg-6 col-md-6">
@@ -213,7 +213,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         `../locales/${locale}.json`
     );
 
-    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
     try {
         return {

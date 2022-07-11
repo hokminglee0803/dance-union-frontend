@@ -266,7 +266,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   try {
 
-    const homePage = await contentfulService.getEntriesByContentType('homePage');
+    const homePage = await contentfulService.getEntriesByContentType('homePage', locale);
 
     const mainPageBanner = [];
     const highlight = [];
@@ -281,7 +281,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       })
     })
 
-    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+    const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
     return {
       props: {

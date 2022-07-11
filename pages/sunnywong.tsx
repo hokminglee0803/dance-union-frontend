@@ -222,7 +222,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                             </div>
                         </Collapse>
                         <Button onClick={() => setShowMore(!showMore)} variant="contained" style={{ float: 'right' }} endIcon={showMore ? <ExpandLessIcon /> : <ExpandMoreIcon />}>
-                            {showMore ? '更少' : '更多'}
+                            {showMore ? t('common.less') : t('common.more')}
                         </Button>
                     </div>
                 </section>
@@ -354,7 +354,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                         <div className="row">
                             <div className="col-lg-7 text-left about-two-grids">
                                 <h5 className="mb-lg-4 mb-3">Sunny Wong &nbsp;
-                                    <span className="mid-color">主要作品一覽</span>
+                                    <span className="mid-color">{t('sunnyWong.majarProductionDisplay')}</span>
                                 </h5>
                             </div>
                         </div>
@@ -394,7 +394,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                         <div className="row">
                             <div className="col-lg-7 text-left about-two-grids">
                                 <h5 className="mb-lg-4 mb-3">Sunny Wong &nbsp;
-                                    <span className="mid-color">相片</span>
+                                    <span className="mid-color">{t('common.album')}</span>
                                 </h5>
                             </div>
                         </div>
@@ -404,7 +404,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                         <div className="row">
                             <div className="col-lg-7 text-left about-two-grids">
                                 <h5 className="mb-lg-4 mb-3">Sunny Wong &nbsp;
-                                    <span className="mid-color">影片</span>
+                                    <span className="mid-color">{t('common.video')}</span>
                                 </h5>
                             </div>
                         </div>
@@ -428,7 +428,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const sunnyWongPage = await contentfulService.getEntriesByContentType('sunnyWongPage');
+        const sunnyWongPage = await contentfulService.getEntriesByContentType('sunnyWongPage', locale);
 
         const banner = sunnyWongPage[0]?.fields?.banner.map(item => transformBannerData(item));
 
@@ -438,7 +438,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const videoCollection = sunnyWongPage[0].fields.sunnyWongVideoCollection.map(item => transformVideoClip(item));
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

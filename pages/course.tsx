@@ -212,10 +212,10 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                 indicatorColor="primary"
                                 textColor="inherit"
                             >
-                                <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={'課程精選'} {...a11yProps(0)} />
-                                <Tab icon={<VideocamIcon />} iconPosition="start" label={'相關影片'} {...a11yProps(1)} />
-                                <Tab icon={<PhotoAlbumIcon />} iconPosition="start" label={'精選相集'} {...a11yProps(2)} />
-                                <Tab icon={<InfoIcon />} iconPosition="start" label={'了解更多'} {...a11yProps(3)} />
+                                <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={t('course.general.title')} {...a11yProps(0)} />
+                                <Tab icon={<VideocamIcon />} iconPosition="start" label={t('course.video.title')} {...a11yProps(1)} />
+                                <Tab icon={<PhotoAlbumIcon />} iconPosition="start" label={t('course.album.title')} {...a11yProps(2)} />
+                                <Tab icon={<InfoIcon />} iconPosition="start" label={t('course.more.title')} {...a11yProps(3)} />
                             </Tabs>
                         </AppBar>
                     )
@@ -411,7 +411,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                 })
                             }
 
-                            <h3 className="text-center title mb-3">更多影片</h3>
+                            <h3 className="text-center title mb-3">{t('common.moreVideo')}</h3>
                             <div className="row gallery-info">
                                 <VideoGallery videos={videoInfo.moreVideoList} />
                             </div>
@@ -715,10 +715,10 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                                     setValue(newValue);
                                 }}
                             >
-                                <BottomNavigationAction label="課程精選" icon={<EmojiPeopleIcon />} />
-                                <BottomNavigationAction label="相關影片" icon={<VideocamIcon />} />
-                                <BottomNavigationAction label="精選相集" icon={<PhotoAlbumIcon />} />
-                                <BottomNavigationAction label="了解更多" icon={<InfoIcon />} />
+                                <BottomNavigationAction icon={<EmojiPeopleIcon />} />
+                                <BottomNavigationAction icon={<VideocamIcon />} />
+                                <BottomNavigationAction icon={<PhotoAlbumIcon />} />
+                                <BottomNavigationAction icon={<InfoIcon />} />
                             </BottomNavigation>
                         </Paper>
                     ) : ""
@@ -741,39 +741,39 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const coursePage = await contentfulService.getEntriesByContentType('coursePage');
+        const coursePage = await contentfulService.getEntriesByContentType('coursePage', locale);
 
         const articleCollection = await Promise.all(coursePage[0].fields?.generalInfoSession?.fields?.articleCollection?.map(async item => {
-            const article = await contentfulService.getEntriesById(item.sys.id);
+            const article = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformArticle(article[0]);
         }))
 
         const videoCollection = await Promise.all(coursePage[0].fields?.videoSession?.fields?.videoCollection?.map(async item => {
-            const video = await contentfulService.getEntriesById(item.sys.id);
+            const video = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformVideoClip(video[0]);
         }))
 
         const moreVideoList = await Promise.all(coursePage[0].fields?.videoSession?.fields?.moreVideo?.map(async item => {
-            const moreVideo = await contentfulService.getEntriesById(item.sys.id);
+            const moreVideo = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformVideoClip(moreVideo[0]);
         }))
 
         const imageCollection = await Promise.all(coursePage[0].fields?.imageSession?.fields?.imageCollection?.map(async item => {
-            const image = await contentfulService.getEntriesById(item.sys.id);
+            const image = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformArticle(image[0])
         }))
 
         const courseTableList = await Promise.all(coursePage[0].fields?.knowMoreSession?.fields?.courseTable.map(async item => {
-            const courseTable = await contentfulService.getEntriesById(item.sys.id);
+            const courseTable = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformCourseTable(courseTable[0]);
         }))
 
         const bannerList = await Promise.all(coursePage[0].fields?.knowMoreSession?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

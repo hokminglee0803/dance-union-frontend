@@ -300,14 +300,14 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const openClassPage = await contentfulService.getEntriesByContentType('openClass');
+        const openClassPage = await contentfulService.getEntriesByContentType('openClass', locale);
 
         const articleCollection = await Promise.all(openClassPage[0].fields?.generalInfoSession?.fields?.articleCollection?.map(async item => {
-            const article = await contentfulService.getEntriesById(item.sys.id);
+            const article = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformArticle(article[0]);
         }))
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

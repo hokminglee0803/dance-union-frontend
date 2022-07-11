@@ -188,8 +188,8 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                         textColor="inherit"
                         centered
                     >
-                        <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label="舞蹈文化藝術推廣" {...a11yProps(0)} />
-                        <Tab icon={<VideocamIcon />} iconPosition="start" label="相關影片" {...a11yProps(1)} />
+                        <Tab icon={<EmojiPeopleIcon />} iconPosition="start" label={t('art.general')} {...a11yProps(0)} />
+                        <Tab icon={<VideocamIcon />} iconPosition="start" label={t('art.video')} {...a11yProps(1)} />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews
@@ -379,7 +379,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                             }
                             <br />
                             <br />
-                            <h3 className="text-center title mb-3">更多影片</h3>
+                            <h3 className="text-center title mb-3">{t('common.moreVideo')}</h3>
                             <div className="row gallery-info">
                                 <VideoGallery videos={videoInfo.moreVideoList} />
                             </div>
@@ -403,24 +403,24 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const showPage = await contentfulService.getEntriesByContentType('showPage');
+        const showPage = await contentfulService.getEntriesByContentType('showPage', locale);
 
         const articleCollection = await Promise.all(showPage[0].fields?.generalInfo?.fields?.articleCollection?.map(async item => {
-            const article = await contentfulService.getEntriesById(item.sys.id);
+            const article = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformArticle(article[0]);
         }))
 
         const videoCollection = await Promise.all(showPage[0].fields?.videoSession?.fields?.videoCollection?.map(async item => {
-            const video = await contentfulService.getEntriesById(item.sys.id);
+            const video = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformVideoClip(video[0]);
         }))
 
         const moreVideoList = await Promise.all(showPage[0].fields?.videoSession?.fields?.moreVideo?.map(async item => {
-            const moreVideo = await contentfulService.getEntriesById(item.sys.id);
+            const moreVideo = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformVideoClip(moreVideo[0]);
         }))
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

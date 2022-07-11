@@ -10,6 +10,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import VideoPlayer from "./VideoPlayer";
 import { VideoType } from "../interface/Video";
 import ReactPlayer from 'react-player/lazy'
+import { useI18n } from "next-localization";
 interface VideoGalleryProps {
     videos: VideoType[];
 }
@@ -22,6 +23,8 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
     const [isOpen, setOpen] = useState(false)
     const [url, setUrl] = useState('');
     const playerRefs = React.useRef([])
+
+    const { t } = useI18n();
 
     const style = {
         position: 'absolute' as 'absolute',
@@ -60,7 +63,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
                 </Box>
             </Modal>
             <ImageList sx={{ width: "100%", height: "auto" }} cols={isMobile ? 1 : 3} >
-                {showMore && videos.map((item,index) => (
+                {showMore && videos.map((item, index) => (
                     <>
                         <ImageListItem style={{
                             margin: 10
@@ -149,7 +152,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
             </ImageList>
             <br />
             <Button onClick={() => setShowMore(!showMore)} variant="contained" style={{ float: 'right', display: videos?.length > 6 ? 'block' : 'none' }}>
-                {showMore ? '更少' : '更多'}
+                {showMore ? t('common.less') : t('common.more')}
                 {showMore ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </Button>
         </>

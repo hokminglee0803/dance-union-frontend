@@ -1,9 +1,89 @@
 {
-    "seo_title": "",
-    "meta_description": "",
-    "meta_keywords": "",
-    "og_title": "",
-    "og_description": "",
-    "og_url": "",
-    "og_image_url": ""
+    "footer": {
+        "title": "Contact us",
+        "address": "Address:",
+        "phone": "Telephone:",
+        "whatsapp": "Whatsapp:",
+        "email": "Email:",
+        "fax": "Fax:",
+        "monToFri": "Monday to Friday:",
+        "holiday": "Saturday to Sunday:"
+    },
+    "common": {
+        "latestBlog": "Latest Blog",
+        "email": "Email",
+        "query": "Enquiry",
+        "album": "Album",
+        "video": "Video",
+        "more": "more",
+        "less": "less",
+        "moreVideo": "More Video",
+        "submit": "Submiting...",
+        "name": "Name",
+        "phone": "Phone no.",
+        "兒童及青少年課程": "Children and youth program",
+        "Vibe Open Class": "Vibe Open Class",
+        "warning": "Please write down your name, email and contact number",
+        "submitSuccess": "Your enquiry is submitted!",
+        "submitButton": "submit"
+    },
+    "menu": {
+        "contactUs": "Contact us",
+        "course": "Course",
+        "home": "Home",
+        "childrenProgram": "Children Dance and Talent Training Program",
+        "show": "Invitation",
+        "promotion": "Promotion",
+        "news": "News",
+        "renting": "Renting"
+    },
+    "course": {
+        "general": {
+            "title": "Course Introduction"
+        },
+        "video": {
+            "title": "Related videos"
+        },
+        "album": {
+            "title": "Best photos"
+        },
+        "more": {
+            "title": "More details",
+            "age": "Age",
+            "course": "Course",
+            "performance": "Performance details",
+            "teacher": "Tutor qualification"
+        }
+    },
+    "join": {
+        "general": {
+            "title": "Joint Operation"
+        },
+        "more": {
+            "title": "More Details"
+        }
+    },
+    "sunnyWong": {
+        "majarProductionDisplay": "Major Production Display"
+    },
+    "danceUnion": {
+        "aboutDanceUnion_1": "About",
+        "aboutDanceUnion_2": " Dance Union",
+        "purpose_1": "Our",
+        "purpose_2": " Philosophy",
+        "service_1": "Our",
+        "service_2": " Services",
+        "show_1": "Performance",
+        "show_2": " Invitations",
+        "booking_1": "Venue",
+        "booking_2": " Renting",
+        "socialResponsibility_1": "Community",
+        "socialResponsibility_2": " Responsibility",
+        "partner_1": "Collaboration",
+        "partner_2": " Partner"
+    },
+    "art": {
+        "general": "Dance culture and art promotion",
+        "video": "Related videos"
+    }
 }

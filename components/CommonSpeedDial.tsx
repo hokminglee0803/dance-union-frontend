@@ -8,32 +8,36 @@ import EmailIcon from '@mui/icons-material/Email';
 import SendIcon from '@mui/icons-material/Send';
 import PhoneIcon from '@mui/icons-material/Phone';
 import ChatIcon from '@mui/icons-material/Chat';
-
-const actions = [
-    // {
-    //     icon: <WhatsAppIcon style={{ color: 'green' }} />, name: 'WhatsApp', onClick: () => {
-
-    //     }
-    // },
-    {
-        icon: <SendIcon />, name: '報名查詢', onClick: () => {
-            window.location.href = `/contactus/`
-        }
-    },
-    {
-        icon: <EmailIcon style={{ color: 'orange' }} />, name: '電郵', onClick: () => {
-            window.location.href = "mailto:danceUnionCms@gmail.com";
-        }
-    },
-    {
-        icon: <FacebookIcon style={{ color: 'blue' }} />, name: 'Facebook', onClick: () => {
-            window.open('https://www.facebook.com/sunnykidsdanceunion/', '_blank');
-        }
-    },
-
-];
+import { useI18n } from 'next-localization';
 
 export default function CommonSpeedDial() {
+
+    const { t } = useI18n();
+
+    const actions = [
+        // {
+        //     icon: <WhatsAppIcon style={{ color: 'green' }} />, name: 'WhatsApp', onClick: () => {
+
+        //     }
+        // },
+        {
+            icon: <SendIcon />, name: t('common.query'), onClick: () => {
+                window.location.href = `/contactus/`
+            }
+        },
+        {
+            icon: <EmailIcon style={{ color: 'orange' }} />, name: t('common.email'), onClick: () => {
+                window.location.href = "mailto:danceUnionCms@gmail.com";
+            }
+        },
+        {
+            icon: <FacebookIcon style={{ color: 'blue' }} />, name: 'Facebook', onClick: () => {
+                window.open('https://www.facebook.com/sunnykidsdanceunion/', '_blank');
+            }
+        },
+
+    ];
+
     return (
         <SpeedDial
             ariaLabel="SpeedDial"

@@ -267,32 +267,32 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const bookingPage = await contentfulService.getEntriesByContentType('bookingPage');
+        const bookingPage = await contentfulService.getEntriesByContentType('bookingPage', locale);
 
         const generalIntroBannerList = await Promise.all(bookingPage[0].fields?.generalIntro?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
         const room1BannerList = await Promise.all(bookingPage[0].fields?.room1?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
 
         const room2BannerList = await Promise.all(bookingPage[0].fields?.Room2?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
 
         const room3BannerList = await Promise.all(bookingPage[0].fields?.room3?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
         const room4BannerList = await Promise.all(bookingPage[0]?.fields?.room4?.[0]?.fields?.banner.map(async item => {
-            const banner = await contentfulService.getEntriesById(item.sys.id);
+            const banner = await contentfulService.getEntriesById(locale, item.sys.id);
             return transformBannerData(banner[0]);
         }))
 
@@ -304,7 +304,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             transformArticle(bookingPage[0].fields.room4?.[0], room4BannerList)
         ]
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

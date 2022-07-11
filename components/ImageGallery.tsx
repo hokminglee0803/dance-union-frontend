@@ -4,12 +4,15 @@ import Carousel, { Modal, ModalGateway } from "react-images";
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { useI18n } from "next-localization";
 
 export default function ImageGallery({ photos }) {
 
     const [currentImage, setCurrentImage] = useState(0);
     const [viewerIsOpen, setViewerIsOpen] = useState(false);
     const [showMore, setShowMore] = useState(false);
+
+    const { t } = useI18n();
 
     const openLightbox = useCallback((event, { photo, index }) => {
         setCurrentImage(index);
@@ -40,7 +43,7 @@ export default function ImageGallery({ photos }) {
             </ModalGateway>
             <br />
             <Button onClick={() => setShowMore(!showMore)} variant="contained" style={{ float: 'right' }} endIcon={showMore ? <ExpandLessIcon /> : <ExpandMoreIcon />}>
-                 {showMore ? '更少' : '更多'}
+                {showMore ? t('common.less') : t('common.more')}
             </Button>
         </>
     );
