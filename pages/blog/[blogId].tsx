@@ -182,17 +182,21 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths: any[] = []
-    const blogEntries = await contentfulService.getEntriesById();
+    const locales = ['zh', 'en']
+    locales.map(async locale => {
+        const blogEntries = await contentfulService.getEntriesById(locale);
 
-    blogEntries.map((blogEntry) => {
-        paths.push(
-            {
-                params: {
-                    blogId: blogEntry?.sys?.id
-                },
-            }
-        )
+        blogEntries.map((blogEntry) => {
+            paths.push(
+                {
+                    params: {
+                        blogId: blogEntry?.sys?.id
+                    },
+                }
+            )
+        })
     })
+
     return {
         paths: paths,
         fallback: 'blocking'
@@ -209,7 +213,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
         const blogEntry = await contentfulService.getEntriesById(params?.blogId?.toString());
 
-        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

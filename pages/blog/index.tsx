@@ -25,6 +25,7 @@ import Link from 'next/link'
 import InfiniteScroll from "react-infinite-scroll-component";
 import CustomizedCircularProgress from '../../components/CustomizedCircularProgress';
 import Image from 'next/image'
+import { LocalLaundryService } from '@mui/icons-material';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
 
@@ -104,13 +105,13 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
         setType(type);
         setLazyLoadList([])
         setStopLazyLoad(false);
-        const tempBlogEntries = await contentfulService.getBlogEntries(type, 3, 0);
+        const tempBlogEntries = await contentfulService.getBlogEntries(type, 3, 0, locale);
         setBlogEntries(tempBlogEntries.map(blog => transformBlog(blog)))
         setLoading(false)
     }
 
     const fetchMoreData = () => {
-        contentfulService.getBlogEntries(type, 5, from).then(data => {
+        contentfulService.getBlogEntries(type, 5, from, locale).then(data => {
             setFrom(from + 5);
             setLazyLoadList(lazyLoadList.concat(data.map(blog => transformBlog(blog))));
             if (data.length === 0) {
@@ -369,9 +370,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.DIRECTION, 3, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.DIRECTION, 3, 0, locale);
 
-        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         return {
             props: {

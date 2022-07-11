@@ -105,12 +105,12 @@ const NewsPage: React.FC<NewsPageProps> = ({
         setType(type);
         setLazyLoadList([])
         setStopLazyLoad(false);
-        const tempBlogEntries = await contentfulService.getBlogEntries(type, 3, 0);
+        const tempBlogEntries = await contentfulService.getBlogEntries(type, 3, 0, locale);
         setBlogEntries(tempBlogEntries.map(blog => transformBlog(blog)))
     }
 
     const fetchMoreData = () => {
-        contentfulService.getBlogEntries(type, 5, from).then(data => {
+        contentfulService.getBlogEntries(type, 5, from, locale).then(data => {
             setFrom(from + 5);
             setLazyLoadList(lazyLoadList.concat(data.map(blog => transformBlog(blog))));
             if (data.length === 0) {
@@ -338,11 +338,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
 
-        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 3, 0);
+        const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 3, 0, locale);
 
-        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+        const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
-        await generateRSS();
+        await generateRSS(locale);
 
         return {
             props: {

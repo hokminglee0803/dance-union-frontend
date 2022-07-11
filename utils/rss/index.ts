@@ -5,7 +5,8 @@ import fs from 'fs';
 import moment from 'moment';
 import { BlogTypeEnum } from '../../interface/Blog';
 
-export const generateRSS = async () => {
+export const generateRSS = async (locale) => {
+
     const feed = new Feed({
         title: 'Dance Union',
         description: 'Dance Union 更新',
@@ -24,7 +25,7 @@ export const generateRSS = async () => {
         },
     });
 
-    const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0);
+    const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
     await Promise.all(
         seoBlogEntries.map(blog => transformBlog(blog)).map(async (post) => {
@@ -35,7 +36,7 @@ export const generateRSS = async () => {
                 link: validURI,
                 title: post.title,
                 description: post.description,
-                date: moment(post.createdDate,'DD/MM/YYYY').toDate(),
+                date: moment(post.createdDate, 'DD/MM/YYYY').toDate(),
                 image: post.desktopBanner,
                 content: post.content,
                 author: [
