@@ -28,7 +28,7 @@ export default class MyDocument extends Document {
                     <meta name="google" content="notranslate" />
                     <meta charSet="utf-8" />
                     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"></meta>
-                    <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+                    <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
                     <link

@@ -27,7 +27,7 @@ import CustomizedCircularProgress from '../../components/CustomizedCircularProgr
 import Image from 'next/image'
 import { LocalLaundryService } from '@mui/icons-material';
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 
 interface BlogEntriesProps {
     initBlogEntries: BlogType[];
@@ -76,7 +76,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en/' : '/';
+    const localePath = locale === 'en' ? '/en' : '/';
 
     const { t } = useI18n();
 
@@ -275,20 +275,20 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                 <title>{'最新消息 | Dance Union'}</title>
                 <meta name="description" content={'最新消息 | Dance Union'} />
                 <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌, 最新消息'} />
-                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+                <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}`}
+                    href={`${HOME_PATH}/blog`}
                     hrefLang="zh-hk"
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/`}
+                    href={`${HOME_PATH}/en/blog`}
                     hrefLang="en-hk"
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}`}
+                    href={`${HOME_PATH}${localePath}/blog`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />

@@ -18,7 +18,7 @@ import ReactPlayer from 'react-player/lazy'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH;
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';
 interface IndexPageProps {
   mainPageBanner: BannerType[];
   highlight: BannerType[];
@@ -32,7 +32,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
 
   const { locale } = router;
 
-  const localePath = locale === 'en' ? '/en/' : '/';
+  const localePath = locale === 'en' ? '/en' : '/';
 
   const { t } = useI18n();
 
@@ -77,7 +77,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         <title>{webSettings?.seoTitle}</title>
         <meta name="description" content={webSettings?.seoDescription} />
         <meta name="keywords" content={webSettings?.seoKeywords} />
-        <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+        <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
         <link
           rel="alternate"
@@ -86,7 +86,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         />
         <link
           rel="alternate"
-          href={`${HOME_PATH}`}
+          href={`${HOME_PATH}/en`}
           hrefLang="en-hk"
         />
         <link

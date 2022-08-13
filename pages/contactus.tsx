@@ -13,7 +13,7 @@ import { postMember } from '../utils/mongo';
 import Image from 'next/image'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 interface ContactUsProps {
     latestNews: BlogType[];
 }
@@ -24,7 +24,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en/' : '/';
+    const localePath = locale === 'en' ? '/en' : '/';
 
     const { t } = useI18n();
 
@@ -82,20 +82,20 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 <title>{t('menu.contactUs')} | Dance Union</title>
                 <meta name="description" content='Dance Union Contact Us' />
                 <meta name="keywords" content='Contact Us, 聯絡我們, Dance Union, Sunny Wong ' />
-                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+                <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}`}
+                    href={`${HOME_PATH}/contactus`}
                     hrefLang="zh-hk"
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/`}
+                    href={`${HOME_PATH}/en/contactus`}
                     hrefLang="en-hk"
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}`}
+                    href={`${HOME_PATH}${localePath}/contactus`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={t('og_title')} />

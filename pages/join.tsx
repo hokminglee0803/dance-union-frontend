@@ -40,7 +40,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 
 interface JoinProps {
     generalInfo: {
@@ -96,7 +96,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en/' : '/';
+    const localePath = locale === 'en' ? '/en' : '/';
 
     const { t } = useI18n();
 
@@ -154,21 +154,21 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                 <title>{webSettings?.seoTitle}</title>
                 <meta name="description" content={webSettings?.seoDescription} />
                 <meta name="keywords" content={webSettings?.seoKeywords} />
-                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" /> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
-                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+                <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" /> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
+                <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}`}
+                    href={`${HOME_PATH}/join`}
                     hrefLang="zh-hk"
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}`}
+                    href={`${HOME_PATH}/en/join`}
                     hrefLang="en-hk"
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}`}
+                    href={`${HOME_PATH}${localePath}/join`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

@@ -18,7 +18,7 @@ import { ShareSocial } from 'react-share-social'
 import { PageSettingProps } from '../../interface/PageSetting';
 import Image from 'next/image'
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 
 interface BlogEntryProps {
     blogEntry: BlogType;
@@ -30,14 +30,14 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
     const router = useRouter()
 
-    const { pid } = router.query;
+    const { blogId } = router.query;
 
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en/' : '/';
+    const localePath = locale === 'en' ? '/en' : '/';
 
     const { t } = useI18n();
 
@@ -58,20 +58,20 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             <meta name="description" content={webSettings?.seoDescription} />
             <meta name="keywords" content={webSettings?.seoKeywords} />
             <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"></meta>
-            <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+            <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
             <link
                 rel="alternate"
-                href={`${HOME_PATH}`}
+                href={`${HOME_PATH}/blog/${blogId}`}
                 hrefLang="zh-hk"
             />
             <link
                 rel="alternate"
-                href={`${HOME_PATH}`}
+                href={`${HOME_PATH}/en/blog/${blogId}`}
                 hrefLang="en-hk"
             />
             <link
                 rel="canonical"
-                href={`${HOME_PATH}${localePath}`}
+                href={`${HOME_PATH}${localePath}/blog/${blogId}`}
             />
             <meta name="buildVersion" content={'1.0.1'} />
             <meta property="og:locale" content="zh_hk" />

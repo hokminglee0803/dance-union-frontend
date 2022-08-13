@@ -27,7 +27,7 @@ import CustomizedCircularProgress from '../../components/CustomizedCircularProgr
 import Image from 'next/image'
 import { generateRSS } from '../../utils/rss';
 
-const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || '';
+const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';
 
 interface NewsPageProps {
     initBlogEntries: BlogType[];
@@ -76,7 +76,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en/' : '/';
+    const localePath = locale === 'en' ? '/en' : '/';
 
     const { t } = useI18n();
 
@@ -262,20 +262,20 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 <title>{'網誌 | Dance Union'}</title>
                 <meta name="description" content={'網誌 | Dance Union'} />
                 <meta name="keywords" content={'Dance Union, Sunny Wong, Blog, 網誌'} />
-                <meta name="google-site-verification" content="HSeiJF1wIPEmRWl27NIHwrslEwWKO6YuN0AP2IkOVgk" />
+                <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}`}
+                    href={`${HOME_PATH}/news`}
                     hrefLang="zh-hk"
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/`}
+                    href={`${HOME_PATH}/en/news`}
                     hrefLang="en-hk"
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}`}
+                    href={`${HOME_PATH}${localePath}/news`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />
