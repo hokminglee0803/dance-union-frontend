@@ -168,7 +168,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/course`}
+                    href={`${HOME_PATH}course`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -178,7 +178,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/course`}
+                    href={`${HOME_PATH}${localePath}course`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

@@ -87,7 +87,7 @@ const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, l
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/openclass`}
+                    href={`${HOME_PATH}openclass`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -97,7 +97,7 @@ const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, l
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/openclass`}
+                    href={`${HOME_PATH}${localePath}openclass`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

@@ -61,7 +61,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
             <link
                 rel="alternate"
-                href={`${HOME_PATH}/blog/${blogId}`}
+                href={`${HOME_PATH}blog/${blogId}`}
                 hrefLang="zh-hk"
             />
             <link
@@ -71,7 +71,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             />
             <link
                 rel="canonical"
-                href={`${HOME_PATH}${localePath}/blog/${blogId}`}
+                href={`${HOME_PATH}${localePath}blog/${blogId}`}
             />
             <meta name="buildVersion" content={'1.0.1'} />
             <meta property="og:locale" content="zh_hk" />

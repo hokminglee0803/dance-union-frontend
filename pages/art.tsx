@@ -148,7 +148,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/art`}
+                    href={`${HOME_PATH}art`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -158,7 +158,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/art`}
+                    href={`${HOME_PATH}${localePath}art`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

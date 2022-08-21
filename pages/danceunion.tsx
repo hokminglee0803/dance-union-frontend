@@ -73,7 +73,7 @@ const About: React.FC<AboutProps> = ({
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/danceunion`}
+                    href={`${HOME_PATH}danceunion`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -83,7 +83,7 @@ const About: React.FC<AboutProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/danceunion`}
+                    href={`${HOME_PATH}${localePath}danceunion`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

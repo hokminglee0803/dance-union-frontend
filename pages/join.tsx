@@ -158,7 +158,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/join`}
+                    href={`${HOME_PATH}join`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -168,7 +168,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/join`}
+                    href={`${HOME_PATH}${localePath}join`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

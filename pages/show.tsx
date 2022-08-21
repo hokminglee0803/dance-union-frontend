@@ -147,7 +147,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/show`}
+                    href={`${HOME_PATH}show`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -157,7 +157,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/show`}
+                    href={`${HOME_PATH}${localePath}show`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

@@ -265,7 +265,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 <meta name="google-site-verification" content="Xj24ARH2mUnvhluOalhwzKKZfmd7l6DUR-asS6v-s-o" />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/news`}
+                    href={`${HOME_PATH}news`}
                     hrefLang="zh-hk"
                 />
                 <link
@@ -275,7 +275,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/news`}
+                    href={`${HOME_PATH}${localePath}news`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />
