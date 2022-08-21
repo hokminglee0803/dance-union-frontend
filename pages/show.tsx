@@ -87,7 +87,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
 
     const { locale } = router;
 
-    const localePath = locale === 'en/show' ? 'en/show' : 'show';
+    const localePath = locale === 'en' ? 'en/show' : 'show';
 
     const { t } = useI18n();
 

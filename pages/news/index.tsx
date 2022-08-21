@@ -76,7 +76,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en/news' ? 'en/news' : 'news';
+    const localePath = locale === 'en' ? 'en/news' : 'news';
 
     const { t } = useI18n();
 

@@ -96,7 +96,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
 
     const { locale } = router;
 
-    const localePath = locale === 'en/join' ? 'en/join' : 'join';
+    const localePath = locale === 'en' ? 'en/join' : 'join';
 
     const { t } = useI18n();
 

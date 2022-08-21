@@ -37,7 +37,7 @@ const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, l
 
     const { locale } = router;
 
-    const localePath = locale === 'en/openclass' ? 'en/openclass' : 'openclass';
+    const localePath = locale === 'en' ? 'en/openclass' : 'openclass';
 
     const { t } = useI18n();
 

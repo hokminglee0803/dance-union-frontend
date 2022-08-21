@@ -46,7 +46,7 @@ const About: React.FC<AboutProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en/danceunion' ? 'en/danceunion' : 'danceunion';
+    const localePath = locale === 'en' ? 'en/danceunion' : 'danceunion';
 
     const { t } = useI18n();
 

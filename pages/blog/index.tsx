@@ -76,7 +76,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en/blog' ? 'en/blog' : 'blog';
+    const localePath = locale === 'en' ? 'en/blog' : 'blog';
 
     const { t } = useI18n();
 

@@ -106,7 +106,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
 
     const { locale } = router;
 
-    const localePath = locale === 'en/course' ? 'en/course' : 'course';
+    const localePath = locale === 'en' ? 'en/course' : 'course';
 
     const { t } = useI18n();
 

@@ -24,7 +24,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const { locale } = router;
 
-    const localePath = locale === 'en/contactus' ? 'en/contactus' : 'contactus';
+    const localePath = locale === 'en' ? 'en/contactus' : 'contactus';
 
     const { t } = useI18n();
 
