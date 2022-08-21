@@ -33,7 +33,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '/';
+    const localePath = locale === 'en' ? '/en' : '';
 
     const { t } = useI18n();
 

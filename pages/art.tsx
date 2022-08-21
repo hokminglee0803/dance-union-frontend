@@ -87,7 +87,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '/';
+    const localePath = locale === 'en' ? '/en' : '';
 
     const { t } = useI18n();
 

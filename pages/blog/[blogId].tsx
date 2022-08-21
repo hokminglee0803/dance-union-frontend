@@ -37,7 +37,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '/';
+    const localePath = locale === 'en' ? '/en' : '';
 
     const { t } = useI18n();
 

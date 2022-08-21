@@ -86,7 +86,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '/';
+    const localePath = locale === 'en' ? '/en' : '';
 
     const { t } = useI18n();
 
