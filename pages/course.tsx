@@ -178,7 +178,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}course`}
+                    href={`${HOME_PATH}${localePath}/course`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

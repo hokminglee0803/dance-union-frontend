@@ -71,7 +71,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             />
             <link
                 rel="canonical"
-                href={`${HOME_PATH}${localePath}blog/${blogId}`}
+                href={`${HOME_PATH}${localePath}/blog/${blogId}`}
             />
             <meta name="buildVersion" content={'1.0.1'} />
             <meta property="og:locale" content="zh_hk" />

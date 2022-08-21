@@ -168,7 +168,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}join`}
+                    href={`${HOME_PATH}${localePath}/join`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

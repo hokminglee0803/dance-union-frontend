@@ -95,7 +95,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}contactus`}
+                    href={`${HOME_PATH}${localePath}/contactus`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={t('og_title')} />

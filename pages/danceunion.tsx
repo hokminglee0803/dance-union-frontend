@@ -83,7 +83,7 @@ const About: React.FC<AboutProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}danceunion`}
+                    href={`${HOME_PATH}${localePath}/danceunion`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

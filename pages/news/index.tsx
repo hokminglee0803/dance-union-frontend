@@ -275,7 +275,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}news`}
+                    href={`${HOME_PATH}${localePath}/news`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />

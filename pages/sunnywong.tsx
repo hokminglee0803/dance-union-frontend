@@ -154,7 +154,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}sunnywong`}
+                    href={`${HOME_PATH}${localePath}/sunnywong`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

@@ -288,7 +288,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}blog`}
+                    href={`${HOME_PATH}${localePath}/blog`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />

@@ -93,7 +93,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}place`}
+                    href={`${HOME_PATH}${localePath}/place`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />
