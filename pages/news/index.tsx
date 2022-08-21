@@ -76,7 +76,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -270,7 +270,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/news`}
+                    href={`${HOME_PATH}en/news`}
                     hrefLang="en-hk"
                 />
                 <link

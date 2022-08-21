@@ -46,7 +46,7 @@ const About: React.FC<AboutProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -78,7 +78,7 @@ const About: React.FC<AboutProps> = ({
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/danceunion`}
+                    href={`${HOME_PATH}en/danceunion`}
                     hrefLang="en-hk"
                 />
                 <link

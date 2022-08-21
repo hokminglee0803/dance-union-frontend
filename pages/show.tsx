@@ -87,7 +87,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -152,7 +152,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/show`}
+                    href={`${HOME_PATH}en/show`}
                     hrefLang="en-hk"
                 />
                 <link

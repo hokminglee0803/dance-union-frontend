@@ -32,7 +32,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
 
   const { locale } = router;
 
-  const localePath = locale === 'en' ? '/en' : '';
+  const localePath = locale === 'en' ? 'en' : '';
 
   const { t } = useI18n();
 
@@ -86,7 +86,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         />
         <link
           rel="alternate"
-          href={`${HOME_PATH}/en`}
+          href={`${HOME_PATH}en`}
           hrefLang="en-hk"
         />
         <link

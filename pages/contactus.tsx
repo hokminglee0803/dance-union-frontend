@@ -24,7 +24,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -90,7 +90,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/contactus`}
+                    href={`${HOME_PATH}en/contactus`}
                     hrefLang="en-hk"
                 />
                 <link

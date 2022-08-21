@@ -76,7 +76,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -283,7 +283,7 @@ const BlogMainPage: React.FC<BlogEntriesProps> = ({
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/blog`}
+                    href={`${HOME_PATH}en/blog`}
                     hrefLang="en-hk"
                 />
                 <link

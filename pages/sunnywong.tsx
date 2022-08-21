@@ -86,7 +86,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -149,7 +149,7 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/sunnywong`}
+                    href={`${HOME_PATH}en/sunnywong`}
                     hrefLang="en-hk"
                 />
                 <link

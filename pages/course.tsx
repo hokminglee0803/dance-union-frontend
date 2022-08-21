@@ -106,7 +106,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -173,7 +173,7 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/course`}
+                    href={`${HOME_PATH}en/course`}
                     hrefLang="en-hk"
                 />
                 <link

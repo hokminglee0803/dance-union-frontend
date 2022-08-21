@@ -87,7 +87,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -153,7 +153,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/art`}
+                    href={`${HOME_PATH}en/art`}
                     hrefLang="en-hk"
                 />
                 <link

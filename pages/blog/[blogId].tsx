@@ -37,7 +37,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -66,7 +66,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             />
             <link
                 rel="alternate"
-                href={`${HOME_PATH}/en/blog/${blogId}`}
+                href={`${HOME_PATH}en/blog/${blogId}`}
                 hrefLang="en-hk"
             />
             <link

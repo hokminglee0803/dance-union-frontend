@@ -33,7 +33,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? '/en' : '';
+    const localePath = locale === 'en' ? 'en' : '';
 
     const { t } = useI18n();
 
@@ -88,7 +88,7 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                 />
                 <link
                     rel="alternate"
-                    href={`${HOME_PATH}/en/place`}
+                    href={`${HOME_PATH}en/place`}
                     hrefLang="en-hk"
                 />
                 <link
