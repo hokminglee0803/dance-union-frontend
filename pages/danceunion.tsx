@@ -46,7 +46,7 @@ const About: React.FC<AboutProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/danceunion' ? 'en/danceunion' : 'danceunion';
 
     const { t } = useI18n();
 
@@ -83,7 +83,7 @@ const About: React.FC<AboutProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/danceunion`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

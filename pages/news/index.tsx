@@ -76,7 +76,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/news' ? 'en/news' : 'news';
 
     const { t } = useI18n();
 
@@ -275,7 +275,7 @@ const NewsPage: React.FC<NewsPageProps> = ({
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/news`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={'網誌 | Dance Union'} />

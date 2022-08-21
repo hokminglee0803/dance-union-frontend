@@ -87,7 +87,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/art' ? 'en/art' : 'art';
 
     const { t } = useI18n();
 
@@ -158,7 +158,7 @@ const Promotion: React.FC<PromotionProps> = ({ generalInfo, videoInfo, webSettin
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/art`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

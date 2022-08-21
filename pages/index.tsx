@@ -91,7 +91,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         />
         <link
           rel="canonical"
-          href={`${HOME_PATH}${localePath}/`}
+          href={`${HOME_PATH}${localePath}`}
         />
         <meta name="buildVersion" content={'1.0.1'} />
         <meta property="og:locale" content="zh_hk" />

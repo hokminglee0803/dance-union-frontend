@@ -24,7 +24,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/contactus' ? 'en/contactus' : 'contactus';
 
     const { t } = useI18n();
 
@@ -95,7 +95,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/contactus`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:title" content={t('og_title')} />

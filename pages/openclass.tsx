@@ -37,7 +37,7 @@ const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, l
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/openclass' ? 'en/openclass' : 'openclass';
 
     const { t } = useI18n();
 
@@ -97,7 +97,7 @@ const OpenClass: React.FC<OpenClassType> = ({ generalInfo, webSettings, title, l
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/openclass`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

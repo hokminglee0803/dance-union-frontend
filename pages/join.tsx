@@ -96,7 +96,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/join' ? 'en/join' : 'join';
 
     const { t } = useI18n();
 
@@ -168,7 +168,7 @@ const Join: React.FC<JoinProps> = ({ generalInfo, knowMore, webSettings, latestN
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/join`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

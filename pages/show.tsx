@@ -87,7 +87,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === 'en/show' ? 'en/show' : 'show';
 
     const { t } = useI18n();
 
@@ -157,7 +157,7 @@ const Show: React.FC<ShowProps> = ({ generalInfo, videoInfo, webSettings, latest
                 />
                 <link
                     rel="canonical"
-                    href={`${HOME_PATH}${localePath}/show`}
+                    href={`${HOME_PATH}${localePath}`}
                 />
                 <meta name="buildVersion" content={'1.0.1'} />
                 <meta property="og:locale" content="zh_hk" />

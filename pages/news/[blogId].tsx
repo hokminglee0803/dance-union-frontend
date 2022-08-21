@@ -37,7 +37,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
 
     const { locale } = router;
 
-    const localePath = locale === 'en' ? 'en' : '';
+    const localePath = locale === `en/blog/${blogId}` ? `en/blog/${blogId}` : `/blog/${blogId}`;
 
     const { t } = useI18n();
 
@@ -71,7 +71,7 @@ const Blog: React.FC<BlogEntryProps> = ({ blogEntry, webSettings, latestNews }) 
             />
             <link
                 rel="canonical"
-                href={`${HOME_PATH}${localePath}/blog/${blogId}`}
+                href={`${HOME_PATH}${localePath}`}
             />
             <meta name="buildVersion" content={'1.0.1'} />
             <meta property="og:locale" content="zh_hk" />
