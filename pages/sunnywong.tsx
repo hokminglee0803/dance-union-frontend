@@ -28,6 +28,8 @@ import ReactPlayer from 'react-player/lazy'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { FAQType } from '../interface/FAQ';
+import FAQ from '../components/FAQ';
 
 
 function TabPanel(props) {
@@ -78,9 +80,10 @@ interface SunnyWongProps {
     videoCollection: VideoType[];
     webSettings: PageSettingProps;
     latestNews: BlogType[];
+    faq: FAQType;
 }
 
-const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, albumCollection, videoCollection, webSettings, latestNews }) => {
+const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, albumCollection, videoCollection, webSettings, latestNews, faq }) => {
 
     const router = useRouter();
 
@@ -413,6 +416,8 @@ const SunnyWong: React.FC<SunnyWongProps> = ({ intro, banner, showCollection, al
                 </section>
             </div>
 
+            <FAQ faq={faq} />
+
             <Footer latestNews={latestNews} />
 
         </div>
@@ -440,6 +445,32 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
+        const contents = [];
+        if (sunnyWongPage[0].fields?.faq?.fields?.contents) {
+            await Promise.all(sunnyWongPage[0].fields?.faq?.fields?.contents?.map(async (faqContent) => {
+                const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
+                contents.push({
+                    title: documentToHtmlString(content[0]?.fields.title) ?? '',
+                    description: documentToHtmlString(content[0]?.fields.description) ?? '',
+                })
+            }))
+        }
+
+
+
+        const questions = [];
+        if (sunnyWongPage[0].fields?.faq?.fields?.faq) {
+            await Promise.all(sunnyWongPage[0].fields?.faq?.fields?.faq?.map(async (faqQuestion) => {
+                const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
+                questions.push({
+                    question: question[0]?.fields.question ?? '',
+                    answer: question[0]?.fields.answer ?? ''
+                })
+            }))
+        }
+
+        const faqTitle = documentToHtmlString(sunnyWongPage[0].fields?.faq?.fields?.faqTitle ?? '');
+
         return {
             props: {
                 lngDict,
@@ -454,7 +485,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 albumCollection: albumCollection,
                 videoCollection: videoCollection,
                 webSettings: transformWebSettings(sunnyWongPage[0]),
-                latestNews: blogEntries.map(blog => transformBlog(blog))
+                latestNews: blogEntries.map(blog => transformBlog(blog)),
+                faq: {
+                    contents,
+                    faqTitle,
+                    questions
+                }
             },
             revalidate: 1,
         };

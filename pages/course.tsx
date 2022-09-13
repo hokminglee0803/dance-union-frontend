@@ -38,7 +38,9 @@ import ReactPlayer from 'react-player/lazy'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
+import { FAQType } from '../interface/FAQ';
+import FAQ from '../components/FAQ';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 
@@ -65,6 +67,7 @@ interface CourseProps {
     };
     webSettings: PageSettingProps;
     latestNews: BlogType[];
+    faq: FAQType;
 }
 
 function TabPanel(props) {
@@ -100,7 +103,7 @@ function a11yProps(index) {
     };
 }
 
-const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, knowMore, webSettings, latestNews }) => {
+const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, knowMore, webSettings, latestNews, faq }) => {
 
     const router = useRouter();
 
@@ -726,6 +729,8 @@ const Course: React.FC<CourseProps> = ({ generalInfo, videoInfo, imageInfo, know
                 }
             </Box>
 
+            <FAQ faq={faq} />
+
             <Footer latestNews={latestNews} />
 
         </div >
@@ -775,6 +780,32 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
+        const contents = [];
+        if (coursePage[0].fields?.faq?.fields?.contents) {
+            await Promise.all(coursePage[0].fields?.faq?.fields?.contents?.map(async (faqContent) => {
+                const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
+                contents.push({
+                    title: documentToHtmlString(content[0]?.fields.title) ?? '',
+                    description: documentToHtmlString(content[0]?.fields.description) ?? '',
+                })
+            }))
+        }
+
+
+
+        const questions = [];
+        if (coursePage[0].fields?.faq?.fields?.faq) {
+            await Promise.all(coursePage[0].fields?.faq?.fields?.faq?.map(async (faqQuestion) => {
+                const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
+                questions.push({
+                    question: question[0]?.fields.question ?? '',
+                    answer: question[0]?.fields.answer ?? ''
+                })
+            }))
+        }
+
+        const faqTitle = documentToHtmlString(coursePage[0].fields?.faq?.fields?.faqTitle ?? '');
+
         return {
             props: {
                 lngDict,
@@ -797,7 +828,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     table: courseTableList
                 },
                 webSettings: transformWebSettings(coursePage[0]),
-                latestNews: blogEntries.map(blog => transformBlog(blog))
+                latestNews: blogEntries.map(blog => transformBlog(blog)),
+                faq: {
+                    contents,
+                    faqTitle,
+                    questions
+                }
             },
             revalidate: 1,
         };

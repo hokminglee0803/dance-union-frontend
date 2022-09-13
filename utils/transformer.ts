@@ -133,3 +133,13 @@ export const transformCourseTable = (item: any) => {
         exam: documentToHtmlString(item?.fields?.exam, options) ?? '',
     }
 }
+
+export const transformFAQ = (item: any) => {
+    return {
+        title: item?.fields?.title ?? '',
+        // age: documentToHtmlString(item?.fields?.age, options) ?? '',
+        // course: documentToHtmlString(item?.fields?.course, options) ?? '',
+        // show: documentToHtmlString(item?.fields?.show, options) ?? '',
+        // exam: documentToHtmlString(item?.fields?.exam, options) ?? '',
+    }
+}

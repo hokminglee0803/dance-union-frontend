@@ -17,6 +17,9 @@ import { BlogType, BlogTypeEnum } from '../interface/Blog';
 import ReactPlayer from 'react-player/lazy'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { FAQType } from '../interface/FAQ';
+import FAQ from '../components/FAQ';
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';
 interface IndexPageProps {
@@ -24,9 +27,10 @@ interface IndexPageProps {
   highlight: BannerType[];
   webSettings: PageSettingProps;
   latestNews: BlogType[];
+  faq: FAQType;
 }
 
-const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSettings, latestNews }) => {
+const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSettings, latestNews, faq }) => {
 
   const router = useRouter();
 
@@ -251,6 +255,8 @@ const IndexPage: React.FC<IndexPageProps> = ({ mainPageBanner, highlight, webSet
         </Grid>
       </div>
 
+      <FAQ faq={faq} />
+
       <Footer latestNews={latestNews} />
 
     </div >
@@ -283,13 +289,38 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
+    const contents = [];
+    await Promise.all(homePage[0].fields.faq.fields.contents.map(async (faqContent) => {
+      const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
+      contents.push({
+        title: documentToHtmlString(content[0]?.fields.title) ?? '',
+        description: documentToHtmlString(content[0]?.fields.description) ?? '',
+      })
+    }))
+
+
+    const questions = [];
+    await Promise.all(homePage[0].fields.faq.fields.faq.map(async (faqQuestion) => {
+      const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
+      questions.push({
+        question: question[0]?.fields.question ?? '',
+        answer: question[0]?.fields.answer ?? ''
+      })
+    }))
+
+    const faqTitle = documentToHtmlString(homePage[0].fields.faq.fields.faqTitle);
     return {
       props: {
         lngDict,
         mainPageBanner,
         highlight,
         webSettings: transformWebSettings(homePage[0]),
-        latestNews: blogEntries.map(blog => transformBlog(blog))
+        latestNews: blogEntries.map(blog => transformBlog(blog)),
+        faq: {
+          contents,
+          faqTitle,
+          questions
+        }
       },
       revalidate: 1,
     };

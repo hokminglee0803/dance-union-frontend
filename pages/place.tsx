@@ -17,6 +17,9 @@ import ReactPlayer from 'react-player/lazy'
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { FAQType } from '../interface/FAQ';
+import FAQ from '../components/FAQ';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
@@ -25,9 +28,10 @@ interface BookingProps {
     articleCollection: ArticleWithBannerType[];
     webSettings: PageSettingProps;
     latestNews: BlogType[];
+    faq: FAQType;
 }
 
-const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings, latestNews }) => {
+const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings, latestNews, faq }) => {
 
     const router = useRouter();
 
@@ -252,6 +256,8 @@ const Booking: React.FC<BookingProps> = ({ title, articleCollection, webSettings
                 }
             </section>
 
+            <FAQ faq={faq} />
+
             <Footer latestNews={latestNews} />
 
         </div>
@@ -306,13 +312,42 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
+        const contents = [];
+        if (bookingPage[0].fields?.faq?.fields?.contents) {
+            await Promise.all(bookingPage[0].fields?.faq?.fields?.contents?.map(async (faqContent) => {
+                const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
+                contents.push({
+                    title: documentToHtmlString(content[0]?.fields.title) ?? '',
+                    description: documentToHtmlString(content[0]?.fields.description) ?? '',
+                })
+            }))
+        }
+
+        const questions = [];
+        if (bookingPage[0].fields?.faq?.fields?.faq) {
+            await Promise.all(bookingPage[0].fields?.faq?.fields?.faq?.map(async (faqQuestion) => {
+                const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
+                questions.push({
+                    question: question[0]?.fields.question ?? '',
+                    answer: question[0]?.fields.answer ?? ''
+                })
+            }))
+        }
+
+        const faqTitle = documentToHtmlString(bookingPage[0].fields?.faq?.fields?.faqTitle ?? '');
+
         return {
             props: {
                 lngDict,
                 title: bookingPage[0].fields.title,
                 articleCollection: articleCollection,
                 webSettings: transformWebSettings(bookingPage[0]),
-                latestNews: blogEntries.map(blog => transformBlog(blog))
+                latestNews: blogEntries.map(blog => transformBlog(blog)),
+                faq: {
+                    contents,
+                    faqTitle,
+                    questions
+                }
             },
             revalidate: 1,
         };
