@@ -313,25 +313,25 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
         const contents = [];
-        if (bookingPage[0].fields?.faq?.fields?.contents) {
-            await Promise.all(bookingPage[0].fields?.faq?.fields?.contents?.map(async (faqContent) => {
-                const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
-                contents.push({
-                    title: documentToHtmlString(content[0]?.fields.title) ?? '',
-                    description: documentToHtmlString(content[0]?.fields.description) ?? '',
-                })
-            }))
+
+        for (let index = 0; index < bookingPage[0].fields.faq.fields.contents.length; index++) {
+            const faqContent = bookingPage[0].fields.faq.fields.contents[index]
+            const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
+            contents.push({
+                title: documentToHtmlString(content[0]?.fields.title) ?? '',
+                description: documentToHtmlString(content[0]?.fields.description) ?? '',
+            })
         }
 
         const questions = [];
-        if (bookingPage[0].fields?.faq?.fields?.faq) {
-            await Promise.all(bookingPage[0].fields?.faq?.fields?.faq?.map(async (faqQuestion) => {
-                const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
-                questions.push({
-                    question: question[0]?.fields.question ?? '',
-                    answer: question[0]?.fields.answer ?? ''
-                })
-            }))
+
+        for (let index = 0; index < bookingPage[0].fields.faq.fields.faq.length; index++) {
+            const faqQuestion = bookingPage[0].fields.faq.fields.faq[index]
+            const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
+            questions.push({
+                question: question[0]?.fields.question ?? '',
+                answer: question[0]?.fields.answer ?? ''
+            })
         }
 
         const faqTitle = documentToHtmlString(bookingPage[0].fields?.faq?.fields?.faqTitle ?? '');

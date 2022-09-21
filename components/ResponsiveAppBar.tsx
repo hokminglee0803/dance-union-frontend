@@ -133,6 +133,18 @@ const ResponsiveAppBar = () => {
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/contactus'))} style={{ backgroundColor: 'white' }}>
                     {t('menu.contactUs')}
                 </ListItem>
+                <Divider />
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/dance'))} style={{ backgroundColor: 'white' }}>
+                    學跳舞
+                </ListItem>
+                <Divider />
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/danceCourse'))} style={{ backgroundColor: 'white' }}>
+                    初學初級跳舞班
+                </ListItem>
+                <Divider />
+                <ListItem button onClick={toggleDrawer(false, () => router.push('/danceLesson'))} style={{ backgroundColor: 'white' }}>
+                    Dance Lessons
+                </ListItem>
             </List>
         </Box >
     );
@@ -322,6 +334,48 @@ const ResponsiveAppBar = () => {
                             }}
                         >
                             {t('menu.contactUs')}
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                handleCloseNavMenu();
+                                router.push('/dance')
+                            }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
+                        >
+                            學跳舞
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                handleCloseNavMenu();
+                                router.push('/danceCourse')
+                            }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
+                        >
+                            初學初級跳舞班
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                handleCloseNavMenu();
+                                router.push('/danceLesson')
+                            }}
+                            sx={{
+                                my: 2, color: 'white', display: 'block', '&:hover': {
+                                    color: 'orange',
+
+                                },
+                            }}
+                        >
+                            Dance Lessons
                         </Button>
                     </Box>
                     <Box>

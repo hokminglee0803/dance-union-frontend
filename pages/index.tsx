@@ -290,23 +290,26 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const blogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
     const contents = [];
-    await Promise.all(homePage[0].fields.faq.fields.contents.map(async (faqContent) => {
+
+    for (let index = 0; index < homePage[0].fields.faq.fields.contents.length; index++) {
+      const faqContent = homePage[0].fields.faq.fields.contents[index]
       const content = await contentfulService.getEntriesById(locale, faqContent.sys.id);
       contents.push({
         title: documentToHtmlString(content[0]?.fields.title) ?? '',
         description: documentToHtmlString(content[0]?.fields.description) ?? '',
       })
-    }))
-
+    }
 
     const questions = [];
-    await Promise.all(homePage[0].fields.faq.fields.faq.map(async (faqQuestion) => {
+
+    for (let index = 0; index < homePage[0].fields.faq.fields.faq.length; index++) {
+      const faqQuestion = homePage[0].fields.faq.fields.faq[index]
       const question = await contentfulService.getEntriesById(locale, faqQuestion.sys.id);
       questions.push({
         question: question[0]?.fields.question ?? '',
         answer: question[0]?.fields.answer ?? ''
       })
-    }))
+    }
 
     const faqTitle = documentToHtmlString(homePage[0].fields.faq.fields.faqTitle);
     return {
