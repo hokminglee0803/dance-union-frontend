@@ -35,7 +35,9 @@
         "show": "演出邀請",
         "promotion": "文化藝術推廣",
         "news": "最新消息",
-        "renting": "場地租借"
+        "renting": "場地租借",
+        "danceLesson": "學跳舞",
+        "danceBeginnerProgram": "初學初級跳舞班"
     },
     "course": {
         "general": {

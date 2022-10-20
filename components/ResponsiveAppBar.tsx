@@ -135,16 +135,13 @@ const ResponsiveAppBar = () => {
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/dance'))} style={{ backgroundColor: 'white' }}>
-                    學跳舞
+                    {t('menu.danceLesson')}
                 </ListItem>
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/danceCourse'))} style={{ backgroundColor: 'white' }}>
-                    初學初級跳舞班
+                    {t('menu.danceBeginnerProgram')}
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={toggleDrawer(false, () => router.push('/danceLesson'))} style={{ backgroundColor: 'white' }}>
-                    Dance Lessons
-                </ListItem>
             </List>
         </Box >
     );
@@ -347,7 +344,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            學跳舞
+                            {t('menu.danceLesson')}
                         </Button>
                         <Button
                             onClick={() => {
@@ -361,21 +358,7 @@ const ResponsiveAppBar = () => {
                                 },
                             }}
                         >
-                            初學初級跳舞班
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                handleCloseNavMenu();
-                                router.push('/danceLesson')
-                            }}
-                            sx={{
-                                my: 2, color: 'white', display: 'block', '&:hover': {
-                                    color: 'orange',
-
-                                },
-                            }}
-                        >
-                            Dance Lessons
+                            {t('menu.danceBeginnerProgram')}
                         </Button>
                     </Box>
                     <Box>

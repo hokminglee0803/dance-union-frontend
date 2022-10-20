@@ -35,7 +35,9 @@
         "show": "Invitation",
         "promotion": "Promotion",
         "news": "News",
-        "renting": "Renting"
+        "renting": "Renting",
+        "danceLesson": "Dance Lesson",
+        "danceBeginnerProgram": "Beginner Program"
     },
     "course": {
         "general": {
