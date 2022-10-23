@@ -330,34 +330,6 @@ const ResponsiveAppBar = () => {
                         >
                             {t('menu.contactUs')}
                         </Button>
-                        <Button
-                            onClick={() => {
-                                handleCloseNavMenu();
-                                router.push('/dance')
-                            }}
-                            sx={{
-                                my: 2, color: 'white', display: 'block', '&:hover': {
-                                    color: 'orange',
-
-                                },
-                            }}
-                        >
-                            {t('menu.danceLesson')}
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                handleCloseNavMenu();
-                                router.push('/danceCourse')
-                            }}
-                            sx={{
-                                my: 2, color: 'white', display: 'block', '&:hover': {
-                                    color: 'orange',
-
-                                },
-                            }}
-                        >
-                            {t('menu.danceBeginnerProgram')}
-                        </Button>
                     </Box>
                     <Box>
                         <IconButton onClick={() => {
