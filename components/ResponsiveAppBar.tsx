@@ -105,6 +105,12 @@ const ResponsiveAppBar = () => {
                     unmountOnExit
                 >
                     <List component="div" disablePadding>
+                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/dance'))} >
+                            {t('menu.danceLesson')}
+                        </ListItem>
+                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/danceCourse'))} >
+                            {t('menu.danceBeginnerProgram')}
+                        </ListItem>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/course'))} >
                             {t('menu.course')}
                         </ListItem>
@@ -132,14 +138,6 @@ const ResponsiveAppBar = () => {
                 <Divider />
                 <ListItem button onClick={toggleDrawer(false, () => router.push('/contactus'))} style={{ backgroundColor: 'white' }}>
                     {t('menu.contactUs')}
-                </ListItem>
-                <Divider />
-                <ListItem button onClick={toggleDrawer(false, () => router.push('/dance'))} style={{ backgroundColor: 'white' }}>
-                    {t('menu.danceLesson')}
-                </ListItem>
-                <Divider />
-                <ListItem button onClick={toggleDrawer(false, () => router.push('/danceCourse'))} style={{ backgroundColor: 'white' }}>
-                    {t('menu.danceBeginnerProgram')}
                 </ListItem>
                 <Divider />
             </List>
@@ -401,6 +399,26 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
+                            <MenuItem
+                                onClick={() => {
+                                    handleCloseUserMenu();
+                                    router.push('/dance')
+                                }}
+                            >
+                                <Typography textAlign="center" >
+                                    {t('menu.danceLesson')}
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    handleCloseUserMenu();
+                                    router.push('/danceCourse')
+                                }}
+                            >
+                                <Typography textAlign="center" >
+                                    {t('menu.danceBeginnerProgram')}
+                                </Typography>
+                            </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleCloseUserMenu();
