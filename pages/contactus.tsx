@@ -88,17 +88,16 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
     }, [init])
 
     const onSubmit = payload => {
-        console.log(payload);
-        // if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
-        //     setLoading(true)
-        //     postMember(payload).then(data => {
-        //         setLoading(false);
-        //         setError(false);
-        //         setSuccess(true);
-        //     })
-        // } else {
-        //     setError(true);
-        // }
+        if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
+            setLoading(true)
+            postMember(payload).then(data => {
+                setLoading(false);
+                setError(false);
+                setSuccess(true);
+            })
+        } else {
+            setError(true);
+        }
     }
 
     return (
