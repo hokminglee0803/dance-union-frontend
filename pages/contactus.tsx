@@ -153,7 +153,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                 </div>
                                 <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="phone" type="text" className="form-control" placeholder={t('common.name')} required={true} onChange={handleChange} />
+                                    <input name="phone" type="text" className="form-control" placeholder={t('common.phone')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className="form-group contact-forms">
