@@ -45,7 +45,8 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
         defaultValues: {
             name: '',
             email: '',
-            phone: ''
+            phone: '',
+            type: '',
         }
     });
 
@@ -88,6 +89,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
     }, [init])
 
     const onSubmit = payload => {
+        console.log(payload)
         if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
             setLoading(true)
             postMember(payload).then(data => {
@@ -201,7 +203,9 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                 </div>
                                 <br />
                                 <div className="form-group contact-forms">
-                                    <select name="type" className="form-control" placeholder="查詢項目" onChange={handleChange}>
+                                    <select
+                                        {...register("type", { required: true })}
+                                        name="type" className="form-control" placeholder="查詢項目" onChange={handleChange}>
                                         {
                                             type.map((item, index) =>
                                                 <option key={index} value={item}>
