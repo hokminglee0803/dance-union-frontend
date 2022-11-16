@@ -205,7 +205,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
 
     try {
 
-        const blogEntry = await contentfulService.getEntriesById(params?.blogId?.toString());
+        const blogEntry = await contentfulService.getEntriesById(locale, params?.blogId?.toString());
 
         const seoBlogEntries = await contentfulService.getBlogEntries(BlogTypeEnum.SEO, 2, 0, locale);
 
