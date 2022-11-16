@@ -25,7 +25,8 @@
         "Vibe Open Class": "Vibe Open Class",
         "warning": "請寫下你的姓名, 電郵以及聯絡電話",
         "submitSuccess": "你的查詢已經發出！",
-        "submitButton": "發送"
+        "submitButton": "發送",
+        "invalidPhoneNumber": "請輸入正確的電話號碼"
     },
     "menu": {
         "contactUs": "聯絡我們",

@@ -6,12 +6,15 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import contentfulService from '../utils/service/contentfulService';
-import { transformBannerData, transformBlog } from '../utils/transformer';
-import { BannerType } from '../interface/Banner';
+import { transformBlog } from '../utils/transformer';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { postMember } from '../utils/mongo';
-import Image from 'next/image'
+import { useForm } from "react-hook-form";
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
+import { ErrorMessage } from '@hookform/error-message';
+
+const PHONE_REGEX =
+    new RegExp(/^[2-9][0-9]{7}$/gm);
 
 const HOME_PATH = process.env.NEXT_PUBLIC_HOME_PATH || 'https://www.sunnywongofficial.com';;
 interface ContactUsProps {
@@ -38,6 +41,14 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const [success, setSuccess] = useState(false);
 
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            name: '',
+            email: '',
+            phone: ''
+        }
+    });
+
     const [loading, setLoading] = useState(false);
     const type = [
         '兒童及青少年課程',
@@ -49,7 +60,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
         "type": type[0],
         "source": "Website",
         "email": "",
-        "phone": "",
+        "phone": 0,
         "alternatePhone": "",
         "age": "",
         "childAge": "",
@@ -75,6 +86,20 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
         }
 
     }, [init])
+
+    const onSubmit = payload => {
+        console.log(payload);
+        // if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
+        //     setLoading(true)
+        //     postMember(payload).then(data => {
+        //         setLoading(false);
+        //         setError(false);
+        //         setSuccess(true);
+        //     })
+        // } else {
+        //     setError(true);
+        // }
+    }
 
     return (
         <div>
@@ -142,18 +167,38 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                     <br /><br />
                     <div className="row">
                         <div className="col-lg-6 col-md-6 contact-form pb-lg-3 pb-2">
-                            <form action="#" method="post">
+                            <form onSubmit={handleSubmit(onSubmit)}>
 
                                 <div className=" form-group contact-forms">
-                                    <input name="name" type="text" className="form-control" placeholder={t('common.name')} required={true} onChange={handleChange} />
+                                    <input
+                                        {...register("name", { required: true, maxLength: 100 })}
+                                        name="name" type="text" className="form-control" placeholder={t('common.name')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="email" type="email" className="form-control" placeholder={t('common.email')} required={true} onChange={handleChange} />
+                                    <input
+                                        {...register("email", { required: true, maxLength: 100 })}
+                                        name="email" type="email" className="form-control" placeholder={t('common.email')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className=" form-group contact-forms">
-                                    <input name="phone" type="text" className="form-control" placeholder={t('common.phone')} required={true} onChange={handleChange} />
+                                    <input
+                                        {...register("phone", {
+                                            required: true,
+                                            minLength: {
+                                                value: 8,
+                                                message: 'common.invalidPhoneNumber'
+                                            },
+                                            maxLength: {
+                                                value: 8,
+                                                message: 'common.invalidPhoneNumber'
+                                            },
+                                            pattern: {
+                                                value: PHONE_REGEX,
+                                                message: 'common.invalidPhoneNumber'
+                                            }
+                                        })}
+                                        name="phone" type="tel" className="form-control" placeholder={t('common.phone')} onChange={handleChange} />
                                 </div>
                                 <br />
                                 <div className="form-group contact-forms">
@@ -169,6 +214,16 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                 </div>
                                 <br />
                                 {
+                                    errors?.name?.message ? <Alert severity="error">{t(errors.name.message)}</Alert> : ""
+                                }
+                                {
+                                    errors?.email?.message ? <Alert severity="error">{t(errors.email.message)}</Alert> : ""
+                                }
+                                {
+                                    errors?.phone?.message ? <Alert severity="error">{t(errors.phone.message)}</Alert> : ""
+                                }
+
+                                {
                                     error ? <Alert severity="error">{t('common.warning')}</Alert> : ""
                                 }
                                 {
@@ -179,18 +234,9 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                     style={{
                                         display: success ? 'none' : 'block'
                                     }}
-                                    onClick={() => {
-                                        if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
-                                            setLoading(true)
-                                            postMember(payload).then(data => {
-                                                setLoading(false);
-                                                setError(false);
-                                                setSuccess(true);
-                                            })
-                                        } else {
-                                            setError(true);
-                                        }
-                                    }} type="button" className="btn sent-butnn btn-lg">{t('common.submit')}</button>
+                                    className="btn sent-butnn btn-lg">
+                                    {t('common.submitButton')}
+                                </button>
                             </form>
                         </div>
                         <div className="address_mail_footer_grids col-lg-6 col-md-6">

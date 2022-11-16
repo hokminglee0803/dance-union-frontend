@@ -25,7 +25,8 @@
         "Vibe Open Class": "Vibe Open Class",
         "warning": "Please write down your name, email and contact number",
         "submitSuccess": "Your enquiry is submitted!",
-        "submitButton": "submit"
+        "submitButton": "submit",
+        "invalidPhoneNumber": "Invalid Phone Number"
     },
     "menu": {
         "contactUs": "Contact us",
