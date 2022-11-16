@@ -88,11 +88,16 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     }, [init])
 
-    const onSubmit = payload => {
-        console.log(payload)
-        if (payload.name && payload.name !== '' && payload.phone && payload.phone !== '' && payload.type && payload.type !== '') {
+    const onSubmit = data => {
+        if (data.name && data.name !== '' && data.phone && data.phone !== '' && data.email && data.email !== '' && data.type && data.type !== '') {
             setLoading(true)
-            postMember(payload).then(data => {
+            postMember({
+                ...payload,
+                email: data.email,
+                name: data.name,
+                phone: data.phone,
+                type: data.type,
+            }).then(data => {
                 setLoading(false);
                 setError(false);
                 setSuccess(true);
