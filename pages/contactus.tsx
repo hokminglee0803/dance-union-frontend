@@ -9,9 +9,9 @@ import contentfulService from '../utils/service/contentfulService';
 import { transformBlog } from '../utils/transformer';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import { postMember } from '../utils/mongo';
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { BlogType, BlogTypeEnum } from '../interface/Blog';
-import { ErrorMessage } from '@hookform/error-message';
+import Input from 'react-phone-number-input/input'
 
 const PHONE_REGEX =
     new RegExp(/^[2-9][0-9]{7}$/gm);
@@ -41,12 +41,12 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
 
     const [success, setSuccess] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { control, register, handleSubmit, formState: { errors }, getValues } = useForm({
         defaultValues: {
             name: '',
             email: '',
             phone: '',
-            type: '',
+            type: '兒童及青少年課程',
         }
     });
 
@@ -95,7 +95,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                 ...payload,
                 email: data.email,
                 name: data.name,
-                phone: data.phone,
+                phone: data.phone.replace('+852'),
                 type: data.type,
             }).then(data => {
                 setLoading(false);
@@ -187,24 +187,31 @@ const ContactUs: React.FC<ContactUsProps> = ({ latestNews }) => {
                                         name="email" type="email" className="form-control" placeholder={t('common.email')} required={true} onChange={handleChange} />
                                 </div>
                                 <br />
-                                <div className=" form-group contact-forms">
-                                    <input
-                                        {...register("phone", {
+                                <div className="form-group contact-forms">
+                                    <Controller
+                                        name="phone"
+                                        control={control}
+                                        rules={{
                                             required: true,
                                             minLength: {
-                                                value: 8,
+                                                value: 12,
                                                 message: 'common.invalidPhoneNumber'
                                             },
                                             maxLength: {
-                                                value: 8,
-                                                message: 'common.invalidPhoneNumber'
-                                            },
-                                            pattern: {
-                                                value: PHONE_REGEX,
+                                                value: 12,
                                                 message: 'common.invalidPhoneNumber'
                                             }
-                                        })}
-                                        name="phone" type="tel" className="form-control" placeholder={t('common.phone')} onChange={handleChange} />
+                                        }}
+                                        render={({ field: { onChange, value } }) => (
+                                            <Input
+                                                value={value}
+                                                onChange={onChange}
+                                                country="HK"
+                                                withCountryCallingCode
+                                                international
+                                            />
+                                        )}
+                                    />
                                 </div>
                                 <br />
                                 <div className="form-group contact-forms">
