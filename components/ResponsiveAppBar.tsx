@@ -105,18 +105,19 @@ const ResponsiveAppBar = () => {
                     unmountOnExit
                 >
                     <List component="div" disablePadding>
-                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/dance'))} >
-                            {t('menu.danceLesson')}
-                        </ListItem>
-                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/danceCourse'))} >
-                            {t('menu.danceBeginnerProgram')}
-                        </ListItem>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/course'))} >
-                            {t('menu.course')}
+                            {t('menu.childCourse')}
                         </ListItem>
                         <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/openclass'))} >
                             Vibe Open Class
                         </ListItem>
+                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/danceCourse'))} >
+                            {t('menu.danceBeginnerProgram')}
+                        </ListItem>
+                        <ListItem button style={{ paddingLeft: '5%', backgroundColor: 'white' }} onClick={toggleDrawer(false, () => router.push('/dance'))} >
+                            {t('menu.danceLesson')}
+                        </ListItem>
+
                     </List>
                 </Collapse>
                 <Divider />
@@ -374,11 +375,21 @@ const ResponsiveAppBar = () => {
                             <MenuItem
                                 onClick={() => {
                                     handleCloseUserMenu();
-                                    router.push('/dance')
+                                    router.push('/course')
                                 }}
                             >
                                 <Typography textAlign="center" >
-                                    {t('menu.danceLesson')}
+                                    {t('menu.childCourse')}
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    handleCloseUserMenu();
+                                    router.push('/openclass')
+                                }}
+                            >
+                                <Typography textAlign="center" >
+                                    Vibe Open Class
                                 </Typography>
                             </MenuItem>
                             <MenuItem
@@ -394,23 +405,15 @@ const ResponsiveAppBar = () => {
                             <MenuItem
                                 onClick={() => {
                                     handleCloseUserMenu();
-                                    router.push('/course')
+                                    router.push('/dance')
                                 }}
                             >
                                 <Typography textAlign="center" >
-                                    Children	Dance	and	Talent	Training	Program
+                                    {t('menu.danceLesson')}
                                 </Typography>
                             </MenuItem>
-                            <MenuItem
-                                onClick={() => {
-                                    handleCloseUserMenu();
-                                    router.push('/openclass')
-                                }}
-                            >
-                                <Typography textAlign="center" >
-                                    Vibe Open Class
-                                </Typography>
-                            </MenuItem>
+
+
                         </Menu>
                     </Box>
                 </Toolbar>

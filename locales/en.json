@@ -38,7 +38,8 @@
         "news": "News",
         "renting": "Renting",
         "danceLesson": "Dance Lesson",
-        "danceBeginnerProgram": "Beginner Program"
+        "danceBeginnerProgram": "Beginner Program",
+        "childCourse": "Children Dance and Talent Training Program"
     },
     "course": {
         "general": {
